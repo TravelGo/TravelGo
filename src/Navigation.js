@@ -15,7 +15,7 @@ export default class App extends Component {
     openModal = (type) => {
         this.setState({
             isOpen : true,
-            
+            modalType : type
         })
     }
     closeModal = () => {
@@ -48,8 +48,10 @@ export default class App extends Component {
                         <Text>asd</Text>
                     </View>
                 </TouchableOpacity>
-                <View style={[styles.modal, {top:(this.state.isOpen)?400:fullHeight}]}>
-                    <Text>asd</Text>
+                <View style={{alignItems:"center"}}>
+                    <View style={[styles.modal, {top:(this.state.isOpen)?fullHeight*(1-0.9):fullHeight}]}>
+                        <Text>asd</Text>
+                    </View>
                 </View>
             </View>
         );
@@ -107,7 +109,10 @@ const styles = StyleSheet.create({
     },
     modal : {
         position : 'absolute',
-        width : fullWidth * 0.8,
-        backgroundColor : "#eee"
+        width : fullWidth * 0.9,
+        height : fullHeight * 0.9,
+        backgroundColor : "#eee",
+        borderTopLeftRadius : 10,
+        borderTopRightRadius : 10,
     }
 });
