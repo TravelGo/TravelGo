@@ -5,14 +5,23 @@ import {StyleSheet, View, Text, Dimensions, Image, TouchableOpacity} from 'react
 // import ScreenMain from './Setting';
 
 var fullWidth = Dimensions.get('window').width; //full width
-// var height = Dimensions.get('window').height; //full height
+var fullHeight = Dimensions.get('window').height; //full height
 
 export default class App extends Component {
     state = {
         currentLocation : "서울특별시 성북구 정릉3동",
+        isOpen : false,        
     }
     openModal = (type) => {
-        alert(type);
+        this.setState({
+            isOpen : true,
+            
+        })
+    }
+    closeModal = () => {
+        this.setState({
+            isOpen : false
+        })
     }
     
     render() {
@@ -33,6 +42,14 @@ export default class App extends Component {
                     <TouchableOpacity  style={[styles.buttomButtonNav, {right:0}]} onPress={()=>{this.openModal('setting')}}>
                         <Image source={require('../images/right.png')} style={styles.bottomButton}/>
                     </TouchableOpacity>
+                </View>
+                <TouchableOpacity style={[styles.modalBg, {top:this.state.isOpen?0:fullHeight}]} onPress={()=>{this.closeModal()}}>
+                    <View>
+                        <Text>asd</Text>
+                    </View>
+                </TouchableOpacity>
+                <View style={[styles.modal, {top:(this.state.isOpen)?400:fullHeight}]}>
+                    <Text>asd</Text>
                 </View>
             </View>
         );
@@ -81,5 +98,16 @@ const styles = StyleSheet.create({
         width : 30,
         height : 30,
         resizeMode : 'stretch',
+    },
+    modalBg : {
+        position : 'absolute',
+        width : fullWidth,
+        height : fullHeight,
+        backgroundColor : "#000000aa"
+    },
+    modal : {
+        position : 'absolute',
+        width : fullWidth * 0.8,
+        backgroundColor : "#eee"
     }
 });
