@@ -4,19 +4,69 @@ import {StyleSheet, View, Text, Dimensions, Image, TouchableOpacity} from 'react
 // import ScreenSetting from './Main';
 // import ScreenMain from './Setting';
 
+// 왼쪽 모달 뷰어
+import LeftModalMenu from './LeftModalMenu';
+
+// 왼쪽 모달
+import ModalRecommanded from './modal/recommanded'; // 추천
+import ModalVisitied from './modal/visitied'; // 방문한
+import ModalNearby from './modal/nearby'; // 근처
+
+// 오른쪽 모달
+import ModalSetting from './modal/setting'; // 세팅
+
 var fullWidth = Dimensions.get('window').width; //full width
 var fullHeight = Dimensions.get('window').height; //full height
 
 export default class App extends Component {
     state = {
         currentLocation : "서울특별시 성북구 정릉3동",
-        isOpen : false,        
+        isOpen : false,
+        menuItems : <View></View>,
+        modalInner : LeftModalMenu
+    }
+
+    modal = {
+        "recommanded" : ModalRecommanded,
+        "visitied" : ModalVisitied,
+        "nearby" : ModalNearby,
+    }
+
+    leftModalItems = [
+        {
+            icon : require('../images/thumb.png'),
+            name : "추천 포케스탑",
+            screen : "recommanded"
+        },
+        {
+            icon : require('../images/marker.png'),
+            name : "방문한 포케스탑",
+            screen : "visitied"
+        },
+        {
+            icon : require('../images/wifi.png'),
+            name : "주변 포케스탑",
+            screen : "nearby"
+        },
+    ]
+
+
+    modalChange = (screen) => {
+        this.setState({
+            modalInner : this.modal[screen]
+        });
     }
     openModal = (type) => {
         this.setState({
             isOpen : true,
-            modalType : type
+            modalType : type,
+            modalInner : LeftModalMenu
         })
+        if(type === 'setting') {
+            this.setState({
+                modalInner : ModalSetting
+            })
+        }
     }
     closeModal = () => {
         this.setState({
@@ -45,12 +95,12 @@ export default class App extends Component {
                 </View>
                 <TouchableOpacity style={[styles.modalBg, {top:this.state.isOpen?0:fullHeight}]} onPress={()=>{this.closeModal()}}>
                     <View>
-                        <Text>asd</Text>
+                        
                     </View>
                 </TouchableOpacity>
                 <View style={{alignItems:"center"}}>
-                    <View style={[styles.modal, {top:(this.state.isOpen)?fullHeight*(1-0.9):fullHeight}]}>
-                        <Text>asd</Text>
+                    <View style={[styles.modal, {top:(this.state.isOpen)?fullHeight*(1-0.98):fullHeight}]}>
+                        <this.state.modalInner menu={this.leftModalItems} change={this.modalChange}/>
                     </View>
                 </View>
             </View>
@@ -105,14 +155,12 @@ const styles = StyleSheet.create({
         position : 'absolute',
         width : fullWidth,
         height : fullHeight,
-        backgroundColor : "#000000aa"
+        backgroundColor : "#00a3ffbb"
     },
     modal : {
         position : 'absolute',
         width : fullWidth * 0.9,
         height : fullHeight * 0.9,
-        backgroundColor : "#eee",
-        borderTopLeftRadius : 10,
-        borderTopRightRadius : 10,
+        alignItems : 'center'
     }
 });
