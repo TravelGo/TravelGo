@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Image} from 'react-native';
 
-let title = "Loading"
-
 export default class App extends Component {
     render() {
         return (

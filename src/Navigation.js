@@ -1,8 +1,16 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, Dimensions, Image, TouchableOpacity} from 'react-native';
 
-// import ScreenSetting from './Main';
-// import ScreenMain from './Setting';
+const JEnum = require('./JEnum.js')
+
+// Screen
+import screenMain from './Main'
+import screenLogin from './Login'
+import screenRegister from './Register'
+import screenChatting from './Chatting'
+import screenMypage from './Mypage'
+import screenSetting from './Setting'
+
 
 // 왼쪽 모달 뷰어
 import LeftModalMenu from './LeftModalMenu';
@@ -19,7 +27,12 @@ var fullWidth = Dimensions.get('window').width; //full width
 var fullHeight = Dimensions.get('window').height; //full height
 
 export default class App extends Component {
+    screen = {
+        'main' : screenMain
+    }
+
     state = {
+        CurrentPage : this.screen['main'],
         currentLocation : "서울특별시 성북구 정릉3동",
         isOpen : false,
         menuItems : <View></View>,
@@ -83,7 +96,7 @@ export default class App extends Component {
                     <Text>  </Text>
                     <Text style={styles.currentText}>현재 위치 : {this.state.currentLocation}</Text>
                 </View>
-                <Text>asd</Text>
+                <this.state.CurrentPage/>
                 <View style={styles.bottomNavigation}>
                     <TouchableOpacity  style={[styles.buttomButtonNav, {left:0}]} onPress={()=>{this.openModal('default')}}>
                         <Image source={require('../images/left.png')} style={styles.bottomButton}/>
