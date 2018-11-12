@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 
 import Navigation from './src/Navigation';
 import ScreenLoading from './src/Loading';
-import screenLogin from './src/Login';
+import ScreenLogin from './src/Login';
+import ScreenRegister from './src/Register';
 
 const JEnum = require('./src/JEnum.js')
 
@@ -11,33 +12,41 @@ export default class App extends Component {
     state = {
         currentPage : ScreenLoading
     }
+    change = (category) => {
+        if(category === "register") {
+            this.setState({
+                currentPage : ScreenRegister
+            })
+        } else if(category === "login") {
+            this.setState({
+                currentPage : ScreenLogin
+            })
+        }
+    }
     constructor(props) {
+        super(props);
         JEnum.axios.get(JEnum.userInfo)
         .then(response => {
-            if(response.data.isLogin) {
-                this.setState({
-                    currentPage : Navigation
-                })    
-            } else {
-                this.setState({
-                    currentPage : screenLogin
-                })
-            }
+            setTimeout(() => {
+                if(response.data.isLogin) {
+                    this.setState({
+                        currentPage : Navigation
+                    })    
+                } else {
+                    this.setState({
+                        currentPage : ScreenLogin
+                    })
+                }
+            }, 1000);
         })
         .catch(function (error) {
             alert(error);
             console.log(error);
         });        
-        super(props)
-        // setTimeout(() => {
-        //     this.setState({
-        //         currentPage : Navigation
-        //     })
-        // }, 1000);
     }
     render() {
         return (
-            <this.state.currentPage/>
+            <this.state.currentPage change={this.change}/>
         );
     }
 }
