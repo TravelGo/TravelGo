@@ -21,6 +21,10 @@ export default class App extends Component {
             this.setState({
                 currentPage : ScreenLogin
             })
+        } else {
+            this.setState({
+                currentPage : Navigation
+            })
         }
     }
     constructor(props) {

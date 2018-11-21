@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, Dimensions, TextInput, TouchableOpacity} from 'react-native';
-import PasswordInputText from 'react-native-hide-show-password-input'; 
+const JEnum = require('./JEnum.js')
 
 var fullWidth = Dimensions.get('window').width; //full width
 var fullHeight = Dimensions.get('window').height; //full height
@@ -11,7 +11,22 @@ export default class App extends Component {
         password : ""
     }
     onLogin = () => {
-        alert(this.state.username + "/" + this.state.password)
+        JEnum.axios.post(JEnum.login, {
+            "username" : this.state.username,
+            "password" : this.state.password,
+        })
+        .then(response => {
+            if(response.data === "AccountLoginSuccess") {
+                alert("로그인 성공");
+                this.props.change("loading");
+            } else {
+                alert(response.data);
+            }
+        })
+        .catch(function (error) {
+            alert(error);
+            console.log(error);
+        });
     }
     onRegist = () => {
         this.props.change("register")
