@@ -17,13 +17,19 @@ import ModalRecommanded from './modal/recommanded'; // 추천
 
 // 오른쪽 모달
 import ModalSetting from './modal/setting'; // 세팅
+import ModalLicense from './modal/opensource'; // License
 
 var fullWidth = Dimensions.get('window').width; //full width
 var fullHeight = Dimensions.get('window').height; //full height
 
 export default class App extends Component {
     screen = {
-        'main' : screenMain
+        'main' : screenMain,
+    }
+
+    modal = {
+        'setting' : ModalSetting,
+        'license' : ModalLicense,
     }
 
     state = {
