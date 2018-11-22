@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, Dimensions, TextInput, TouchableOpacity} from 'react-native';
-const JEnum = require('./JEnum.js')
+const JEnum = require('./JEnum.js');
 
 var fullWidth = Dimensions.get('window').width; //full width
 var fullHeight = Dimensions.get('window').height; //full height
 
 export default class App extends Component {
     state = {
-        username : "",
-        password : ""
+        username : "jtjisgod",
+        password : "password12#"
     }
     onLogin = () => {
         JEnum.axios.post(JEnum.login, {
@@ -29,7 +29,7 @@ export default class App extends Component {
         });
     }
     onRegist = () => {
-        this.props.change("register")
+        this.props.change("register");
     }
     render() {
         return (
@@ -37,9 +37,9 @@ export default class App extends Component {
                 <View style={styles.inner}>
                     <Text style={styles.h1}>트라벨러 로그인</Text>
                     <Text style={styles.h2}>USERNAME</Text>
-                    <TextInput placeholder="Username" style={styles.input} onChangeText={(text) => {this.setState({username:text})}}/>
+                    <TextInput value={this.state.username} placeholder="Username" style={styles.input} onChangeText={(text) => {this.setState({username:text})}}/>
                     <Text style={styles.h2}>PASSWORD</Text>
-                    <TextInput placeholder="Password" style={styles.input} onChangeText={(text) => {this.setState({password:text})}} secureTextEntry={true}/>
+                    <TextInput value={this.state.password} placeholder="Password" style={styles.input} onChangeText={(text) => {this.setState({password:text})}} secureTextEntry={true}/>
                     <TouchableOpacity
                         onPress={this.onLogin}
                         style={styles.button}
