@@ -112,7 +112,7 @@ export default class App extends Component {
                     </View>
                 </TouchableOpacity>
                 <View style={{alignItems:"center"}}>
-                    <View style={[styles.modal, {top:(this.state.isOpen)?fullHeight*(1-0.98):fullHeight}]}>
+                    <View style={[styles.modal, {top:(this.state.isOpen)?-1 * fullHeight * 0.90:fullHeight}]}>
                         <this.state.modalInner menu={this.leftModalItems} change={this.modalChange}/>
                     </View>
                 </View>

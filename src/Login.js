@@ -17,7 +17,6 @@ export default class App extends Component {
         })
         .then(response => {
             if(response.data === "AccountLoginSuccess") {
-                alert("로그인 성공");
                 this.props.change("loading");
             } else {
                 alert(response.data);
