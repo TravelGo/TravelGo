@@ -12,13 +12,8 @@ import screenMypage from './Mypage'
 import screenSetting from './Setting'
 
 
-// 왼쪽 모달 뷰어
-import LeftModalMenu from './LeftModalMenu';
-
 // 왼쪽 모달
 import ModalRecommanded from './modal/recommanded'; // 추천
-import ModalVisitied from './modal/visitied'; // 방문한
-import ModalNearby from './modal/nearby'; // 근처
 
 // 오른쪽 모달
 import ModalSetting from './modal/setting'; // 세팅
@@ -36,33 +31,8 @@ export default class App extends Component {
         currentLocation : "서울특별시 성북구 정릉3동",
         isOpen : false,
         menuItems : <View></View>,
-        modalInner : LeftModalMenu
+        modalInner : ModalRecommanded
     }
-
-    modal = {
-        "recommanded" : ModalRecommanded,
-        "visitied" : ModalVisitied,
-        "nearby" : ModalNearby,
-    }
-
-    leftModalItems = [
-        {
-            icon : require('../images/thumb.png'),
-            name : "추천 포케스탑",
-            screen : "recommanded"
-        },
-        {
-            icon : require('../images/marker.png'),
-            name : "방문한 포케스탑",
-            screen : "visitied"
-        },
-        {
-            icon : require('../images/wifi.png'),
-            name : "주변 포케스탑",
-            screen : "nearby"
-        },
-    ]
-
 
     modalChange = (screen) => {
         this.setState({
@@ -73,7 +43,7 @@ export default class App extends Component {
         this.setState({
             isOpen : true,
             modalType : type,
-            modalInner : LeftModalMenu
+            modalInner : ModalRecommanded
         })
         if(type === 'setting') {
             this.setState({
