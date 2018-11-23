@@ -19,6 +19,9 @@ import ModalRecommanded from './modal/recommanded'; // 추천
 import ModalSetting from './modal/setting'; // 세팅
 import ModalLicense from './modal/opensource'; // License
 
+// TravelStop
+import ModalTravelStop from './modal/travelStop'; // License
+
 var fullWidth = Dimensions.get('window').width; //full width
 var fullHeight = Dimensions.get('window').height; //full height
 
@@ -45,6 +48,12 @@ export default class App extends Component {
             modalInner : this.modal[screen]
         });
     }
+    
+    travelStop = (id) => {
+        alert(id);
+        this.props.change('travelStop');
+    }
+
     openModal = (type) => {
         this.setState({
             isOpen : true,
@@ -54,6 +63,10 @@ export default class App extends Component {
         if(type === 'setting') {
             this.setState({
                 modalInner : ModalSetting
+            })
+        } else if(type === 'travelStop') {
+            this.setState({
+                modalInner : ModalTravelStop
             })
         }
     }
@@ -72,7 +85,8 @@ export default class App extends Component {
                     <Text>  </Text>
                     <Text style={styles.currentText}>현재 위치 : {this.state.currentLocation}</Text>
                 </View>
-                <this.state.CurrentPage/>
+                {/* Current Page */}
+                <this.state.CurrentPage change={this.props.change} modal={this.modalChange} travelStop={this.travelStop}/>
                 <View style={styles.bottomNavigation}>
                     <TouchableOpacity  style={[styles.buttomButtonNav, {left:0}]} onPress={()=>{this.openModal('default')}}>
                         <Image source={require('../images/left.png')} style={styles.bottomButton}/>
@@ -83,9 +97,7 @@ export default class App extends Component {
                     </TouchableOpacity>
                 </View>
                 <TouchableOpacity style={[styles.modalBg, {top:this.state.isOpen?0:fullHeight}]} onPress={()=>{this.closeModal()}}>
-                    <View>
-                        
-                    </View>
+                    <View></View>
                 </TouchableOpacity>
                 <View style={{alignItems:"center"}}>
                     <View style={[styles.modal, {top:(this.state.isOpen)?-1 * fullHeight * 0.90:fullHeight}]}>

@@ -67,7 +67,7 @@ export default class App extends Component {
                         longitude: 126.996917,
                         latitudeDelta: 0.005,
                         longitudeDelta: 0.005,
-                        }}
+                    }}
                     region={this.state.user}
                     rotateEnabled={false}
                     scrollEnabled={false}
@@ -75,15 +75,23 @@ export default class App extends Component {
                     zoomEnabled={false}          
                 >
 
-                    {this.state.stops.map((contact, i) =>
-                        geolib.getDistance(contact.location, this.state.user) <= 50 ?
-                            <MapView.Marker coordinate={contact.location} key={i} image={StopOnImg}
-                                onPress={e => {
-                                    alert("Place name : " + contact.name + "\n"
-                                        + "Distance with User : " + geolib.getDistance(contact.location, this.state.user) + "m")
-                                }}><Image source={StopOnImg} /></MapView.Marker>
-                            : <MapView.Marker coordinate={contact.location} key={i} image={StopOffImg}><Image source={StopOffImg} style={{ width: 40, height: 40 }} /></MapView.Marker>
-                    )}
+                    {
+                        this.state.stops.map((contact, i) =>
+                            geolib.getDistance(contact.location, this.state.user) <= 50 ? (
+                                <MapView.Marker coordinate={contact.location} key={i}
+                                    onPress={e => {   
+                                        this.props.travelStop(contact._id)
+                                    }
+                                }>
+                                    <Image source={StopOnImg} style={{ width: 40, height: 40 }}/>
+                                </MapView.Marker>
+                            ) : (
+                                <MapView.Marker coordinate={contact.location} key={i}>
+                                    <Image source={StopOffImg} style={{ width: 40, height: 40 }}/>
+                                </MapView.Marker>
+                            )
+                        )
+                    }
 
                 </MapView>
 

@@ -4,6 +4,7 @@ import Navigation from './src/Navigation';
 import ScreenLoading from './src/Loading';
 import ScreenLogin from './src/Login';
 import ScreenRegister from './src/Register';
+import ScreenTravelStop from './src/travelStop';
 
 const JEnum = require('./src/JEnum.js')
 
@@ -20,6 +21,10 @@ export default class App extends Component {
         } else if(category === "login") {
             this.setState({
                 currentPage : ScreenLogin
+            })
+        } else if(category === "travelStop") {
+            this.setState({
+                currentPage : ScreenTravelStop
             })
         } else {
             this.setState({
