@@ -6,108 +6,126 @@ import {Dimensions} from "react-native";
 import StopOnImg from '../images/travelstop(on).png';
 import StopOffImg from '../images/travelstop(off).png';
 import { Button } from 'react-native';
+const JEnum = require('./JEnum.js');
 
 
 export default class App extends Component {
-  render() {
 
-    T_TITLE = (
-        <View style={styles.T_Title}>
-            <Text style={styles.T_Title_Text}>
-                국민대학교 용두리2
-            </Text>
-        </View>
-    )
+    constructor(props) {
+        super(props);
+        this.state = {
+            _id : props.travelStopId,
+            title : "두리두리 용두리",
+            image : 'http://www.doopedia.co.kr/_upload/image4/1711/03/171103021618274/171103021618274_thumb_400.jpg',
+            description : "",
+            comment : [
+                "A",
+                "B",
+                "C"
+            ],
+        }
+        JEnum.axios.get(JEnum.travelStop + this.state._id)
+        .then((res) => {
+            this.setState(res.data);
+        })
+    }
 
-    T_View = (
-        <View style={styles.T_View}>
-            <TouchableOpacity onPress={() => alert("방문 확인")}>
-                <Image
-                    style={{flex: 1, width: 260, alignSelf: 'stretch', justifyContent: 'center', alignItems: 'center', borderRadius: 10, marginLeft: 50, marginRight: 50, marginTop: 10, marginBottom: 10,}}
-                    source={{uri: 'http://www.doopedia.co.kr/_upload/image4/1711/03/171103021618274/171103021618274_thumb_400.jpg'}} //서버에서 받아올 것
-                />
+    render() {
+
+        T_TITLE = (
+            <View style={styles.T_Title}>
+                <Text style={styles.T_Title_Text}>
+                    { this.state.title }
+                </Text>
+            </View>
+        )
+
+        T_View = (
+            <View style={styles.T_View}>
+                <TouchableOpacity onPress={() => alert("방문 확인")}>
+                    <Image
+                        style={{flex: 1, width: 260, alignSelf: 'stretch', justifyContent: 'center', alignItems: 'center', borderRadius: 10, marginLeft: 50, marginRight: 50, marginTop: 10, marginBottom: 10,}}
+                        source={{uri: (this.state.image ? this.state.image : "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/No_image_3x4.svg/1024px-No_image_3x4.svg.png")}} //서버에서 받아올 것
+                    />
+                </TouchableOpacity>
+            </View>
+        )
+
+        T_Info = (
+            <View style={styles.T_Info}>
+                <Text style={styles.T_Info_Text}>{this.state.description ? this.state.description : "Description이 작성되지 않은 TravelStop 입니다."}</Text>
+                <TouchableOpacity onPress={() => alert("자세히 보기 기능")}>
+                    <Text style={{fontSize: 10, color: "#000000", textDecorationLine: 'underline'}}>
+                        자세히보기
+                    </Text>
+                </TouchableOpacity>
+            </View>
+        )
+
+        T_Mention = (
+            <View style={styles.T_Mention}>
+                <View style={styles.Mention_Group}>
+                    <Text style={styles.T_Mention_Text}>
+                        {this.state.comment[0]}
+                    </Text>
+                </View>
+                <View style={styles.Mention_Group}>
+                    <Text style={styles.T_Mention_Text}>
+                        {this.state.comment[1]}
+                    </Text>
+                </View>
+
+                <View style={styles.Mention_Group}>
+                    <Text style={styles.T_Mention_Text}>
+                        {this.state.comment[2]}
+                    </Text>
+                </View>
+            </View>
+        )
+
+        T_ButtonGroup = (
+            <View style={styles.T_ButtonGroup}>
+
+            <View style={{flex: 1}}></View>
+
+            <TouchableOpacity onPress={() => alert("방명록으로 넘어가자")}>
+            <View style={styles.T_Button}>
+                <Text style={{fontSize: 13, color: "#FFFFFF", fontWeight: 'bold'}}>
+                    방명록
+                </Text>
+            </View>
             </TouchableOpacity>
-        </View>
-    )
 
-    T_Info = (
-        <View style={styles.T_Info}>
-            <Text style={styles.T_Info_Text}>
-                국민대학교 용두리 안녕하세요 리엑트 네이티브{"\n"}
-                도서관 장태진 코딩 컴퓨터구조 배고프다 으악...{"\n"}
-            </Text>
-        <TouchableOpacity onPress={() => alert("자세히 보기 기능")}>
-            <Text style={{fontSize: 10, color: "#000000", textDecorationLine: 'underline'}}>
-                자세히보기
-            </Text>
-        </TouchableOpacity>
-        </View>
-    )
+            <View style={{flex: 1}}></View>
 
-    T_Mention = (
-        <View style={styles.T_Mention}>
-            <View style={styles.Mention_Group}>
-                <Text style={styles.T_Mention_Text}>
-                    최근 방명록 1
+            <TouchableOpacity onPress={() => alert("채팅방으로 넘어가자")}>
+            <View style={styles.T_Button}>
+                <Text style={{fontSize: 13, color: "#FFFFFF", fontWeight: 'bold'}}>
+                    채팅방
                 </Text>
             </View>
-            <View style={styles.Mention_Group}>
-                <Text style={styles.T_Mention_Text}>
-                    최근 방명록 2
-                </Text>
+            </TouchableOpacity>
+
+            <View style={{flex: 1}}></View>
+
             </View>
+        )
 
-            <View style={styles.Mention_Group}>
-                <Text style={styles.T_Mention_Text}>
-                    최근 방명록 3
-                </Text>
+        return (
+            <View style={styles.container}>
+                {T_TITLE}
+
+                {T_View}
+
+                {T_Info}
+
+                {T_Mention}
+
+                <T_Map />
+
+                {T_ButtonGroup}
             </View>
-        </View>
-    )
-
-    T_ButtonGroup = (
-        <View style={styles.T_ButtonGroup}>
-
-        <View style={{flex: 1}}></View>
-
-        <TouchableOpacity onPress={() => alert("방명록으로 넘어가자")}>
-        <View style={styles.T_Button}>
-            <Text style={{fontSize: 13, color: "#FFFFFF", fontWeight: 'bold'}}>
-                방명록
-            </Text>
-        </View>
-        </TouchableOpacity>
-
-        <View style={{flex: 1}}></View>
-
-        <TouchableOpacity onPress={() => alert("채팅방으로 넘어가자")}>
-        <View style={styles.T_Button}>
-            <Text style={{fontSize: 13, color: "#FFFFFF", fontWeight: 'bold'}}>
-                채팅방
-            </Text>
-        </View>
-        </TouchableOpacity>
-
-        <View style={{flex: 1}}></View>
-
-        </View>
-    )
-
-    return (
-        <View style={styles.container}>
-            {T_TITLE}
-
-            {T_View}
-
-            {T_Info}
-
-            {T_Mention}
-
-            <T_Map />
-
-            {T_ButtonGroup}
-        </View>
-    );
+        );
     }
 }
 

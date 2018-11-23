@@ -32,6 +32,12 @@ export default class App extends Component {
             })
         }
     }
+    travelStop = (id) => {
+        this.change("travelStop");
+        this.setState({
+            travelStopId : id
+        })
+    }
     constructor(props) {
         super(props);
         JEnum.axios.get(JEnum.userInfo)
@@ -55,7 +61,7 @@ export default class App extends Component {
     }
     render() {
         return (
-            <this.state.currentPage change={this.change}/>
+            <this.state.currentPage change={this.change} travelStop={this.travelStop} travelStopId={this.state.travelStopId}/>
         );
     }
 }

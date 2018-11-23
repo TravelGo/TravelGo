@@ -48,10 +48,7 @@ export default class App extends Component {
     }
     
     travelStop = (id) => {
-        this.setState({
-            travelStop : id
-        })
-        this.props.change('travelStop');
+        this.props.travelStop(id);
     }
 
     openModal = (type) => {
