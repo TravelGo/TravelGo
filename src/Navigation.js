@@ -19,9 +19,6 @@ import ModalRecommanded from './modal/recommanded'; // 추천
 import ModalSetting from './modal/setting'; // 세팅
 import ModalLicense from './modal/opensource'; // License
 
-// TravelStop
-import ModalTravelStop from './modal/travelStop'; // License
-
 var fullWidth = Dimensions.get('window').width; //full width
 var fullHeight = Dimensions.get('window').height; //full height
 
