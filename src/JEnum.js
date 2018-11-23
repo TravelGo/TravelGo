@@ -2,10 +2,10 @@ import Axios from 'react-native-axios'
 
 const Obj = {}
 Obj.protocol = "http"
-Obj.server = "xn--9i5b27z1b.xn--3e0b707e"
+Obj.server = "여행해.한국"
 Obj.port = "80"
 
-Obj.url = Obj.protocol + "://" + Obj.server + ":" + Obj.port
+Obj.url = Obj.protocol + "://" + Obj.server // + ":" + Obj.port
 
 Obj.axios = Axios.create({
     baseURL: Obj.url,
