@@ -33,11 +33,38 @@ export default class App extends Component {
     render() {
 
         T_TITLE = (
+            // <View style={styles.T_Title}>
+            //     <Text style={styles.T_Title_Text}>
+            //         { this.state.title }
+            //     </Text>
+            // </View>
+
+            // <View style={styles.T_Title}>
+            //     <Text style={styles.T_Title_Text}>
+            //         { this.state.title }
+            //     </Text>
+            // </View>
+
             <View style={styles.T_Title}>
-                <Text style={styles.T_Title_Text}>
-                    { this.state.title }
-                </Text>
-            </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',}}>
+            <TouchableOpacity onPress={() => { this.props.change('Main'); }}>
+                <Image
+                    source={require('../images/goBackButton.png')}
+                    style={{width: 25, height: 25,}}
+                />
+            </TouchableOpacity>
+        </View>
+        
+        <View style={{flex: 6, justifyContent: 'center', alignItems: 'center',}}>
+            <Text style={styles.T_Title_Text}>
+            { this.state.title }
+            </Text>
+        </View>
+
+        <View style={{flex: 1}}></View>
+        </View>
+
+
         )
 
         T_View = (
@@ -216,6 +243,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'stretch',
+        flexDirection: 'row',
     },
 
     T_Title_Text: {
