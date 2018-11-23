@@ -37,7 +37,8 @@ export default class App extends Component {
         currentLocation : "서울특별시 성북구 정릉3동",
         isOpen : false,
         menuItems : <View></View>,
-        modalInner : ModalRecommanded
+        modalInner : ModalRecommanded,
+        travelStop : ""
     }
 
     modalChange = (screen) => {
@@ -47,7 +48,9 @@ export default class App extends Component {
     }
     
     travelStop = (id) => {
-        alert(id);
+        this.setState({
+            travelStop : id
+        })
         this.props.change('travelStop');
     }
 
@@ -83,7 +86,7 @@ export default class App extends Component {
                     <Text style={styles.currentText}>현재 위치 : {this.state.currentLocation}</Text>
                 </View>
                 {/* Current Page */}
-                <this.state.CurrentPage change={this.props.change} modal={this.modalChange} travelStop={this.travelStop}/>
+                <this.state.CurrentPage change={this.props.change} modal={this.modalChange} travelStop={this.travelStop} travelStopId={this.state.travelStop}/>
                 <View style={styles.bottomNavigation}>
                     <TouchableOpacity  style={[styles.buttomButtonNav, {left:0}]} onPress={()=>{this.openModal('default')}}>
                         <Image source={require('../images/left.png')} style={styles.bottomButton}/>
