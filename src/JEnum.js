@@ -2,9 +2,8 @@ import Axios from 'react-native-axios'
 
 const Obj = {}
 Obj.protocol = "http"
-Obj.server = "192.168.43.28"
-Obj.server = "35.231.168.105"
-Obj.port = "8083"
+Obj.server = "xn--9i5b27z1b.xn--3e0b707e"
+Obj.port = "80"
 
 Obj.url = Obj.protocol + "://" + Obj.server + ":" + Obj.port
 
