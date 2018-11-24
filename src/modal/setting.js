@@ -7,9 +7,6 @@ export default class App extends Component {
         super(props);
         const { width, height } = Dimensions.get("window")
         this.state = {
-            switch1: false,
-            switch2: false,
-            switch3: false,
             window: {
                 width: width,
                 height: height
@@ -51,39 +48,16 @@ export default class App extends Component {
                         </View>
                     </ImageBackground>
                 </View>
-                <View style={styles.settingview1}>
-                    <View style={{ flex: 1, alignItems: 'center', backgroundColor: 'green', borderWidth: 3, borderColor: 'white' }}>
-                        <Text style={{ margin: 5, fontSize: 20 }}>ID</Text>
-                        <Text>SeongHoon Choi</Text>
+
+                <TouchableOpacity onPress={() => alert("방문 확인")}>
+                    <View style={styles.settingview1}>
+                        <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#00AFFF', height: 40, justifyContent: 'center'}}>
+                            <Text style={{fontSize: 20, color: 'white', fontWeight: 'bold' }}>jtjisgod 님의 마이페이지</Text>
+                        </View>
                     </View>
-                </View>
+                </TouchableOpacity>
+
                 <ScrollView>
-                    <View style={styles.settingview2}>
-                        <View style={[styles.settingview2_1, { borderBottomWidth: 1, borderBottomColor: 'rgba(230,230,230, 1)' }]}>
-                            <View style={{ flex: 5, justifyContent: 'center' }}>
-                                <Text style={{ marginLeft: 20, fontSize: 20 }}>BGM ON / OFF</Text>
-                            </View>
-                            <View style={{ flex: 2, alignItems: 'center' }}>
-                                <Switch style={{ margin: 5, transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }] }} onValueChange={(value) => this.setState({ switch1: value })} value={this.state.switch1} />
-                            </View>
-                        </View>
-                        <View style={[styles.settingview2_1, { borderBottomWidth: 1, borderBottomColor: 'rgba(230,230,230, 1)' }]}>
-                            <View style={{ flex: 5, justifyContent: 'center' }}>
-                                <Text style={{ marginLeft: 20, fontSize: 20 }}>setting 1</Text>
-                            </View>
-                            <View style={{ flex: 2, alignItems: 'center' }}>
-                                <Switch style={{ margin: 5, transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }] }} onValueChange={(value) => this.setState({ switch2: value })} value={this.state.switch2} />
-                            </View>
-                        </View>
-                        <View style={[styles.settingview2_1, { borderBottomWidth: 1, borderBottomColor: 'rgba(230,230,230, 1)' }]}>
-                            <View style={{ flex: 5, justifyContent: 'center' }}>
-                                <Text style={{ marginLeft: 20, fontSize: 20 }}>setting 1</Text>
-                            </View>
-                            <View style={{ flex: 2, alignItems: 'center' }}>
-                                <Switch style={{ margin: 5, transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }] }} onValueChange={(value) => this.setState({ switch3: value })} value={this.state.switch3} />
-                            </View>
-                        </View>
-                    </View>
                     <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
                         {visited}
                     </View>
@@ -109,29 +83,10 @@ const styles = StyleSheet.create({
     },
     settingview1: {
         justifyContent: 'center',
-        alignItems: 'stretch',
-        borderBottomWidth: 3,
-        borderBottomColor: 'white',
-        borderTopWidth: 3,
-        borderTopColor: 'white',
-        flexDirection: 'row',
-    },
-    settingview2: {
-        justifyContent: 'center',
-        alignItems: 'stretch',
-        borderBottomWidth: 3,
-        borderBottomColor: 'white',
-        flexDirection: 'column',
-        backgroundColor: 'white',
-    },
-    settingview2_1: {
-        flexDirection: 'row',
-        margin: 5,
-    },
-    settingview2_2: {
-        justifyContent: 'center',
         alignItems: 'center',
-        margin: 10,
+        flexDirection: 'row',
+        height: 40,
+        marginBottom: 1.5,
     },
     settingview3: {
         backgroundColor: 'white',
