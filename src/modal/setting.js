@@ -62,11 +62,12 @@ export default class App extends Component {
                         {visited}
                     </View>
                 </ScrollView>
-                <View style={styles.settingview3}>
-                    <TouchableOpacity onPress={() => { this.props.change('license'); }}>
+                <TouchableOpacity onPress={() => { this.props.change('license'); }}>
+                    <View style={styles.settingview3}>
                         <Text style={{ color: 'grey', fontWeight: 'bold', fontSize: 15 }}>Open Source</Text>
-                    </TouchableOpacity>
-                </View>
+                    </View>
+                </TouchableOpacity>
+
             </View>
         );
     }
