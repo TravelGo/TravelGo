@@ -99,24 +99,34 @@ export default class GuestBook extends Component {
           <View style={{width:30}}></View>
         </View>
 
-
-        <View style={{height: 500, borderRadius: 20, paddingLeft: 10, paddingRight: 10}}>
-          <View style={{height: 35, alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={{color: '#00BFFF'}}>방명록 ({this.state.boardnum})</Text>
-          </View>
-          <ScrollView
-            refreshControl={
+        <ScrollView
+          refreshControl={
               <RefreshControl
-                refreshing={this.state.refreshing}
-                onRefresh={this._onRefresh} />} >
-          {this.state.guestbooks}
-          </ScrollView>
-        </View>
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh} />
+          }
+          style={{flex:1}}>
 
-        <View style={{width:400, height:80, alignItems: 'center', flexDirection: 'row', justifyContent:'space-between'}}>
-          <TextInput style={[styles.TextInput_style]} placeholder='     방명록 작성하기'></TextInput>
-          <Button style={[styles.button]} color='#00AFFF' title="send"></Button>
-        </View>
+            <View style={{height: Dimensions.get("window").height - 150,  paddingLeft: 10, paddingRight: 10}}>
+
+              <View style={{height: 35, alignItems: 'center', justifyContent: 'center'}}>
+                  <Text style={{color: '#00BFFF'}}>방명록 ({this.state.boardnum})</Text>
+              </View>
+
+              <View>
+              {this.state.guestbooks}
+              </View>
+
+            </View>
+
+            <View style={{alignItems: 'center', flexDirection: 'row', justifyContent:'space-between', height:55}}>
+                  <TextInput style={styles.TextInput_style} placeholder='     방명록 작성하기'></TextInput>
+                  <TouchableOpacity onPress={this._onRefresh} style={{}}>
+                        <View style={{backgroundColor:'#00AFFF', width:80, height:50, alignItems:'center', borderRadius:30, marginRight:10, justifyContent:'center'}}><Text style={{color:'white', fontSize:15, fontWeight:'bold'}}> SEND </Text></View>
+                  </TouchableOpacity>
+            </View>
+        </ScrollView>
+
       </View>
     );
   }
@@ -141,13 +151,11 @@ const styles = StyleSheet.create({
   },
 
   TextInput_style: {
-    borderWidth: 2,
-    borderColor: '#00BFFF',
-    width: 330,
-    height: 60,
+    backgroundColor : '#EEEEEE',
+    width: 300,
+    height: 50,
     marginLeft: 5,
     paddingLeft: 10,
-    borderRadius: 30,
   },
 
   button: {
