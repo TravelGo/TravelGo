@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 
-let title = "Timeline"
+let title = "Mypage"
 
 export default class App extends Component {
     render() {

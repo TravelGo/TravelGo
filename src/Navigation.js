@@ -105,7 +105,7 @@ export default class App extends Component {
                 </TouchableOpacity>
                 <View style={{alignItems:"center"}}>
                     <View style={[styles.modal, {top:(this.state.isOpen)?-1 * fullHeight * 0.90:fullHeight}]}>
-                        <this.state.modalInner menu={this.leftModalItems} userID={this.props.userID} change={this.modalChange}/>
+                        <this.state.modalInner move={this.props.change} menu={this.leftModalItems} userID={this.props.userID} change={this.modalChange}/>
                     </View>
                 </View>
             </View>

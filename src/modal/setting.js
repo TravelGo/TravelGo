@@ -50,7 +50,7 @@ export default class App extends Component {
                     </ImageBackground>
                 </View>
 
-                <TouchableOpacity onPress={() => alert("방문 확인")}>
+                <TouchableOpacity onPress={() => this.props.move("mypage")}>
                     <View style={styles.settingview1}>
                         <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#00AFFF', height: 40, justifyContent: 'center'}}>
                             <Text style={{fontSize: 20, color: 'white', fontWeight: 'bold' }}>마이페이지로 이동</Text>
