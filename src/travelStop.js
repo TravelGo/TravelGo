@@ -13,6 +13,7 @@ export default class App extends Component {
 
     constructor(props) {
         super(props);
+        const { width, height } = Dimensions.get("window")
         this.state = {
             _id : props.travelStopId,
             title : "두리두리 용두리",
@@ -23,6 +24,10 @@ export default class App extends Component {
                 "B",
                 "C"
             ],
+            window: {
+                width: width,
+                height: height
+            },
         }
         JEnum.axios.get(JEnum.travelStop + this.state._id)
         .then((res) => {
@@ -132,7 +137,7 @@ export default class App extends Component {
                     {T_View}
 
                 <View style={{flex: 1}}>
-                <ScrollView style={{flex: 1, alignSelf: 'stretch',}}>
+                <ScrollView style={{flex: 1, alignSelf: 'stretch', width: this.state.window.width, height: this.state.window.height - 210}}>
 
                     {T_Info}
 
