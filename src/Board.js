@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, TextInput, ScrollView, Button, View, Image, Dimensions, RefreshControl} from 'react-native';
+import {Platform, StyleSheet, Text, TextInput, ScrollView, Button, View, Image, Dimensions, RefreshControl, TouchableOpacity} from 'react-native';
 
 export default class GuestBook extends Component {
 
@@ -11,6 +11,7 @@ export default class GuestBook extends Component {
       height,
       refreshing: false,
       stop: "Travel",
+      boardnum: 0,
       guestbooks: [],
     }
   }
@@ -59,7 +60,7 @@ export default class GuestBook extends Component {
   import_json() {
     var guestbook = this.state.guestbooks;
     guestbook.push(
-      <View style={{height: 85, borderWidth: 2, borderColor: '#841584', borderRadius:10, padding: 5, marginBottom:10}}>
+      <View style={styles.board}>
         <View style={{flexDirection: 'row', alignItems: 'center', marginBottom:3}}>
           <Image source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Regular_quadrilateral.svg/220px-Regular_quadrilateral.svg.png'}} style={{width: 20, height: 20}} resizeMode='center'/>
           <Text style={{fontSize:10, fontWeight: '800', color: '#841584'}}>사용자 본인(1)</Text>
@@ -86,17 +87,22 @@ export default class GuestBook extends Component {
 
   render() {
     return (
-      <View>
+      <View style={{flex:1}}>
 
-        <View style={{backgroundColor: '#787878', width: 412, height:80, alignItems: 'center', flexDirection: 'row', padding:20, justifyContent:'space-between'}} >
-          <Button style={{width: 70, height: 70, textAlign: 'center', borderRadius: 20}} color='#841584' title="<"></Button>
-          <Text style={{color: 'white', fontSize: 30}}>{this.state.stop}</Text>
-          <Button style={{width: 70, height: 70, textAlign: 'center', borderRadius: 20}} color='#841584' title="="></Button>
+
+
+        <View style={{paddingHorizontal: 15, justifyContent:'space-between', backgroundColor: '#00AFFF', height: 60, flexDirection: 'row', alignItems:'center'}}>
+          <TouchableOpacity onPress={this._goToMap} style={{width:30}}>
+            <Image source={require("./images/goBackButton.png")} style={{width:30, height: 30, resizeMode: 'contain'}}/>
+          </TouchableOpacity>
+          <Text style={{color: 'white', fontSize: 25, fontWeight: 'bold'}}>마이페이지</Text>
+          <View style={{width:30}}></View>
         </View>
+
 
         <View style={{height: 500, borderRadius: 20, paddingLeft: 10, paddingRight: 10}}>
           <View style={{height: 35, alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={{color: '#00BFFF'}}>방명록(87)</Text>
+              <Text style={{color: '#00BFFF'}}>방명록 ({this.state.boardnum})</Text>
           </View>
           <ScrollView
             refreshControl={
@@ -109,7 +115,7 @@ export default class GuestBook extends Component {
 
         <View style={{width:400, height:80, alignItems: 'center', flexDirection: 'row', justifyContent:'space-between'}}>
           <TextInput style={[styles.TextInput_style]} placeholder='     방명록 작성하기'></TextInput>
-          <Button style={[styles.button]} color='#841584' title="send"></Button>
+          <Button style={[styles.button]} color='#00AFFF' title="send"></Button>
         </View>
       </View>
     );
@@ -158,6 +164,28 @@ const styles = StyleSheet.create({
     padding: 20,
     margin: 2,
   },
+
+  T_Title: {
+      height: 60,
+      backgroundColor: '#00AFFF',
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf: 'stretch',
+      flexDirection: 'row',
+  },
+  T_Title_Text: {
+      fontSize: 30,
+      fontWeight: 'bold',
+      color: '#FFFFFF',
+  },
+  board:{
+    height: 85,
+    borderWidth: 2,
+    borderColor: '#00AFFF',
+    borderRadius:10,
+    padding: 5,
+    marginBottom:10
+  }
 
 
 });
