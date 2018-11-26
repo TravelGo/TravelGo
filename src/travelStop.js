@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, AppRegistry, Image, TouchableOpacity} from 'react-native';
+import {Platform, StyleSheet, Text, View, AppRegistry, Image, TouchableOpacity, ScrollView} from 'react-native';
 import MapView from 'react-native-maps';
 import geolib from 'geolib';
 import {Dimensions} from "react-native";
@@ -122,17 +122,23 @@ export default class App extends Component {
 
         return (
             <View style={styles.container}>
-                {T_TITLE}
 
-                {T_View}
+                    {T_TITLE}
+                    {T_View}
 
-                {T_Info}
+                <View style={{flex: 1}}>
+                <ScrollView style={{flex: 1, alignSelf: 'stretch',}}>
 
-                {T_Mention}
+                    {T_Info}
 
-                <T_Map />
+                    {T_Mention}
 
-                {T_ButtonGroup}
+                    <T_Map />
+                    
+                    {T_ButtonGroup}
+
+                </ScrollView>
+                </View>
             </View>
         );
     }
@@ -220,7 +226,7 @@ const styles = StyleSheet.create({
     },
 
     T_Title: {
-        flex: 1,
+        height:40,
         backgroundColor: '#545454',
         justifyContent: 'center',
         alignItems: 'center',
@@ -235,7 +241,7 @@ const styles = StyleSheet.create({
     },
 
     T_View: {
-        flex: 4,
+        height: 170,
         backgroundColor: '#00AFFF',
         justifyContent: 'center',
         alignItems: 'center',
@@ -273,7 +279,8 @@ const styles = StyleSheet.create({
     },
 
     T_Map: {
-        flex: 3,
+        // flex: 3,
+        height: 170,
         backgroundColor: '#FFFFFF',
         justifyContent: 'center',
         alignItems: 'center',
