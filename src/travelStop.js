@@ -136,18 +136,18 @@ export default class App extends Component {
                     {T_TITLE}
                     {T_View}
 
-                <View style={{flex: 1}}>
-                <ScrollView style={{flex: 1, alignSelf: 'stretch', width: this.state.window.width, height: this.state.window.height - 210}}>
+                <View style={{flex: 1, width: this.state.window.width, height: this.state.window.height}}>
+                    <ScrollView style={{flex: 1, alignSelf: 'stretch', width: this.state.window.width, height: this.state.window.height}}>
 
-                    {T_Info}
+                        {T_Info}
 
-                    {T_Mention}
+                        {T_Mention}
 
-                    <T_Map />
-                    
-                    {T_ButtonGroup}
+                        <T_Map />
+                        
+                        {T_ButtonGroup}
 
-                </ScrollView>
+                    </ScrollView>
                 </View>
             </View>
         );
@@ -208,7 +208,7 @@ class T_Map extends Component{
     return (
       <View style={styles.T_Map}>
         <MapView style={styles.mapview}
-          showsUserLocation = {true}
+          showsUserLocation = {false}
           initialRegion={{
               latitude: 37.611026, //서버에서 받아올 것
               longitude: 126.996917, //서버에서 받아올 것
