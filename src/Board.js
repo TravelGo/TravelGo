@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, TextInput, ScrollView, Button, View, Image, Dimensions, RefreshControl, TouchableOpacity} from 'react-native';
+import React, { Component } from 'react';
+import { Platform, StyleSheet, Text, TextInput, ScrollView, Button, View, Image, Dimensions, RefreshControl, TouchableOpacity } from 'react-native';
 
 export default class GuestBook extends Component {
 
   constructor(props) {
     super(props);
-    const {width, height} = Dimensions.get("window")
+    const { width, height } = Dimensions.get("window")
     this.state = {
       width,
       height,
@@ -17,9 +17,9 @@ export default class GuestBook extends Component {
   }
 
   _onRefresh = () => {
-    this.setState({refreshing:true});
+    this.setState({ refreshing: true });
     this.import_json();
-    this.setState({refreshing:false});
+    this.setState({ refreshing: false });
   };
 
 
@@ -27,52 +27,52 @@ export default class GuestBook extends Component {
     var guestbook = [];
 
     fetch('http://35.231.168.105/travelstop/37.610304/126.996917?ID=' + props.ID)
-        .then(response => response.json())
-        .then((responseJson) => {
-            console.log(responseJson)
-            for(i=0;i<responseJson.length();i++){
-              guestbook.push(
-                <View style={{height: 85, borderWidth: 2, borderColor: '#841584', borderRadius:10, padding: 5, marginBottom:10}}>
-                  <View style={{flexDirection: 'row', alignItems: 'center', marginBottom:3}}>
-                    <Image source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Regular_quadrilateral.svg/220px-Regular_quadrilateral.svg.png'}} style={{width: 20, height: 20}} resizeMode='center'/>
-                    <Text style={{fontSize:10, fontWeight: '800', color: '#841584'}}>{responseJson[i].writer}</Text>
-                  </View>
-                  <Text style={{color: '#00BFFF', marginLeft:10, marginBottom:5}}>{responseJson[i].memo}</Text>
-                  <View style={{paddingLeft:10, paddingRight:5, alignItems: 'baseline', flexDirection: 'row', justifyContent:'space-between'}}>
-                    <Text style={{color: '#D3D3D3', fontSize:10}}>{responseJson[i].timestamp}</Text>
-                    <View style={{alignItems: 'center', flexDirection: 'row'}}>
-                      <Text style={{borderWidth: 1, borderColor: '#00BFFF', borderRadius: 7, paddingHorizontal: 5}}>{responseJson[i].like}</Text>
-                      <Image
-                        source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Bot%C3%B3n_Me_gusta.svg/1200px-Bot%C3%B3n_Me_gusta.svg.png'}}
-                        style={{marginLeft: 5, width: 25, height: 25}} resizeMode='center'>
-                      </Image>
-                    </View>
-                  </View>
+      .then(response => response.json())
+      .then((responseJson) => {
+        console.log(responseJson)
+        for (i = 0; i < responseJson.length(); i++) {
+          guestbook.push(
+            <View style={{ height: 85, borderWidth: 2, borderColor: '#841584', borderRadius: 10, padding: 5, marginBottom: 10 }}>
+              <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 3 }}>
+                <Image source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Regular_quadrilateral.svg/220px-Regular_quadrilateral.svg.png' }} style={{ width: 20, height: 20 }} resizeMode='center' />
+                <Text style={{ fontSize: 10, fontWeight: '800', color: '#841584' }}>{responseJson[i].writer}</Text>
+              </View>
+              <Text style={{ color: '#00BFFF', marginLeft: 10, marginBottom: 5 }}>{responseJson[i].memo}</Text>
+              <View style={{ paddingLeft: 10, paddingRight: 5, alignItems: 'baseline', flexDirection: 'row', justifyContent: 'space-between' }}>
+                <Text style={{ color: '#D3D3D3', fontSize: 10 }}>{responseJson[i].timestamp}</Text>
+                <View style={{ alignItems: 'center', flexDirection: 'row' }}>
+                  <Text style={{ borderWidth: 1, borderColor: '#00BFFF', borderRadius: 7, paddingHorizontal: 5 }}>{responseJson[i].like}</Text>
+                  <Image
+                    source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Bot%C3%B3n_Me_gusta.svg/1200px-Bot%C3%B3n_Me_gusta.svg.png' }}
+                    style={{ marginLeft: 5, width: 25, height: 25 }} resizeMode='center'>
+                  </Image>
                 </View>
-              )
-            }
-        })
-        .catch(error => alert(error));
+              </View>
+            </View>
+          )
+        }
+      })
+      .catch(error => alert(error));
 
-    this.setState({guestbooks:guestbook});
+    this.setState({ guestbooks: guestbook });
   }
 
   import_json() {
     var guestbook = this.state.guestbooks;
     guestbook.push(
       <View style={styles.board}>
-        <View style={{flexDirection: 'row', alignItems: 'center', marginBottom:3}}>
-          <Image source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Regular_quadrilateral.svg/220px-Regular_quadrilateral.svg.png'}} style={{width: 20, height: 20}} resizeMode='center'/>
-          <Text style={{fontSize:10, fontWeight: '800', color: '#841584'}}>사용자 본인(1)</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 3 }}>
+          <Image source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Regular_quadrilateral.svg/220px-Regular_quadrilateral.svg.png' }} style={{ width: 20, height: 20 }} resizeMode='center' />
+          <Text style={{ fontSize: 10, fontWeight: '800', color: '#841584' }}>사용자 본인(1)</Text>
         </View>
-        <Text style={{color: '#00BFFF', marginLeft:10, marginBottom:5}}>계획대로 되고 있어</Text>
-        <View style={{paddingLeft:10, paddingRight:5, alignItems: 'baseline', flexDirection: 'row', justifyContent:'space-between'}}>
-          <Text style={{color: '#D3D3D3', fontSize:10}}>방금 전</Text>
-          <View style={{alignItems: 'center', flexDirection: 'row'}}>
-            <Text style={{borderWidth: 1, borderColor: '#00BFFF', borderRadius: 7, paddingHorizontal: 5}}>5</Text>
+        <Text style={{ color: '#00BFFF', marginLeft: 10, marginBottom: 5 }}>계획대로 되고 있어</Text>
+        <View style={{ paddingLeft: 10, paddingRight: 5, alignItems: 'baseline', flexDirection: 'row', justifyContent: 'space-between' }}>
+          <Text style={{ color: '#D3D3D3', fontSize: 10 }}>방금 전</Text>
+          <View style={{ alignItems: 'center', flexDirection: 'row' }}>
+            <Text style={{ borderWidth: 1, borderColor: '#00BFFF', borderRadius: 7, paddingHorizontal: 5 }}>5</Text>
             <Image
-              source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Bot%C3%B3n_Me_gusta.svg/1200px-Bot%C3%B3n_Me_gusta.svg.png'}}
-              style={{marginLeft: 5, width: 25, height: 25}} resizeMode='center'>
+              source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Bot%C3%B3n_Me_gusta.svg/1200px-Bot%C3%B3n_Me_gusta.svg.png' }}
+              style={{ marginLeft: 5, width: 25, height: 25 }} resizeMode='center'>
             </Image>
           </View>
         </View>
@@ -81,50 +81,54 @@ export default class GuestBook extends Component {
 
 
     console.log(guestbook[0]);
-    this.setState({guestbooks:guestbook});
+    this.setState({ guestbooks: guestbook });
   }
 
 
   render() {
     return (
-      <View style={{flex:1}}>
+      <View style={{ flex: 1 }}>
 
 
 
-        <View style={{paddingHorizontal: 15, justifyContent:'space-between', backgroundColor: '#00AFFF', height: 60, flexDirection: 'row', alignItems:'center'}}>
-          <TouchableOpacity onPress={this._goToMap} style={{width:30}}>
-            <Image source={require("../images/goBackButton.png")} style={{width:30, height: 30, resizeMode: 'contain'}}/>
+        <View style={{ paddingHorizontal: 15, justifyContent: 'space-between', backgroundColor: '#00AFFF', height: 60, flexDirection: 'row', alignItems: 'center' }}>
+          <TouchableOpacity onPress={this._goToMap} style={{ width: 30 }}>
+            <Image source={require("../images/goBackButton.png")} style={{ width: 30, height: 30, resizeMode: 'contain' }} />
           </TouchableOpacity>
-          <Text style={{color: 'white', fontSize: 25, fontWeight: 'bold'}}>마이페이지</Text>
-          <View style={{width:30}}></View>
+          <Text style={{ color: 'white', fontSize: 25, fontWeight: 'bold' }}>방명록</Text>
+          <View style={{ width: 30 }}></View>
         </View>
 
         <ScrollView
           refreshControl={
-              <RefreshControl
+            <RefreshControl
               refreshing={this.state.refreshing}
               onRefresh={this._onRefresh} />
           }
-          style={{flex:1}}>
+        >
 
-            <View style={{height: Dimensions.get("window").height - 150,  paddingLeft: 10, paddingRight: 10}}>
-
-              <View style={{height: 35, alignItems: 'center', justifyContent: 'center'}}>
-                  <Text style={{color: '#00BFFF'}}>방명록 ({this.state.boardnum})</Text>
+          <View style={{ height: 55, padding: 10 }}>
+            <Text style={{fontSize:15}}># 방명록 작성</Text>
+            <TextInput multiline={true} style={styles.TextInput_style} placeholder='방명록 작성하기'></TextInput>
+            <TouchableOpacity onPress={this._onRefresh} style={{alignSelf:'flex-end'}}>
+              <View style={{ backgroundColor: '#00AFFF', width: 85, borderRadius: 5, height: 40, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold' }}> SEND </Text>
               </View>
+            </TouchableOpacity>
+          </View>
 
-              <View>
+          <View style={{ height: Dimensions.get("window").height - 150, paddingLeft: 10, paddingRight: 10 }}>
+
+            <View style={{ height: 35 }}>
+              <Text style={{ color: '#00BFFF' }}>방명록 ({this.state.boardnum})</Text>
+            </View>
+
+            <View>
               {this.state.guestbooks}
-              </View>
-
             </View>
 
-            <View style={{alignItems: 'center', flexDirection: 'row', justifyContent:'space-between', height:55}}>
-                  <TextInput style={styles.TextInput_style} placeholder='     방명록 작성하기'></TextInput>
-                  <TouchableOpacity onPress={this._onRefresh} style={{}}>
-                        <View style={{backgroundColor:'#00AFFF', width:80, height:50, alignItems:'center', borderRadius:30, marginRight:10, justifyContent:'center'}}><Text style={{color:'white', fontSize:15, fontWeight:'bold'}}> SEND </Text></View>
-                  </TouchableOpacity>
-            </View>
+          </View>
+
         </ScrollView>
 
       </View>
@@ -152,17 +156,11 @@ const styles = StyleSheet.create({
 
   TextInput_style: {
     backgroundColor : '#EEEEEE',
-    width: 300,
-    height: 50,
-    marginLeft: 5,
-    paddingLeft: 10,
-  },
-
-  button: {
-    width: 90,
-    height: 80,
-    textAlign: 'center',
-    borderRadius: 5,
+    width : Dimensions.get('window').width - 20,
+    height : 100,
+    paddingLeft : 10,
+    marginBottom : 5,
+    marginTop : 5
   },
 
   ScrollItem: {
@@ -174,25 +172,25 @@ const styles = StyleSheet.create({
   },
 
   T_Title: {
-      height: 60,
-      backgroundColor: '#00AFFF',
-      justifyContent: 'center',
-      alignItems: 'center',
-      alignSelf: 'stretch',
-      flexDirection: 'row',
+    height: 60,
+    backgroundColor: '#00AFFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'stretch',
+    flexDirection: 'row',
   },
   T_Title_Text: {
-      fontSize: 30,
-      fontWeight: 'bold',
-      color: '#FFFFFF',
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
   },
-  board:{
+  board: {
     height: 85,
     borderWidth: 2,
     borderColor: '#00AFFF',
-    borderRadius:10,
+    borderRadius: 10,
     padding: 5,
-    marginBottom:10
+    marginBottom: 10
   }
 
 
