@@ -160,7 +160,7 @@ export default class App extends Component {
 
             <View style={{flex: 1}}></View>
 
-            <TouchableOpacity onPress={() => alert("채팅방으로 넘어가자")}>
+            <TouchableOpacity onPress={() => this.props.change('chatting')}>
             <View style={styles.T_Button}>
                 <Text style={{fontSize: 13, color: "#FFFFFF", fontWeight: 'bold'}}>
                     채팅방

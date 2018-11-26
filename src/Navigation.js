@@ -7,7 +7,7 @@ const JEnum = require('./JEnum.js')
 import screenMain from './Main'
 import screenLogin from './Login'
 import screenRegister from './Register'
-import screenChatting from './Chatting'
+import Chatting from './Chatting'
 import Mypage from './Mypage'
 import screenSetting from './Setting'
 
@@ -30,7 +30,8 @@ export default class App extends Component {
     modal = {
         'setting' : ModalSetting,
         'license' : ModalLicense,
-        'mypage' : Mypage
+        'mypage' : Mypage,
+        'chatting' : Chatting,
     }
 
     state = {
