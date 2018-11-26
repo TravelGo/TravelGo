@@ -107,7 +107,7 @@ export default class GuestBook extends Component {
           }
         >
 
-          <View style={{ height: 55, padding: 10 }}>
+          <View style={{padding: 10 , flexDirection:'column'}}>
             <Text style={{fontSize:15}}># 방명록 작성</Text>
             <TextInput multiline={true} style={styles.TextInput_style} placeholder='방명록 작성하기'></TextInput>
             <TouchableOpacity onPress={this._onRefresh} style={{alignSelf:'flex-end'}}>
@@ -117,11 +117,8 @@ export default class GuestBook extends Component {
             </TouchableOpacity>
           </View>
 
-          <View style={{ height: Dimensions.get("window").height - 150, paddingLeft: 10, paddingRight: 10 }}>
+          <View style={{paddingLeft: 10, paddingRight: 10 }}>
 
-            <View style={{ height: 35 }}>
-              <Text style={{ color: '#00BFFF' }}>방명록 ({this.state.boardnum})</Text>
-            </View>
 
             <View>
               {this.state.guestbooks}
