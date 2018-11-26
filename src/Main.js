@@ -61,7 +61,7 @@ export default class App extends Component {
             <View style={styles.view}>
 
                 <MapView style={styles.mapview}
-                    showsUserLocation = {true}
+                    showsUserLocation = {false}
                     initialRegion={{
                         latitude: 38.611026,
                         longitude: 126.996917,
@@ -72,14 +72,20 @@ export default class App extends Component {
                     rotateEnabled={false}
                     scrollEnabled={false}
                     pitchEnabled={true}
-                    zoomEnabled={false}          
+                    zoomEnabled={false}
                 >
+
+                <MapView.Marker coordinate={this.state.user}>
+                    <Image source={require('../images/point.png')} style={{ width: 25, height: 25 }}/>
+                </MapView.Marker>
+
+
 
                     {
                         this.state.stops.map((contact, i) =>
-                            geolib.getDistance(contact.location, this.state.user) <= 500 ? (
+                            geolib.getDistance(contact.location, this.state.user) <= 50 ? (
                                 <MapView.Marker coordinate={contact.location} key={i}
-                                    onPress={e => {   
+                                    onPress={e => {
                                         this.props.travelStop(contact._id)
                                     }
                                 }>
