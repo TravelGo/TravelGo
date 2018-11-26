@@ -5,6 +5,8 @@ import ScreenLoading from './src/Loading';
 import ScreenLogin from './src/Login';
 import ScreenRegister from './src/Register';
 import ScreenTravelStop from './src/travelStop';
+import ScreenBoard from './src/Board';
+import ScreenChatting from './src/Chatting';
 
 const JEnum = require('./src/JEnum.js')
 
@@ -25,6 +27,14 @@ export default class App extends Component {
         } else if(category === "travelStop") {
             this.setState({
                 currentPage : ScreenTravelStop
+            })
+        } else if(category === "board") {
+            this.setState({
+                currentPage : ScreenBoard
+            })
+        } else if(category === "chatting") {
+            this.setState({
+                currentPage : ScreenChatting
             })
         } else {
             this.setState({
