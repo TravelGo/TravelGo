@@ -76,7 +76,7 @@ export default class App extends Component {
                 >
 
                 <MapView.Marker coordinate={this.state.user}>
-                    <Image source={require('../images/point.png')} style={{ width: 25, height: 25 }}/>
+                    <Image source={require('../images/point.png')} style={{ width: 20, height: 20 }}/>
                 </MapView.Marker>
 
 
