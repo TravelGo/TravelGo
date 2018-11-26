@@ -8,7 +8,7 @@ import screenMain from './Main'
 import screenLogin from './Login'
 import screenRegister from './Register'
 import screenChatting from './Chatting'
-import screenMypage from './Mypage'
+import Mypage from './Mypage'
 import screenSetting from './Setting'
 
 
@@ -30,6 +30,7 @@ export default class App extends Component {
     modal = {
         'setting' : ModalSetting,
         'license' : ModalLicense,
+        'mypage' : Mypage
     }
 
     state = {
@@ -64,6 +65,10 @@ export default class App extends Component {
         } else if(type === 'travelStop') {
             this.setState({
                 modalInner : ModalTravelStop
+            })
+        } else if(type === 'mypage') {
+            this.setState({
+                modalInner : Mypage
             })
         }
     }
@@ -104,10 +109,16 @@ export default class App extends Component {
                     <View></View>
                 </TouchableOpacity>
                 <View style={{alignItems:"center"}}>
-                    <View style={[styles.modal, {top:(this.state.isOpen)?-1 * fullHeight * 0.90:fullHeight}]}>
+                    <View style={[styles.modal, {top:(this.state.isOpen)?-1 * fullHeight + 30:fullHeight}]}>
                         <this.state.modalInner move={this.props.change} menu={this.leftModalItems} userID={this.props.userID} change={this.modalChange}/>
                     </View>
                 </View>
+                <TouchableOpacity style={{position:"absolute",left:10, top:this.state.isOpen?15:fullHeight}} onPress={()=>{this.closeModal()}}>
+                    <Image
+                        source={require('../images/goBackButton.png')}
+                        style={{width: 30, height: 30}}
+                    />
+                </TouchableOpacity>
             </View>
         );
     }
@@ -164,8 +175,8 @@ const styles = StyleSheet.create({
     },
     modal : {
         position : 'absolute',
-        width : fullWidth * 0.9,
-        height : fullHeight * 0.9,
+        width : fullWidth,
+        height : fullHeight-30,
         alignItems : 'center'
     }
 });

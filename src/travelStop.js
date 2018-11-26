@@ -28,11 +28,54 @@ export default class App extends Component {
                 width: width,
                 height: height
             },
+            user: {
+                latitude: 0,
+                longitude: 0,
+                latitudeDelta: 1,
+                longitudeDelta: 1,
+            },
+            stop: {
+                latitude: 0,
+                longitude: 0
+            },
+            stops: []
         }
         JEnum.axios.get(JEnum.travelStop + this.state._id)
         .then((res) => {
+            this.setState({
+                stops: [{
+                    location : {
+                        latitude: res.data.lat,
+                        longitude: res.data.lng      
+                    }
+                },],
+                stop: {
+                    latitude : res.data.lat,
+                    longitude : res.data.lng
+                }
+            })
             this.setState(res.data);
         })
+    }
+
+
+    componentDidMount() {
+        setInterval(() => {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    this.setState({
+                        user: {
+                            latitude: position.coords.latitude,
+                            longitude: position.coords.longitude,
+                            latitudeDelta: 0.005,
+                            longitudeDelta: 0.005,
+                        }
+                    });
+                },
+                (error) => alert(JSON.stringify(error)),
+                { enableHighAccuracy: true, timeout: 2000 }
+            )
+        }, 2000);
     }
 
     render() {
@@ -130,6 +173,34 @@ export default class App extends Component {
             </View>
         )
 
+        T_Map = (
+            <View style={styles.T_Map}>
+                <MapView style={styles.mapview}
+                    showsUserLocation={false}
+                    initialRegion={{
+                        latitude: this.state.stop.latitude, //서버에서 받아올 것
+                        longitude: this.state.stop.longitude, //서버에서 받아올 것
+                        latitudeDelta: 0.002,
+                        longitudeDelta: 0.002,
+                    }}
+                    region={{
+                        latitude: this.state.stop.latitude, //서버에서 받아올 것
+                        longitude: this.state.stop.longitude, //서버에서 받아올 것
+                        latitudeDelta: 0.002,
+                        longitudeDelta: 0.002,
+                    }}
+                    rotateEnabled={false}
+                    scrollEnabled={false}
+                    pitchEnabled={false}
+                    zoomEnabled={false}
+                >
+                    {this.state.stops.map((contact, i) =>
+                        <MapView.Marker coordinate={contact.location} key={i} image={StopOnImg} />
+                    )}
+                </MapView>
+            </View>
+        )
+
         return (
             <View style={styles.container}>
 
@@ -143,7 +214,7 @@ export default class App extends Component {
 
                         {T_Mention}
 
-                        <T_Map />
+                        {T_Map}
                         
                         {T_ButtonGroup}
 
@@ -155,79 +226,28 @@ export default class App extends Component {
 }
 
 
-class T_Map extends Component{
+// class T_Map extends Component{
 
-  constructor(props) {
-    super(props);
+//   componentDidMount(){
+//     setInterval(() => {
+//       navigator.geolocation.getCurrentPosition(
+//           (position) =>{
+//             this.setState({
+//               user: {
+//                 latitude: position.coords.latitude,
+//                 longitude: position.coords.longitude,
+//                 latitudeDelta: 0.005,
+//                 longitudeDelta: 0.005,
+//               }
+//             });
+//           },
+//         (error) => alert(JSON.stringify(error)),
+//         {enableHighAccuracy: true, timeout: 2000}
+//       )
+//     }, 2000);
+//   }
 
-    this.state = {
-      user:{
-        latitude: 0,
-        longitude: 0,
-        latitudeDelta: 1,
-        longitudeDelta: 1,
-      },
-      stop:{
-        latitude: 37.611026,
-        longitude: 126.996917
-      },
-      stops:[]
-    };
-
-    fetch('http://35.231.168.105/travelstop/37.610304/126.996917')
-    .then(response => response.json())
-    .then((responseJson) => {
-        this.setState({
-            stops: responseJson,
-        })
-        console.log(this.state.stops)
-    })
-    .catch(error => alert(error));
-  }
-
-  componentDidMount(){
-    setInterval(() => {
-      navigator.geolocation.getCurrentPosition(
-          (position) =>{
-            this.setState({
-              user: {
-                latitude: position.coords.latitude,
-                longitude: position.coords.longitude,
-                latitudeDelta: 0.005,
-                longitudeDelta: 0.005,
-              }
-            });
-          },
-        (error) => alert(JSON.stringify(error)),
-        {enableHighAccuracy: true, timeout: 2000}
-      )
-    }, 2000);
-  }
-
-  render() {
-    return (
-      <View style={styles.T_Map}>
-        <MapView style={styles.mapview}
-          showsUserLocation = {false}
-          initialRegion={{
-              latitude: 37.611026, //서버에서 받아올 것
-              longitude: 126.996917, //서버에서 받아올 것
-              latitudeDelta: 0.002,
-              longitudeDelta: 0.002,
-            }}          
-          rotateEnabled={false}
-          scrollEnabled={false}
-          pitchEnabled={false}
-          zoomEnabled={false}
-        >
-          {this.state.stops.map((contact, i) =>
-            <MapView.Marker coordinate={contact.location} key={i} image={StopOffImg}/>
-          )}
-        </MapView>
-      </View>
-    );
-  }
-}
+// }
 
 const styles = StyleSheet.create({
     container: {

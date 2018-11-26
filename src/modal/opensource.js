@@ -9,12 +9,6 @@ export default class App extends Component {
       <View style={styles.container}>        
           <View style={{backgroundColor: '#00AFFF', flexDirection: 'row', height: 40,}}>
             <View style={{flex: 1, height: 40, justifyContent: 'center', alignItems: 'center',}}>
-              <TouchableOpacity onPress={() => { this.props.change('setting'); }}>
-                <Image
-                  source={require('../../images/goBackButton.png')}
-                  style={{width: 25, height: 25,}}
-                />
-              </TouchableOpacity>
             </View>
             
             <View style={{flex: 6, height: 50, justifyContent: 'center',alignSelf: 'center'}}>
