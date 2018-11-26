@@ -72,6 +72,13 @@ export default class App extends Component {
             isOpen : false
         })
     }
+
+    _id = (a) => {
+        this.setState({
+            _id : a
+        })
+        this.props._id(a);
+    }
     
     render() {
         return (
@@ -83,7 +90,7 @@ export default class App extends Component {
                     <Text style={styles.currentText}>현재 위치 : {this.state.currentLocation}</Text>
                 </View>
                 {/* Current Page */}
-                <this.state.CurrentPage change={this.props.change} modal={this.modalChange} travelStop={this.travelStop} travelStopId={this.state.travelStop}/>
+                <this.state.CurrentPage _id={this._id} _userID={this.state._id} change={this.props.change} modal={this.modalChange} travelStop={this.travelStop} travelStopId={this.state.travelStop}/>
                 <View style={styles.bottomNavigation}>
                     <TouchableOpacity  style={[styles.buttomButtonNav, {left:0}]} onPress={()=>{this.openModal('default')}}>
                         <Image source={require('../images/left.png')} style={styles.bottomButton}/>
@@ -98,7 +105,7 @@ export default class App extends Component {
                 </TouchableOpacity>
                 <View style={{alignItems:"center"}}>
                     <View style={[styles.modal, {top:(this.state.isOpen)?-1 * fullHeight * 0.90:fullHeight}]}>
-                        <this.state.modalInner menu={this.leftModalItems} change={this.modalChange}/>
+                        <this.state.modalInner menu={this.leftModalItems} userID={this.props.userID} change={this.modalChange}/>
                     </View>
                 </View>
             </View>

@@ -56,7 +56,12 @@ export default class App extends Component {
 
         T_View = (
             <View style={styles.T_View}>
-                <TouchableOpacity onPress={() => alert("방문 확인")}>
+                <TouchableOpacity onPress={() => {
+                    JEnum.axios.get(JEnum.travelStopVisit + this.props.userID + "/" + this.props.travelStopId)
+                    .then(response => {
+                        alert(response.data.message);
+                    })
+                }}>
                     <Image
                         style={{flex: 1, width: 260, alignSelf: 'stretch', justifyContent: 'center', alignItems: 'center', borderRadius: 10, marginLeft: 50, marginRight: 50, marginTop: 10, marginBottom: 10,}}
                         source={{uri: (this.state.image ? this.state.image : "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/No_image_3x4.svg/1024px-No_image_3x4.svg.png")}} //서버에서 받아올 것

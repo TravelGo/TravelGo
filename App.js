@@ -13,7 +13,8 @@ const JEnum = require('./src/JEnum.js')
 
 export default class App extends Component {
     state = {
-        currentPage : ScreenLoading
+        currentPage : ScreenLoading,
+        _id : "",
     }
     change = (category) => {
         if(category === "register") {
@@ -48,6 +49,11 @@ export default class App extends Component {
             travelStopId : id
         })
     }
+    _id = (a) => {
+        this.setState({
+            _id : a
+        })
+    }
     constructor(props) {
         super(props);
         JEnum.axios.get(JEnum.userInfo)
@@ -71,7 +77,7 @@ export default class App extends Component {
     }
     render() {
         return (
-            <this.state.currentPage change={this.change} travelStop={this.travelStop} travelStopId={this.state.travelStopId}/>
+            <this.state.currentPage _id={this._id} userID={this.state._id} change={this.change} travelStop={this.travelStop} travelStopId={this.state.travelStopId}/>
         );
     }
 }

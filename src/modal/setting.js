@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Switch, TouchableOpacity, Image, Dimensions, ScrollView, ImageBackground } from 'react-native';
+const JEnum = require('../JEnum.js');
 
 export default class App extends Component {
 
@@ -12,37 +13,37 @@ export default class App extends Component {
                 height: height
             },
             userInfo: {
-            }
 
+            },
+            recentTS : [],
+            recent : {}
         }
+
+        JEnum.axios.get(JEnum.visited + this.props.userID)
+        .then(res => {
+            this.setState({
+                recentTS : res.data,
+                recent : res.data[0]
+            })
+        })
     }
 
     render() {
         var visited = [];
-        for (i = 1; i < 5; i++) {
+        this.state.recentTS.forEach(r => {
             visited.push(
                 <View style={{ width: this.state.window.width / 2, height: 100 }}>
-                    <Image source={require('../../images/tropical.jpg')} style={{ width: null, height: 100, borderWidth: 1.5, borderColor: 'white' }} />
+                    <Image source={{uri:r.image}} style={{ width: null, height: 100, borderWidth: 1.5, borderColor: 'white' }} />
                 </View>
             )
-            visited.push(
-                <View style={{ width: this.state.window.width / 2, height: 100 }}>
-                    <Image source={require('../../images/forest.jpg')} style={{ width: null, height: 100, borderWidth: 1.5, borderColor: 'white' }} />
-                </View>
-            )
-            visited.push(
-                <View style={{ width: this.state.window.width / 2, height: 100 }}>
-                    <Image source={require('../../images/island.jpg')} style={{ width: null, height: 100, borderWidth: 1.5, borderColor: 'white' }} />
-                </View>
-            )
-        }
+        })
 
 
 
         return (
             <View style={styles.container}>
                 <View style={{ justifyContent: 'center', alignItems: 'center', width: this.state.window.width, height: this.state.window.width / 2 }}>
-                    <ImageBackground source={require('../../images/kookmin.jpeg')} style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
+                    <ImageBackground source={{uri:this.state.recent.image}} style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
                         <View style={{ borderRadius: 100, borderWidth: 15, borderColor: 'rgba(255,255,255, 0.5)', width: this.state.window.width / 2 - 20, height: this.state.window.width / 2 - 20, justifyContent: 'center' }}>
                             <Image source={require('../../images/ddobuck.png')} style={{ flex: 1, alignSelf: 'stretch', borderColor: 'white', borderWidth: 5, borderRadius: 100, width: null }}></Image>
                         </View>
@@ -52,7 +53,7 @@ export default class App extends Component {
                 <TouchableOpacity onPress={() => alert("방문 확인")}>
                     <View style={styles.settingview1}>
                         <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#00AFFF', height: 40, justifyContent: 'center'}}>
-                            <Text style={{fontSize: 20, color: 'white', fontWeight: 'bold' }}>jtjisgod 님의 마이페이지</Text>
+                            <Text style={{fontSize: 20, color: 'white', fontWeight: 'bold' }}>마이페이지로 이동</Text>
                         </View>
                     </View>
                 </TouchableOpacity>

@@ -1834,6 +1834,11 @@ convert-source-map@^1.1.0, convert-source-map@^1.4.0, convert-source-map@^1.5.1:
   dependencies:
     safe-buffer "~5.1.1"
 
+cookie@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.3.1.tgz#e7e0a1f9ef43b4c8ba925c5c5a96e806d16873bb"
+  integrity sha1-5+Ch+e9DtMi6klxcWpboBtFoc7s=
+
 copy-descriptor@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
@@ -4929,6 +4934,13 @@ react-native-axios@^0.17.1:
   integrity sha1-RCkpUKoHzu4uS9NJEG/3c774H48=
   dependencies:
     follow-redirects "0.0.7"
+
+react-native-cookie@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-cookie/-/react-native-cookie-0.2.0.tgz#e8bb0701faf107aaebc327c60551055e0149839d"
+  integrity sha512-FIZF6ALSPLIFVEaRp+Lc9GCv2aL9FeiX/783P8LIfN5uZTXBPB9/XyS8Gyg6Gf/cVGZDKM9/neaHUb3nwIh74w==
+  dependencies:
+    cookie "^0.3.1"
 
 react-native-hide-show-password-input@^1.0.7:
   version "1.0.7"

@@ -1,175 +1,87 @@
 import React, { Component } from 'react';
-import { Dimensions, Platform, StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import { Platform, StyleSheet, Text, View, TouchableOpacity, Image, Dimensions, ScrollView, } from 'react-native';
 
-var fullWidth = Dimensions.get('window').width; //full width
-var fullHeight = Dimensions.get('window').height; //full height
-
+const JEnum = require('../JEnum.js')
 
 export default class App extends Component {
-    render() {
-        return (
-            <View style={styles.container}>
 
-
-                <TopBar />
-                <TstopList />
-
-
-            </View>
-        );
+    constructor(props) {
+        super(props);
+        const { width, height } = Dimensions.get("window")
+        this.state = {
+            window: {
+                width: width * 0.9,
+                height: height * 0.9,
+            },
+            stops : []
+        }
+        JEnum.axios.get(JEnum.recommanded)
+        .then(res => {
+            this.setState({
+                stops : res.data
+            })
+        })
     }
-}
 
-class TopBar extends Component {
     render() {
-        return (
-            <View style={styles.Top}>
-                <Text style={{ fontSize: 25, color: '#FFFFFF', fontWeight: 'bold' }}>
-                    추천 트래블 스탑
-        </Text>
+
+        var Reco = [];
+
+        this.state.stops.forEach(row => {
+            Reco.push(
+                <View style={{ width: this.state.window.width / 2 - 10, height: this.state.window.width / 2 - 10, margin: 3, }}>
+                    <Image
+                        style={{ flex: 3, width: this.state.window.width / 2 - 10, height: 100, borderWidth: 1.5, borderColor: 'white' }}
+                        source={{ uri: row.image }}
+                    />
+                    <View style={{ flex: 1, backgroundColor:'#eee', justifyContent: 'center', alignItems: 'center' }}>
+                        <Text style={{ fontSize: 10 }}>
+                            {row.name}
+                        </Text>
+                    </View>
+                </View>
+            )
+        });
+
+
+        TopBar = (
+            <View style={styles.top}>
+                <Text style={{ fontSize: 20, color: '#FFFFFF', fontWeight: 'bold' }}>추천 트래블 스탑</Text>
             </View>
         )
-    }
-}
 
-class TstopList extends Component {
-    render() {
-        return (
-            <View
-                style={{ flex: 10, backgroundColor: '#ABCDEF', alignSelf: 'stretch' }}
-            >
-
-                <ScrollView style={{ flexDirection: 'column', backgroundColor: 'white' }}>
-
-                    <View style={styles.rowStyle}>
-                        <Image
-                            style={styles.T_view}
-                            source={{ uri: 'http://www.doopedia.co.kr/_upload/image4/1711/03/171103021618274/171103021618274_thumb_400.jpg' }}
-                        ></Image>
-
-                        <Image
-                            style={styles.T_view}
-                            source={{ uri: 'http://www.doopedia.co.kr/_upload/image4/1711/03/171103021618274/171103021618274_thumb_400.jpg' }}
-                        ></Image>
+        TstopList = (
+            <View style={{ flex: 1, alignSelf: 'stretch', backgroundColor: 'white' }}>
+                <ScrollView>
+                    <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
+                        {Reco}
                     </View>
-
-                    <View style={styles.rowStyle}>
-                        <Image
-                            style={styles.T_view}
-                            source={{ uri: 'http://www.doopedia.co.kr/_upload/image4/1711/03/171103021618274/171103021618274_thumb_400.jpg' }}
-                        ></Image>
-
-                        <Image
-                            style={styles.T_view}
-                            source={{ uri: 'http://www.doopedia.co.kr/_upload/image4/1711/03/171103021618274/171103021618274_thumb_400.jpg' }}
-                        ></Image>
-                    </View>
-
-                    <View style={styles.rowStyle}>
-                        <Image
-                            style={styles.T_view}
-                            source={{ uri: 'http://www.doopedia.co.kr/_upload/image4/1711/03/171103021618274/171103021618274_thumb_400.jpg' }}
-                        ></Image>
-
-                        <Image
-                            style={styles.T_view}
-                            source={{ uri: 'http://www.doopedia.co.kr/_upload/image4/1711/03/171103021618274/171103021618274_thumb_400.jpg' }}
-                        ></Image>
-                    </View>
-
-                    <View style={styles.rowStyle}>
-                        <Image
-                            style={styles.T_view}
-                            source={{ uri: 'http://www.doopedia.co.kr/_upload/image4/1711/03/171103021618274/171103021618274_thumb_400.jpg' }}
-                        ></Image>
-
-                        <Image
-                            style={styles.T_view}
-                            source={{ uri: 'http://www.doopedia.co.kr/_upload/image4/1711/03/171103021618274/171103021618274_thumb_400.jpg' }}
-                        ></Image>
-                    </View>
-
-                    <View style={styles.rowStyle}>
-                        <Image
-                            style={styles.T_view}
-                            source={{ uri: 'http://www.doopedia.co.kr/_upload/image4/1711/03/171103021618274/171103021618274_thumb_400.jpg' }}
-                        ></Image>
-
-                        <Image
-                            style={styles.T_view}
-                            source={{ uri: 'http://www.doopedia.co.kr/_upload/image4/1711/03/171103021618274/171103021618274_thumb_400.jpg' }}
-                        ></Image>
-                    </View>
-
-                    <View style={styles.rowStyle}>
-                        <Image
-                            style={styles.T_view}
-                            source={{ uri: 'http://www.doopedia.co.kr/_upload/image4/1711/03/171103021618274/171103021618274_thumb_400.jpg' }}
-                        ></Image>
-
-                        <Image
-                            style={styles.T_view}
-                            source={{ uri: 'http://www.doopedia.co.kr/_upload/image4/1711/03/171103021618274/171103021618274_thumb_400.jpg' }}
-                        ></Image>
-                    </View>
-
                 </ScrollView>
+            </View>
+        )
 
-
+        return (
+            <View style={styles.container}>
+                {TopBar}
+                {TstopList}
             </View>
         );
     }
 }
-
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#F5FCFF',
-        width : fullWidth
+        backgroundColor: 'white',
     },
-
-    Top: {
-        flex: 1,
+    top: {
+        height: 40,
         backgroundColor: '#545454',
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'stretch',
-        marginBottom: 5,
-    },
-
-    // welcome: {
-    //   flex: 1,
-    //   backgroundColor: 'orange',
-    //   margin: 5,
-    //   textAlign: 'center',
-    //   fontSize: 100,
-    //   aspectRatio: 1,
-    // },
-
-    T_view: {
-        flex: 1,
-        aspectRatio: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        alignSelf: 'stretch',
-        margin: 3,
-        borderWidth: 1,
-        borderColor: '#A4A4A4',
-    },
-
-    rowStyle: {
-        marginRight: 20,
-        marginLeft: 20,
-        flex: 1,
-        flexDirection: 'row',
-    },
-
-    // instructions: {
-    //   textAlign: 'center',
-    //   color: '#333333',
-    //   marginBottom: 5,
-    // },
+        // marginBottom: 5,    
+    }
 });

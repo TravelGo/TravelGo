@@ -16,10 +16,11 @@ export default class App extends Component {
             "password" : this.state.password,
         })
         .then(response => {
-            if(response.data === "AccountLoginSuccess") {
+            if(response.data.status) {
                 this.props.change("loading");
+                this.props._id(response.data._id)
             } else {
-                alert(response.data);
+                alert("아이디 또는 비밀번호가 맞지 않습니다.");
             }
         })
         .catch(function (error) {
