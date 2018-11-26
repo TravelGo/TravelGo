@@ -81,11 +81,6 @@ export default class App extends Component {
         T_Info = (
             <View style={styles.T_Info}>
                 <Text style={styles.T_Info_Text}>{this.state.description ? this.state.description : "Description이 작성되지 않은 TravelStop 입니다."}</Text>
-                <TouchableOpacity onPress={() => alert("자세히 보기 기능")}>
-                    <Text style={{fontSize: 10, color: "#000000", textDecorationLine: 'underline'}}>
-                        자세히보기
-                    </Text>
-                </TouchableOpacity>
             </View>
         )
 
@@ -271,8 +266,10 @@ const styles = StyleSheet.create({
     },
 
     T_Info_Text: {
-        fontSize: 10,
+        fontSize: 15,
         color: '#000000',
+        padding: 5,
+
     },
 
     T_Mention: {
