@@ -226,29 +226,6 @@ export default class App extends Component {
 }
 
 
-// class T_Map extends Component{
-
-//   componentDidMount(){
-//     setInterval(() => {
-//       navigator.geolocation.getCurrentPosition(
-//           (position) =>{
-//             this.setState({
-//               user: {
-//                 latitude: position.coords.latitude,
-//                 longitude: position.coords.longitude,
-//                 latitudeDelta: 0.005,
-//                 longitudeDelta: 0.005,
-//               }
-//             });
-//           },
-//         (error) => alert(JSON.stringify(error)),
-//         {enableHighAccuracy: true, timeout: 2000}
-//       )
-//     }, 2000);
-//   }
-
-// }
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -279,24 +256,23 @@ const styles = StyleSheet.create({
     },
 
     T_Info: {
-        flex: 1.5,
         backgroundColor: '#FFFFFF',
         justifyContent: 'center',
         alignItems: 'center',
-        marginLeft: 10,
-        marginRight: 10,
+        alignContent: 'center',
         alignSelf: 'stretch',
+        padding: 10,
+        paddingLeft: 40,
+        paddingRight: 40,
     },
 
     T_Info_Text: {
-        fontSize: 15,
+        fontSize: 12,
         color: '#000000',
-        padding: 5,
-
+        lineHeight: 15,
     },
 
     T_Mention: {
-        flex: 2,
         backgroundColor: '#FFFFFF',
         justifyContent: 'center',
         alignItems: 'center',
@@ -309,7 +285,6 @@ const styles = StyleSheet.create({
     },
 
     T_Map: {
-        // flex: 3,
         height: 170,
         backgroundColor: '#FFFFFF',
         justifyContent: 'center',
@@ -318,7 +293,6 @@ const styles = StyleSheet.create({
     },
 
     T_ButtonGroup: {
-        flex: 1,
         backgroundColor: '#FFFFFF',
         flexDirection: 'row',
         justifyContent: 'center',
@@ -327,7 +301,7 @@ const styles = StyleSheet.create({
     },
 
     T_Button: {
-        flex: 1,
+        height: 30,
         backgroundColor: '#00AFFF',
         justifyContent: 'center',
         alignItems: 'center',
@@ -335,6 +309,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginBottom: 10,
         width: 100,
+        marginBottom: 10,
     },
 
     T_Button_Text: {
@@ -343,7 +318,7 @@ const styles = StyleSheet.create({
     },
 
     Mention_Group: {
-        flex: 1,
+        height: 25,
         justifyContent: 'center',
         borderRadius: 7,
         borderWidth: 1,
@@ -353,48 +328,16 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         paddingRight: 10,
         alignSelf: 'stretch',
-        marginLeft: 50,
-        marginRight: 50,
+        marginLeft: 30,
+        marginRight: 30,
     },
-
-    view:{
-        flex: 1,
-        alignItems: 'center',
-      },
     
     mapview:{
-      flex: 5,
+      height: 160,
       alignItems: 'center',
       alignSelf: 'stretch',
       borderRadius: 7,
       marginLeft: 50,
       marginRight: 50,
     },
-    
-    container: {
-      position: 'absolute',
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0,
-      justifyContent: 'flex-end',
-      alignItems: 'center',
-    },
-    
-    tile:{
-      height:30,
-      justifyContent:'center',
-      marginHorizontal:15,
-      fontSize:40,
-      borderBottomColor: '#000000',
-      borderBottomWidth: 1
-    },
-    
-    map: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-    }
 });
