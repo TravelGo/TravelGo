@@ -35,7 +35,7 @@ export default class App extends Component {
         return (
             <View style={styles.view}>
                 <View style={styles.inner}>
-                    <Text style={styles.h1}>트라벨러 로그인</Text>
+                    <Text style={styles.h1}>트래블러 로그인</Text>
                     <Text style={styles.h2}>USERNAME</Text>
                     <TextInput value={this.state.username} placeholder="Username" style={styles.input} onChangeText={(text) => {this.setState({username:text})}}/>
                     <Text style={styles.h2}>PASSWORD</Text>

@@ -7,8 +7,10 @@ export default class Chat extends Component {
         super(props);
         const { width, height } = Dimensions.get("window")
         this.state = {
-            width,
-            height
+            window: {
+                width: width,
+                height: height
+            }
         }
     }
 
@@ -69,7 +71,7 @@ export default class Chat extends Component {
     )
 
     TextInputBar = (
-        <View style={styles.TextInputView}>
+        <View style={styles.TextInputView}> 
             <TextInput style={styles.TextInput_style} placeholder='     보낼 내용을 입력해주세요'></TextInput>
             <TouchableOpacity>
                 <Image source={require("../images/send.png")} style={{ width: 40, resizeMode: 'contain' }} />
@@ -79,15 +81,13 @@ export default class Chat extends Component {
 
     render() {
         return (
-            <View style={styles.MainView}>
-
-                {this.TopBar}
-
-                {this.ChatBox}
-
-                {this.TextInputBar}
-
-            </View>
+            <ScrollView>
+                <View style={styles.MainView}>
+                    {this.TopBar}
+                    {this.ChatBox}
+                    {this.TextInputBar}
+                </View>
+            </ScrollView>
         );
     }
 }
@@ -128,8 +128,8 @@ const styles = StyleSheet.create({
     },
 
     MainView: {
-        backgroundColor: '#787878',
-        height: 1200,
+        backgroundColor: '#00afff',
+        flex : 1,
         resizeMode: 'contain',
     },
 
@@ -158,12 +158,14 @@ const styles = StyleSheet.create({
     },
 
     ScrollView: {
-        width: 400,
-        height: 490,
-        paddingTop: 5,
-        borderTopWidth: 2,
-        borderLeftWidth: 2,
-        borderRightWidth: 2,
+        // height: 100,
+        flex: 1,
+        padding: 5,
+        margin: 10,
+        // borderTopWidth: 2,
+        // borderLeftWidth: 2,
+        // borderRightWidth: 2,
+        borderWidth: 2,
         borderColor: '#b4b4b4',
         zIndex: 1
     },
@@ -177,10 +179,12 @@ const styles = StyleSheet.create({
     },
 
     ChatView: {
-        height: 500,
+        height: 300,
+        // flex: 1,
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
         paddingTop: 10,
+        // margin: 10,
         paddingHorizontal: 10,
         backgroundColor: 'white',
         alignItems: 'center',
@@ -188,7 +192,7 @@ const styles = StyleSheet.create({
 
     TextInputView: {
         height: 80,
-        alignItems: 'center',
+        alignContent: "flex-end",
         flexDirection: 'row',
         justifyContent: 'space-between',
         borderTopWidth: 2,
