@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, TouchableOpacity, TextInput, ScrollView, View, Image, Dimensions, RefreshControl } from 'react-native';
 
+fullHeight = Dimensions.get("window").height;
+fullWidth = Dimensions.get("window").width;
+
 export default class Chat extends Component {
 
     constructor(props) {
         super(props);
-        const { width, height } = Dimensions.get("window")
-        this.state = {
-            window: {
-                width: width,
-                height: height
-            }
-        }
     }
 
     fetchData = async () => {
@@ -43,27 +39,26 @@ export default class Chat extends Component {
             </View>
             <View style={styles.UpperAdditionView}>
                 <Text style={styles.SmallText}>접속자 수 </Text>
-                <Image source={require("../images/person.png")} style={{ width: 15, resizeMode: 'contain' }}></Image>
                 <Text style={styles.SmallText}> 8</Text>
             </View>
         </View>
     )
 
     ChatBox = (
-        <View style={styles.ChatView}>
+        <View style={[styles.ChatView, {height: fullHeight - 180}]}>
             <Image source={require("../images/logo.png")} style={styles.ImageBackground}></Image>
             <View style={styles.ScrollView}>
                 <ScrollView refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this._onRefresh.bind(this)} />} >
                     <View style={{ alignItems: 'center' }}>
-                        <Text style={{ borderStyle: 'solid' }}>"용두리" 채팅방에 입장하셨습니다.</Text>
+                        <Text style={styles.ChattingText}>"용두리" 채팅방에 입장하셨습니다.</Text>
                     </View>
                     <View style={{ flexDirection: 'row' }}>
-                        <Text style={{ borderStyle: 'solid' }}>용두리 마스터(555):</Text>
-                        <Text> hi</Text>
+                        <Text style={styles.ChattingText}>용두리 마스터(555):</Text>
+                        <Text style={styles.ChattingText}> hi</Text>
                     </View>
                     <View style={{ flexDirection: 'row' }}>
-                        <Text style={{ borderStyle: 'solid' }}>용두리 마스터(555):</Text>
-                        <Text> hi</Text>
+                        <Text style={styles.ChattingText}>용두리 마스터(555):</Text>
+                        <Text style={styles.ChattingText}> hi</Text>
                     </View>
                 </ScrollView>
             </View>
@@ -81,13 +76,15 @@ export default class Chat extends Component {
 
     render() {
         return (
+        <View style={{flex: 1, backgroundColor: '#00afff'}}>
+            {this.TopBar}
             <ScrollView>
                 <View style={styles.MainView}>
-                    {this.TopBar}
                     {this.ChatBox}
                     {this.TextInputBar}
                 </View>
             </ScrollView>
+        </View>
         );
     }
 }
@@ -138,12 +135,6 @@ const styles = StyleSheet.create({
         fontSize: 30,
     },
 
-    UpperButton: {
-        width: 30,
-        height: 30,
-        resizeMode: 'contain'
-    },
-
     UpperAdditionView: {
         flexDirection: 'row',
         paddingHorizontal: 10,
@@ -158,15 +149,9 @@ const styles = StyleSheet.create({
     },
 
     ScrollView: {
-        // height: 100,
         flex: 1,
         padding: 5,
         margin: 10,
-        // borderTopWidth: 2,
-        // borderLeftWidth: 2,
-        // borderRightWidth: 2,
-        borderWidth: 2,
-        borderColor: '#b4b4b4',
         zIndex: 1
     },
 
@@ -176,23 +161,22 @@ const styles = StyleSheet.create({
         opacity: 0.3,
         zIndex: 0,
         position: 'absolute',
+        justifyContent: 'center',
+        alignItems: 'center',
+        left:(fullWidth - 330)/2
     },
 
     ChatView: {
-        height: 300,
-        // flex: 1,
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
-        paddingTop: 10,
-        // margin: 10,
-        paddingHorizontal: 10,
         backgroundColor: 'white',
-        alignItems: 'center',
+        alignItems: 'stretch',
     },
 
     TextInputView: {
+        flex: 1,
         height: 80,
-        alignContent: "flex-end",
+        alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-between',
         borderTopWidth: 2,
@@ -200,6 +184,11 @@ const styles = StyleSheet.create({
         paddingLeft: 5,
         paddingRight: 15,
         backgroundColor: 'white',
+    },
+
+    ChattingText: {
+        borderStyle: 'solid',
+        fontSize: 20,
     },
 
 });
