@@ -45,7 +45,7 @@ export default class Chat extends Component {
     )
 
     ChatBox = (
-        <View style={[styles.ChatView, {height: fullHeight - 180}]}>
+        <View style={[styles.ChatView, {height: fullHeight - 185}]}>
             <Image source={require("../images/logo.png")} style={styles.ImageBackground}></Image>
             <View style={styles.ScrollView}>
                 <ScrollView refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this._onRefresh.bind(this)} />} >
