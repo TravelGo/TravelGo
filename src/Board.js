@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, TextInput, ScrollView, Button, View, Image, Dimensions, RefreshControl, TouchableOpacity } from 'react-native';
+const JEnum = require('./JEnum.js');
 
 export default class GuestBook extends Component {
 
@@ -78,7 +79,14 @@ export default class GuestBook extends Component {
   }
 
   write = () => {
-    alert(this.state.comment);
+    JEnum.axios.put(JEnum.comment + this.props._id, {
+      user : this.props.userID,
+      body : this.state.comment
+    })
+    .then(res => {
+      // 글쓰기 완료
+      // 서버단 처리바람
+    })
   }
 
 

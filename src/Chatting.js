@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, TouchableOpacity, TextInput, ScrollView, View, Image, Dimensions, RefreshControl } from 'react-native';
-// TextInput, ImageBackground, Button,
 
 export default class Chat extends Component {
 
@@ -9,9 +8,7 @@ export default class Chat extends Component {
         const { width, height } = Dimensions.get("window")
         this.state = {
             width,
-            height,
-            data: [],
-            refreshing: false    
+            height
         }
     }
 
@@ -28,81 +25,73 @@ export default class Chat extends Component {
         });
     }
 
+    state = {
+        data: [],
+        refreshing: false
+    };
+
+    TopBar = (
+        <View>
+            <View style={styles.UpperView}>
+                <TouchableOpacity>
+                </TouchableOpacity>
+                <Text style={styles.UpperText}>용두리</Text>
+                <TouchableOpacity>
+                </TouchableOpacity>
+            </View>
+            <View style={styles.UpperAdditionView}>
+                <Text style={styles.SmallText}>접속자 수 </Text>
+                <Image source={require("../images/person.png")} style={{ width: 15, resizeMode: 'contain' }}></Image>
+                <Text style={styles.SmallText}> 8</Text>
+            </View>
+        </View>
+    )
+
+    ChatBox = (
+        <View style={styles.ChatView}>
+            <Image source={require("../images/logo.png")} style={styles.ImageBackground}></Image>
+            <View style={styles.ScrollView}>
+                <ScrollView refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this._onRefresh.bind(this)} />} >
+                    <View style={{ alignItems: 'center' }}>
+                        <Text style={{ borderStyle: 'solid' }}>"용두리" 채팅방에 입장하셨습니다.</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text style={{ borderStyle: 'solid' }}>용두리 마스터(555):</Text>
+                        <Text> hi</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text style={{ borderStyle: 'solid' }}>용두리 마스터(555):</Text>
+                        <Text> hi</Text>
+                    </View>
+                </ScrollView>
+            </View>
+        </View>
+    )
+
+    TextInputBar = (
+        <View style={styles.TextInputView}>
+            <TextInput style={styles.TextInput_style} placeholder='     보낼 내용을 입력해주세요'></TextInput>
+            <TouchableOpacity>
+                <Image source={require("../images/send.png")} style={{ width: 40, resizeMode: 'contain' }} />
+            </TouchableOpacity>
+        </View>
+    )
+
     render() {
         return (
             <View style={styles.MainView}>
 
-                <TopBar />
+                {this.TopBar}
 
-                <ChatBox />
+                {this.ChatBox}
 
-                <TextInputBar />
+                {this.TextInputBar}
 
             </View>
         );
     }
 }
 
-class TopBar extends Component {
-    render() {
-        return (
-            <View>
-                <View style={styles.UpperView}>
-                    <TouchableOpacity>
-                        <Image source={require("../images/Back_Button.png")} style={styles.UpperButton} />
-                    </TouchableOpacity>
-                    <Text style={styles.UpperText}>용두리</Text>
-                    <TouchableOpacity>
-                        <Image source={require("../images/right.png")} style={styles.UpperButton} />
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.UpperAdditionView}>
-                    <Text style={styles.SmallText}>접속자 수 </Text>
-                    <Image source={require("../images/person.png")} style={{ width: 15, resizeMode: 'contain' }}></Image>
-                    <Text style={styles.SmallText}> 8</Text>
-                </View>
-            </View>
-        )
-    }
-}
-
-class ChatBox extends Component {
-    render() {
-        return (
-            <View style={styles.ChatView}>
-                <Image source={require("../images/logo.png")} style={styles.ImageBackground}></Image>
-                <View style={styles.ScrollView}>
-                    <ScrollView>
-                        <View style={{ alignItems: 'center' }}>
-                            <Text style={{ borderStyle: 'solid' }}>"용두리" 채팅방에 입장하셨습니다.</Text>
-                        </View>
-                        <View style={{ flexDirection: 'row' }}>
-                            <Text style={{ borderStyle: 'solid' }}>용두리 마스터(555):</Text>
-                            <Text> hi</Text>
-                        </View>
-                        <View style={{ flexDirection: 'row' }}>
-                            <Text style={{ borderStyle: 'solid' }}>용두리 마스터(555):</Text>
-                            <Text> hi</Text>
-                        </View>
-                    </ScrollView>
-                </View>
-            </View>
-        )
-    }
-}
-
-class TextInputBar extends Component {
-    render() {
-        return (
-            <View style={styles.TextInputView}>
-                <TextInput style={styles.TextInput_style} placeholder='     보낼 내용을 입력해주세요'></TextInput>
-                <TouchableOpacity>
-                    <Image source={require("../images/send.png")} style={{ width: 40, resizeMode: 'contain' }} />
-                </TouchableOpacity>
-            </View>
-        )
-    }
-}
 
 const styles = StyleSheet.create({
     TextInput_style: {

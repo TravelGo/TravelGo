@@ -23,4 +23,6 @@ Obj.visited = Obj.url + "/travelstop/visited/"
 
 Obj.recommanded = Obj.url + "/travelstop/recommanded"
 
+Obj.comment = Obj.url + "/comment/"
+
 module.exports = Obj

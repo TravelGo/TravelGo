@@ -96,7 +96,7 @@ export default class App extends Component {
                     <Text style={styles.currentText}>현재 위치 : {this.state.currentLocation}</Text>
                 </View>
                 {/* Current Page */}
-                <this.state.CurrentPage _id={this._id} _userID={this.state._id} change={this.props.change} modal={this.modalChange} travelStop={this.travelStop} travelStopId={this.state.travelStop}/>
+                <this.state.CurrentPage _id={this._id} userID={this.state.userID} change={this.props.change} modal={this.modalChange} travelStop={this.travelStop} travelStopId={this.state.travelStop}/>
                 <View style={styles.bottomNavigation}>
                     <TouchableOpacity  style={[styles.buttomButtonNav, {left:0}]} onPress={()=>{this.openModal('default')}}>
                         <Image source={require('../images/left.png')} style={styles.bottomButton}/>
