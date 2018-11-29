@@ -138,17 +138,7 @@ export default class App extends Component {
 
         const mentions = []
 
-        // if (this.state.guestBookCounter == 0) {
-        //     this.state.comment.forEach(comment => {
-        //         mentions.push((
-        //             <View style={styles.Mention_Group1}>
-        //                 <Text style={styles.T_Mention_Text1}>
-        //                     {comment}
-        //                 </Text>
-        //             </View>
-        //         ))
-        //     })
-        // }
+
             this.state.comment.forEach(comment => {
                 mentions.push((
                     <View style={styles.Mention_Group1}>
@@ -158,7 +148,7 @@ export default class App extends Component {
                     </View>
                 ))
             })
-                
+
 
 
         T_Mention = (
