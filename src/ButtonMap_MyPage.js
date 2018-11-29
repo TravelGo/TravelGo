@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Dimensions, Button, Icon, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, Button, Icon, TouchableOpacity, TouchableWithoutFeedback, Image } from 'react-native';
 import Modal from "react-native-simple-modal"
 
 export default class Position extends React.Component {
@@ -24,54 +24,86 @@ export default class Position extends React.Component {
     return (
       <View style={styles.container}>
         <Image source={require("../images/Korea.png")} style={styles.Korea}/>
-        <TouchableOpacity onPress={() => { this.openModal("경상북도") }}>
-          <Image source={require("../images//Gb.png")} style={styles.Gb}/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => { this.openModal("강원도")}}>
-          <Image source={require("../images/Gw.png")} style={styles.Gw}/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => { this.openModal("경기도")}}>
-          <Image source={require("../images/Gy.png")} style={styles.Gy}/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => { this.openModal("충청남도")}}>
-          <Image source={require("../images//Cn.png")} style={styles.Cn}/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => { this.openModal("충청북도")}}>
-          <Image source={require("../images//Cb.png")} style={styles.Cb}/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => { this.openModal("경상남도")}}>
-          <Image source={require("../images//Gn.png")} style={styles.Gn}/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => { this.openModal("전라남도")}}>
-          <Image source={require("../images//Jn.png")} style={styles.Jn}/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => { this.openModal("전라북도")}}>
-          <Image source={require("../images//Jb.png")} style={styles.Jb}/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => { this.openModal("울산광역시")}}>
-          <Image source={require("../images//Us.png")} style={styles.Us}/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => { this.openModal("부산광역시")}}>
-          <Image source={require("../images//Bs.png")} style={styles.Bs}/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => { this.openModal("광주광역시")}}>
-          <Image source={require("../images//Gj.png")} style={styles.Gj}/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => { this.openModal("대구광역시")}}>
-          <Image source={require("../images//Dg.png")} style={styles.Dg}/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => { this.openModal("대전광역시")}}>
-          <Image source={require("../images//Dj.png")} style={styles.Dj}/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => { this.openModal("인천광역시")}}>
-          <Image source={require("../images//Ic.png")} style={styles.Ic}/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => { this.openModal("제주특별자치도")}}>
-          <Image source={require("../images//Jj.png")} style={styles.Jj}/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => { this.openModal("서울특별시")}}>
-          <Image source={require("../images/Sl.png")} style={styles.Sl}/>
-        </TouchableOpacity>
+        <TouchableWithoutFeedback>
+          <TouchableOpacity onPress={() => { this.openModal("경상북도") }}>
+            <Image source={require("../images//Gb.png")} style={styles.Gb}/>
+          </TouchableOpacity>
+        </TouchableWithoutFeedback>  
+        <TouchableWithoutFeedback>
+          <TouchableOpacity onPress={() => { this.openModal("강원도")}}>
+            <Image source={require("../images/Gw.png")} style={styles.Gw}/>
+          </TouchableOpacity>
+        </TouchableWithoutFeedback>  
+        <TouchableWithoutFeedback>
+          <TouchableOpacity onPress={() => { this.openModal("경기도")}}>
+            <Image source={require("../images/Gy.png")} style={styles.Gy}/>
+          </TouchableOpacity>
+        </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback>  
+          <TouchableOpacity onPress={() => { this.openModal("충청남도")}}>
+            <Image source={require("../images//Cn.png")} style={styles.Cn}/>
+          </TouchableOpacity>
+        </TouchableWithoutFeedback>  
+        <TouchableWithoutFeedback>
+          <TouchableOpacity onPress={() => { this.openModal("충청북도")}}>
+            <Image source={require("../images//Cb.png")} style={styles.Cb}/>
+          </TouchableOpacity>
+        </TouchableWithoutFeedback>   
+        <TouchableWithoutFeedback>  
+          <TouchableOpacity onPress={() => { this.openModal("경상남도")}}>
+            <Image source={require("../images//Gn.png")} style={styles.Gn}/>
+          </TouchableOpacity>
+        </TouchableWithoutFeedback> 
+        <TouchableWithoutFeedback>  
+          <TouchableOpacity onPress={() => { this.openModal("전라남도")}}>
+            <Image source={require("../images//Jn.png")} style={styles.Jn}/>
+          </TouchableOpacity>
+        </TouchableWithoutFeedback> 
+        <TouchableWithoutFeedback>  
+          <TouchableOpacity onPress={() => { this.openModal("전라북도")}}>
+            <Image source={require("../images//Jb.png")} style={styles.Jb}/>
+          </TouchableOpacity>
+        </TouchableWithoutFeedback> 
+        <TouchableWithoutFeedback>  
+          <TouchableOpacity onPress={() => { this.openModal("울산광역시")}}>
+            <Image source={require("../images//Us.png")} style={styles.Us}/>
+          </TouchableOpacity>
+        </TouchableWithoutFeedback> 
+        <TouchableWithoutFeedback>  
+          <TouchableOpacity onPress={() => { this.openModal("부산광역시")}}>
+            <Image source={require("../images//Bs.png")} style={styles.Bs}/>
+          </TouchableOpacity>
+        </TouchableWithoutFeedback> 
+        <TouchableWithoutFeedback>  
+          <TouchableOpacity onPress={() => { this.openModal("광주광역시")}}>
+            <Image source={require("../images//Gj.png")} style={styles.Gj}/>
+          </TouchableOpacity>
+        </TouchableWithoutFeedback> 
+        <TouchableWithoutFeedback>
+          <TouchableOpacity onPress={() => { this.openModal("대구광역시")}}>
+            <Image source={require("../images//Dg.png")} style={styles.Dg}/>
+          </TouchableOpacity>
+        </TouchableWithoutFeedback> 
+        <TouchableWithoutFeedback>
+          <TouchableOpacity onPress={() => { this.openModal("대전광역시")}}>
+            <Image source={require("../images//Dj.png")} style={styles.Dj}/>
+          </TouchableOpacity>
+        </TouchableWithoutFeedback> 
+        <TouchableWithoutFeedback>  
+          <TouchableOpacity onPress={() => { this.openModal("인천광역시")}}>
+            <Image source={require("../images//Ic.png")} style={styles.Ic}/>
+          </TouchableOpacity>
+        </TouchableWithoutFeedback> 
+        <TouchableWithoutFeedback>
+          <TouchableOpacity onPress={() => { this.openModal("제주특별자치도")}}>
+            <Image source={require("../images//Jj.png")} style={styles.Jj}/>
+          </TouchableOpacity>
+        </TouchableWithoutFeedback> 
+        <TouchableWithoutFeedback>
+          <TouchableOpacity onPress={() => { this.openModal("서울특별시")}}>
+            <Image source={require("../images/Sl.png")} style={styles.Sl}/>
+          </TouchableOpacity>
+        </TouchableWithoutFeedback> 
         <Modal
           offset={this.state.offset}
           open={this.state.open}
