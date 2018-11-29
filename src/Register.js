@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, ScrollView, View, Text, Dimensions, TextInput, TouchableOpacity} from 'react-native';
+import {StyleSheet, ScrollView, View, Text, Dimensions, TextInput, TouchableOpacity, Image} from 'react-native';
 import PasswordInputText from 'react-native-hide-show-password-input'; 
 const JEnum = require('./JEnum.js')
 
@@ -49,8 +49,9 @@ export default class App extends Component {
         return (
             <ScrollView>
                 <View style={[styles.view]}>
-                    <View style={[styles.inner, {marginTop:30}]}>
-                        <Text style={styles.h1}>트라벨클럽 가입</Text>
+                    <View style={[styles.inner, {marginTop:30, marginBottom:30}]}>
+                        <Image source={require("../images/logo.png")} style={styles.ImageBackground}></Image>
+                        <Text style={styles.h1}>트래블클럽 가입</Text>
                         <Text style={styles.h2}>Fullname</Text>
                         <TextInput placeholder="Fullname" style={styles.input} onChangeText={(text) => {this.setState({fullname:text})}}/>
                         <Text style={styles.h2}>Phone</Text>
@@ -124,5 +125,14 @@ const styles = StyleSheet.create({
         marginTop : 15,
         backgroundColor : '#ff5959',
         alignSelf : "stretch",
-    }
+    },
+    ImageBackground: {
+        width: 150,
+        height: 100,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center',
+        alignContent: 'center',
+        marginBottom: 30
+    },
 });

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, Dimensions, TextInput, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text, Dimensions, TextInput, TouchableOpacity, Image} from 'react-native';
 const JEnum = require('./JEnum.js');
 
 var fullWidth = Dimensions.get('window').width; //full width
@@ -35,6 +35,10 @@ export default class App extends Component {
         return (
             <View style={styles.view}>
                 <View style={styles.inner}>
+
+                    <Image source={require("../images/logo.png")} style={styles.ImageBackground}></Image>
+
+
                     <Text style={styles.h1}>트래블러 로그인</Text>
                     <Text style={styles.h2}>USERNAME</Text>
                     <TextInput value={this.state.username} placeholder="Username" style={styles.input} onChangeText={(text) => {this.setState({username:text})}}/>
@@ -102,5 +106,14 @@ const styles = StyleSheet.create({
         marginTop : 15,
         backgroundColor : '#ff5959',
         alignSelf : "stretch",
-    }
+    },
+    ImageBackground: {
+        width: 150,
+        height: 100,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center',
+        alignContent: 'center',
+        marginBottom: 50
+    },
 });
