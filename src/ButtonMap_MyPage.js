@@ -23,7 +23,6 @@ export default class Position extends React.Component {
 //    var arr = ['경상북도','강원도','경기도','충청남도','충청북도','경상남도','전라남도','전라북도','울산광역시','부산광역시','광주광역시','대구광역시','대전광역시','인천광역시','제주특별자치도','서울특별시']
     return (
       <View style={styles.container}>
-        <Image source={require("../images/logo.png")} style={styles.logo}/>
         <Image source={require("../images/Korea.png")} style={styles.Korea}/>
         <TouchableOpacity onPress={() => { this.openModal("경상북도") }}>
           <Image source={require("../images//Gb.png")} style={styles.Gb}/>
@@ -100,18 +99,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  logo: {
-    position: 'absolute',
-    resizeMode: 'contain',
-    top: -10,
-    left: 135,
-    width: 110,
-    height: 110,
-  },
   Korea: {
     position: 'absolute',
     resizeMode: 'contain',
-    top: 100,
+    top: 40,
     left: -30,
     width: 450,
     height: 450,
@@ -119,7 +110,7 @@ const styles = StyleSheet.create({
   Gy: {
     position: 'absolute',
     resizeMode: 'contain',
-    top: 126,
+    top: 66,
     left: 76,
     width: 122,
     height: 122,
@@ -127,7 +118,7 @@ const styles = StyleSheet.create({
   Sl: {
     position: 'absolute',
     resizeMode: 'contain',
-    top: 171.3,
+    top: 111.3,
     left: 110,
     width: 30,
     height: 30,
@@ -135,7 +126,7 @@ const styles = StyleSheet.create({
   Ic: {
     position: 'absolute',
     resizeMode: 'contain',
-    top: 146,
+    top: 86,
     left: 31.5,
     width: 103,
     height: 103,
@@ -143,7 +134,7 @@ const styles = StyleSheet.create({
   Gw: {
     position: 'absolute',
     resizeMode: 'contain',
-    top: 88,
+    top: 28,
     left: 137,
     width: 160,
     height: 160,
@@ -151,7 +142,7 @@ const styles = StyleSheet.create({
   Cb: {
     position: 'absolute',
     resizeMode: 'contain',
-    top: 218.3,
+    top: 158.3,
     left: 136.3,
     width: 113,
     height: 113,
@@ -159,7 +150,7 @@ const styles = StyleSheet.create({
   Cn: {
     position: 'absolute',
     resizeMode: 'contain',
-    top: 224,
+    top: 164,
     left: 59,
     width: 117,
     height: 117,
@@ -167,7 +158,7 @@ const styles = StyleSheet.create({
   Gb: {
     position: 'absolute',
     resizeMode: 'contain',
-    top: 142,
+    top: 82,
     left: 141,
     width: 240,
     height: 240,
@@ -175,7 +166,7 @@ const styles = StyleSheet.create({
   Gn: {
     position: 'absolute',
     resizeMode: 'contain',
-    top: 335,
+    top: 275,
     left: 168,
     width: 118,
     height: 118,
@@ -183,7 +174,7 @@ const styles = StyleSheet.create({
   Jb: {
     position: 'absolute',
     resizeMode: 'contain',
-    top: 300,
+    top: 240,
     left: 80,
     width: 110,
     height: 110,
@@ -191,7 +182,7 @@ const styles = StyleSheet.create({
   Jn: {
     position: 'absolute',
     resizeMode: 'contain',
-    top: 365,
+    top: 305,
     left: 35,
     width: 150,
     height: 150,
@@ -199,7 +190,7 @@ const styles = StyleSheet.create({
   Bs: {
     position: 'absolute',
     resizeMode: 'contain',
-    top: 375,
+    top: 315,
     left: 233,
     width: 60,
     height: 60,
@@ -207,7 +198,7 @@ const styles = StyleSheet.create({
   Us: {
     position: 'absolute',
     resizeMode: 'contain',
-    top: 355.5,
+    top: 295.5,
     left: 270,
     width: 36,
     height: 36,
@@ -215,7 +206,7 @@ const styles = StyleSheet.create({
   Dj: {
     position: 'absolute',
     resizeMode: 'contain',
-    top: 285,
+    top: 225,
     left: 141.5,
     width: 26,
     height: 26,
@@ -223,7 +214,7 @@ const styles = StyleSheet.create({
   Gj: {
     position: 'absolute',
     resizeMode: 'contain',
-    top: 394,
+    top: 334,
     left: 97,
     width: 28,
     height: 28,
@@ -231,7 +222,7 @@ const styles = StyleSheet.create({
   Dg: {
     position: 'absolute',
     resizeMode: 'contain',
-    top: 328,
+    top: 268,
     left: 223,
     width: 35.5,
     height: 35.5,
@@ -239,7 +230,7 @@ const styles = StyleSheet.create({
   Jj: {
     position: 'absolute',
     resizeMode: 'contain',
-    top: 495,
+    top: 435,
     left: 60,
     width: 63,
     height: 63,

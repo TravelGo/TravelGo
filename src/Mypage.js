@@ -62,29 +62,27 @@ export default class Mypage extends React.Component {
             </View>
           </View>
         </View>
-        <View style={{flexDirection: 'row', backgroundColor: "white", flex: 0.7, height: 60, flexDirection: 'row', alignItems:'center', }}> 
-          <TouchableOpacity onPress={() => { this._goToMap("map"); }} style={{height: 55, borderColor: '#00afff', borderWidth: 1.5, borderRadius: 8, flex: 1, }}>{ 
-            <Text style={{ fontSize: 18, color : '#00afff', marginTop: 20,textAlign: 'center', fontWeight: 'bold'}}>
+        <View style={{flexDirection: 'row', flex: 0.7, height: 55, flexDirection: 'row', alignItems:'center', }}> 
+          <TouchableOpacity onPress={() => { this._goToMap("map"); }} style={{height: 48, borderColor: '#00afff', borderWidth: 1.5, borderRadius: 8, flex: 1, }}>{ 
+            <Text style={{ fontSize: 17, color : '#00afff', marginTop: 16,textAlign: 'center', fontWeight: 'bold'}}>
             지도 
             </Text>
           }
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => { this._goToMap("travelstop"); }} style={{height: 55, borderColor: '#00afff', borderWidth: 1.5, borderRadius: 8, flex: 1}}>{ 
-            <Text style={{ fontSize: 18, color : '#00afff', marginTop: 18.5,textAlign: 'center', fontWeight: 'bold'}}>
+          <TouchableOpacity onPress={() => { this._goToMap("travelstop"); }} style={{height: 48, borderColor: '#00afff', borderWidth: 1.5, borderRadius: 8, flex: 1}}>{ 
+            <Text style={{ fontSize: 17, color : '#00afff', marginTop: 14.5,textAlign: 'center', fontWeight: 'bold'}}>
             트레블 스탑 
             </Text>
           }
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => { this._goToMap("challenge"); }} style={{height: 55, borderColor: '#00afff', borderWidth: 1.5, borderRadius: 8, flex: 1}}>{ 
-            <Text style={{ fontSize: 18, color : '#00afff', marginTop: 18.5,textAlign: 'center', fontWeight: 'bold'}}>
+          <TouchableOpacity onPress={() => { this._goToMap("challenge"); }} style={{height: 48, borderColor: '#00afff', borderWidth: 1.5, borderRadius: 8, flex: 1}}>{ 
+            <Text style={{ fontSize: 17, color : '#00afff', marginTop: 14.5,textAlign: 'center', fontWeight: 'bold'}}>
             도전 과제 
             </Text>
           }
           </TouchableOpacity>
         </View>
-        <View style={{flex:0.3}}>
-        </View>
-        <View style={{flex:12}}>
+        <View style={{flex:11.5}}>
           <this.state.currentPage/>
         </View>
       </View>
