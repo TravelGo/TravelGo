@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Image} from 'react-native';
+import {StyleSheet, View, Image, Text} from 'react-native';
 import MapView from 'react-native-maps';
 import geolib from 'geolib';
 import StopOnImg from '../images/travelstop(on).png';
@@ -21,6 +21,7 @@ export default class App extends Component {
                 longitudeDelta: 1,
             },
             stops: [],
+            findgps : true,
         };
     }
 
@@ -33,7 +34,7 @@ export default class App extends Component {
                 })
                 console.log(this.state.stops)
             })
-            .catch(error => alert(error));
+            .catch(error => console.log(error));
     }
 
     watchID : ?number=null
@@ -51,9 +52,12 @@ export default class App extends Component {
                             longitudeDelta: 0.005,
                         }
                     });
+                    this.setState({findgps: true});
                 },
-                (error) => alert(JSON.stringify(error)),
-                { enableHighAccuracy: true, timeout: 30000 }
+                (error) => {console.log(JSON.stringify(error));
+                 this.setState({findgps: false});
+               },
+                { enableHighAccuracy: true, timeout: 2000 }
             )
         }, 2000);
     }
@@ -61,8 +65,8 @@ export default class App extends Component {
     render() {
         return (
             <View style={styles.view}>
-
-                <MapView style={styles.mapview}
+              {this.state.findgps ?
+                (<MapView style={styles.mapview}
                     showsUserLocation = {false}
                     initialRegion={{
                         latitude: 38.611026,
@@ -80,6 +84,7 @@ export default class App extends Component {
                 <MapView.Marker coordinate={this.state.user}>
                     <Image source={require('../images/point.png')} style={{ width: 25, height: 25 }}/>
                 </MapView.Marker>
+
 
 
 
@@ -101,7 +106,13 @@ export default class App extends Component {
                         )
                     }
 
-                </MapView>
+                </MapView>) :
+                (<View style={{flex:1, justifyContent:'space-between', alignItems:'center'}}>
+                  <Text>    </Text>
+                  <Text style={{fontSize:30}}>GPS가 잘 동작하지 않습니다</Text>
+                  <Text>    </Text>
+                </View>)
+              }
 
             </View>
         );

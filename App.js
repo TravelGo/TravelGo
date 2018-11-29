@@ -67,7 +67,7 @@ export default class App extends Component {
                 if(response.data.isLogin) {
                     this.setState({
                         currentPage : Navigation
-                    })    
+                    })
                 } else {
                     this.setState({
                         currentPage : ScreenLogin
@@ -78,7 +78,7 @@ export default class App extends Component {
         .catch(function (error) {
             alert(error);
             console.log(error);
-        });        
+        });
     }
     render() {
         return (
@@ -86,4 +86,3 @@ export default class App extends Component {
         );
     }
 }
-
