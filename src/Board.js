@@ -54,7 +54,7 @@ export default class GuestBook extends Component {
       if(res.data.status) {
         this.setState({
           comments : res.data.data
-        })        
+        })
       }
     })
   }

@@ -19,11 +19,7 @@ export default class App extends Component {
             title : "두리두리 용두리",
             image : 'http://www.doopedia.co.kr/_upload/image4/1711/03/171103021618274/171103021618274_thumb_400.jpg',
             description : "",
-            comment : [
-                "A",
-                "B",
-                "C"
-            ],
+            comment : [],
             window: {
                 width: width,
                 height: height
@@ -42,6 +38,10 @@ export default class App extends Component {
         }
         JEnum.axios.get(JEnum.travelStop + this.state._id)
         .then((res) => {
+            comments = []
+            for(let i=0;i<res.data.comments.length;i++) {
+                comments.push(res.data.comments[i].body.replace(/\n/g, " ").slice(0, 30) + "...");
+            }
             this.setState({
                 stops: [{
                     location : {
@@ -52,7 +52,8 @@ export default class App extends Component {
                 stop: {
                     latitude : res.data.lat,
                     longitude : res.data.lng
-                }
+                },
+                comment : comments
             })
             this.setState(res.data);
         })
@@ -124,24 +125,22 @@ export default class App extends Component {
             </View>
         )
 
+        const mentions = []
+
+        this.state.comment.forEach(comment => {
+            mentions.push((
+                <View style={styles.Mention_Group}>
+                    <Text style={styles.T_Mention_Text}>
+                        {comment}
+                    </Text>
+                </View>
+            ))
+        })
+
+
         T_Mention = (
             <View style={styles.T_Mention}>
-                <View style={styles.Mention_Group}>
-                    <Text style={styles.T_Mention_Text}>
-                        {this.state.comment[0]}
-                    </Text>
-                </View>
-                <View style={styles.Mention_Group}>
-                    <Text style={styles.T_Mention_Text}>
-                        {this.state.comment[1]}
-                    </Text>
-                </View>
-
-                <View style={styles.Mention_Group}>
-                    <Text style={styles.T_Mention_Text}>
-                        {this.state.comment[2]}
-                    </Text>
-                </View>
+                {mentions}
             </View>
         )
 
