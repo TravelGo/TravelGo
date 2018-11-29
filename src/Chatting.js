@@ -23,6 +23,10 @@ export default class Chat extends Component {
         });
     }
 
+    _goToMap = () => {
+        this.props.change("travelstop")
+    };
+
     state = {
         data: [],
         refreshing: false
@@ -31,11 +35,12 @@ export default class Chat extends Component {
     TopBar = (
         <View>
             <View style={styles.UpperView}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={this._goToMap} style={{ width: 30 }}>
+                  <Image source={require("../images/goBackButton.png")} style={{ width: 30, height: 30, resizeMode: 'contain' }} />
                 </TouchableOpacity>
                 <Text style={styles.UpperText}>용두리</Text>
-                <TouchableOpacity>
-                </TouchableOpacity>
+                <View style= {{ width: 30}}>
+                </View>
             </View>
             <View style={styles.UpperAdditionView}>
                 <Text style={styles.SmallText}>접속자 수 </Text>
@@ -45,7 +50,7 @@ export default class Chat extends Component {
     )
 
     ChatBox = (
-        <View style={[styles.ChatView, {height: fullHeight - 185}]}>
+        <View style={[styles.ChatView, {height: fullHeight - 180}]}>
             <Image source={require("../images/logo.png")} style={styles.ImageBackground}></Image>
             <View style={styles.ScrollView}>
                 <ScrollView refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this._onRefresh.bind(this)} />} >
@@ -128,11 +133,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#00afff',
         flex : 1,
         resizeMode: 'contain',
+        flexDirection: 'column'
     },
 
     UpperText: {
         color: 'white',
-        fontSize: 30,
+        fontSize: 25, 
+        fontWeight: 'bold',
     },
 
     UpperAdditionView: {
@@ -175,6 +182,7 @@ const styles = StyleSheet.create({
 
     TextInputView: {
         flex: 1,
+        alignItems: 'flex-end',
         height: 80,
         alignItems: 'center',
         flexDirection: 'row',
