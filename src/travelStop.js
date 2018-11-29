@@ -39,9 +39,17 @@ export default class App extends Component {
         JEnum.axios.get(JEnum.travelStop + this.state._id)
         .then((res) => {
             comments = []
-            for(let i=0;i<res.data.comments.length;i++) {
-                comments.push(res.data.comments[i].body.replace(/\n/g, " ").slice(0, 30) + "...");
+
+            if (comments.length == 0) {
+                comments.push("최근 기록된 방명록이 없습니다.");
             }
+            
+            else {
+                for(let i=0;i<res.data.comments.length;i++) {
+                    comments.push(res.data.comments[i].body.replace(/\n/g, " ").slice(0, 30) + "...");
+                }
+            }
+
             this.setState({
                 stops: [{
                     location : {
