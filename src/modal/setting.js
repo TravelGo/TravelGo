@@ -44,7 +44,7 @@ export default class App extends Component {
             <View style={styles.container}>
                 <View style={{ justifyContent: 'center', alignItems: 'center', width: this.state.window.width, height: this.state.window.width / 2 }}>
                     <ImageBackground source={{uri:this.state.recent.image}} style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
-                        <TouchableOpacity onPress={() => {this.props.change("mypage");}}>
+                        <TouchableOpacity onPress={() => {this.props.move("mypage");}}>
                             <View style={{ borderRadius: 100, borderWidth: 15, borderColor: 'rgba(255,255,255, 0.5)', width: this.state.window.width / 2 - 20, height: this.state.window.width / 2 - 20, justifyContent: 'center' }}>
                                 <Image source={require('../../images/ddobuck.png')} style={{ flex: 1, alignSelf: 'stretch', borderColor: 'white', borderWidth: 5, borderRadius: 100, width: null }}></Image>
                             </View>
