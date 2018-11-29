@@ -3824,7 +3824,7 @@ lodash.throttle@^4.1.1:
   resolved "https://registry.yarnpkg.com/lodash.throttle/-/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
   integrity sha1-wj6RtxAkKscMN/HhzaknTMOb8vQ=
 
-lodash@^4.0.0, lodash@^4.13.1, lodash@^4.17.10, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0, lodash@^4.6.1:
+lodash@^4.0.0, lodash@^4.13.1, lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0, lodash@^4.6.1:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
   integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
@@ -4376,6 +4376,13 @@ node-pre-gyp@^0.10.0:
     rimraf "^2.6.1"
     semver "^5.3.0"
     tar "^4"
+
+node-time-ago@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/node-time-ago/-/node-time-ago-1.0.0.tgz#9071f73ea2450b0adf14a776a31c40283cf8f26b"
+  integrity sha1-kHH3PqJFCwrfFKd2oxxAKDz48ms=
+  dependencies:
+    lodash "^4.15.0"
 
 nopt@^4.0.1:
   version "4.0.1"
@@ -4961,6 +4968,18 @@ react-native-material-textfield@^0.8.4:
   integrity sha1-Jn86RukleiWmtxnrrzQTEBn5AaA=
   dependencies:
     prop-types "^15.5.9"
+
+react-native-progress@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/react-native-progress/-/react-native-progress-3.5.0.tgz#d1ccc7f96dc17c609aedb43b2e6695d67deae0ec"
+  integrity sha512-Tgc002D0BGes1fTlObu/qNItlsTPYKFrF9XRQaJLme77TNxNX9I04sgIz3kaq8O4R+z/jlai64dk1HDEDQhzMA==
+  dependencies:
+    prop-types "^15.5.8"
+
+react-native-simple-modal@^9.0.1:
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-simple-modal/-/react-native-simple-modal-9.0.1.tgz#a753e9493f4bfcd8b9bf7812faaa56336bf56bde"
+  integrity sha512-tAqIWFD2K1qZ71oQDEeyxC+3nwVEqwt/wnho7cbGzz1GB0HpxzC5qHbO5x39PUNgm3iX1DitUUQFhKYnxT3pTg==
 
 react-native-vector-icons@^4.3.0:
   version "4.6.0"
