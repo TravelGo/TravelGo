@@ -34,17 +34,20 @@ export default class App extends Component {
                 latitude: 0,
                 longitude: 0
             },
-            stops: []
+            stops: [],
+            guestBookCounter : 0
         }
         JEnum.axios.get(JEnum.travelStop + this.state._id)
         .then((res) => {
             comments = []
 
             if (comments.length == 0) {
+                guestBookCounter = 0
                 comments.push("최근 기록된 방명록이 없습니다.");
             }
             
             else {
+                guestBookCounter = 1
                 for(let i=0;i<res.data.comments.length;i++) {
                     comments.push(res.data.comments[i].body.replace(/\n/g, " ").slice(0, 30) + "...");
                 }
@@ -135,15 +138,27 @@ export default class App extends Component {
 
         const mentions = []
 
-        this.state.comment.forEach(comment => {
-            mentions.push((
-                <View style={styles.Mention_Group}>
-                    <Text style={styles.T_Mention_Text}>
-                        {comment}
-                    </Text>
-                </View>
-            ))
-        })
+        // if (this.state.guestBookCounter == 0) {
+        //     this.state.comment.forEach(comment => {
+        //         mentions.push((
+        //             <View style={styles.Mention_Group1}>
+        //                 <Text style={styles.T_Mention_Text1}>
+        //                     {comment}
+        //                 </Text>
+        //             </View>
+        //         ))
+        //     })
+        // }
+            this.state.comment.forEach(comment => {
+                mentions.push((
+                    <View style={styles.Mention_Group1}>
+                        <Text style={styles.T_Mention_Text1}>
+                            {comment}
+                        </Text>
+                    </View>
+                ))
+            })
+                
 
 
         T_Mention = (
@@ -286,9 +301,14 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
     },
 
-    T_Mention_Text: {
+    T_Mention_Text1: {
         fontSize: 10,
         color: '#00AFFF',
+    },
+
+    T_Mention_Text2: {
+        fontSize: 10,
+        color: '#FF0000',
     },
 
     T_Map: {
@@ -324,7 +344,7 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
     },
 
-    Mention_Group: {
+    Mention_Group1: {
         height: 25,
         justifyContent: 'center',
         borderRadius: 7,
@@ -338,7 +358,23 @@ const styles = StyleSheet.create({
         marginLeft: 30,
         marginRight: 30,
     },
-    
+
+    Mention_Group2: {
+        height: 25,
+        justifyContent: 'center',
+        borderRadius: 7,
+        borderWidth: 1,
+        backgroundColor: '#FFFFFF',
+        borderColor: '#00AFFF',
+        marginBottom: 5,
+        paddingLeft: 10,
+        paddingRight: 10,
+        alignSelf: 'stretch',
+        marginLeft: 30,
+        marginRight: 30,
+    },
+
+
     mapview:{
       height: 160,
       alignItems: 'center',

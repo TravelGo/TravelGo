@@ -24,7 +24,7 @@ export default class Mypage extends React.Component {
     return (
       <View style={{flexDirection: 'column', flex : 1}}>
         <View style={{paddingHorizontal: 15, justifyContent:'space-between', backgroundColor: '#00afff', height: 60, flexDirection: 'row', alignItems:'center'}}>
-          <TouchableOpacity onPress={this._goToMap} style={{width:30}}>
+          <TouchableOpacity onPress={() => this.props.change('setting')} style={{width:30}}>
             <Image source={require("../images/goBackButton.png")} style={{width:30, height: 30, resizeMode: 'contain'}}/>
           </TouchableOpacity>
           <Text style={{color: 'white', fontSize: 25, fontWeight: 'bold'}}>마이페이지</Text>
