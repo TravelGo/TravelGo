@@ -36,6 +36,8 @@ export default class App extends Component {
             .catch(error => alert(error));
     }
 
+    watchID : ?number=null
+
     componentDidMount() {
         this.import_json_url()
         setInterval(() => {
@@ -51,7 +53,7 @@ export default class App extends Component {
                     });
                 },
                 (error) => alert(JSON.stringify(error)),
-                { enableHighAccuracy: true, timeout: 2000 }
+                { enableHighAccuracy: true, timeout: 30000 }
             )
         }, 2000);
     }
