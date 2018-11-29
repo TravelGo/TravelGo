@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "geolib": "^2.0.24",
+    "node-time-ago": "^1.0.0",
     "react": "16.6.0-alpha.8af6728",
     "react-native": "0.57.4",
     "react-native-axios": "^0.17.1",
