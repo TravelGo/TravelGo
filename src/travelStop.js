@@ -35,20 +35,22 @@ export default class App extends Component {
                 longitude: 0
             },
             stops: [],
-            // guestBookCounter : 0
+            guestBookCounter : 0
         }
         JEnum.axios.get(JEnum.travelStop + this.state._id)
         .then((res) => {
-            comments = []
-            // comments = res.data.data
-            if (comments.length == 0) {
-                // guestBookCounter = 0
+          console.log(res.data.comments);
+            comments = [];
+
+            if (res.data.comments.length == 0) {
+                guestBookCounter = 0
                 comments.push("최근 기록된 방명록이 없습니다.");
             }
-            
-            else if (comments.length > 0){
-                // guestBookCounter = 1
+
+            else {
+                guestBookCounter = 1
                 for(let i=0;i<res.data.comments.length;i++) {
+                    console.log(res.data.comments[i]);
                     comments.push(res.data.comments[i].body.replace(/\n/g, " ").slice(0, 30) + "...");
                 }
             }
@@ -57,7 +59,7 @@ export default class App extends Component {
                 stops: [{
                     location : {
                         latitude: res.data.lat,
-                        longitude: res.data.lng      
+                        longitude: res.data.lng
                     }
                 },],
                 stop: {
@@ -103,7 +105,7 @@ export default class App extends Component {
                     />
                 </TouchableOpacity>
             </View>
-            
+
             <View style={{flex: 6, justifyContent: 'center', alignItems: 'center',}}>
                 <Text style={styles.T_Title_Text}>
                 { this.state.title }
@@ -227,7 +229,7 @@ export default class App extends Component {
                         {T_Mention}
 
                         {T_Map}
-                        
+
                         {T_ButtonGroup}
 
                     </ScrollView>
