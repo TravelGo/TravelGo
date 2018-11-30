@@ -36,7 +36,7 @@ export default class App extends Component {
 
     state = {
         CurrentPage : this.screen['main'],
-        currentLocation : "서울특별시 성북구 정릉3동",
+        currentLocation : "",
         isOpen : false,
         menuItems : <View></View>,
         modalInner : ModalRecommanded,
@@ -55,7 +55,7 @@ export default class App extends Component {
             modalInner : this.modal[screen]
         });
     }
-    
+
     travelStop = (id) => {
         this.props.travelStop(id);
     }
@@ -102,7 +102,7 @@ export default class App extends Component {
             money : this.state.money + 1
         })
     }
-    
+
     render() {
         return (
             <View style={{flex:1}}>

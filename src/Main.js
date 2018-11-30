@@ -4,6 +4,7 @@ import MapView from 'react-native-maps';
 import geolib from 'geolib';
 import StopOnImg from '../images/travelstop(on).png';
 import StopOffImg from '../images/travelstop(off).png';
+import Geocoder from 'react-native-geocoding';
 
 
 let title="TITLE"
@@ -12,6 +13,8 @@ export default class App extends Component {
 
     constructor(props) {
         super(props);
+
+        Geocoder.init("AIzaSyC-wh2GZ92W7jsNjtHD1JUDoMl1nNLRJgo");
 
         this.state = {
             user: {
@@ -52,6 +55,17 @@ export default class App extends Component {
                             longitudeDelta: 0.005,
                         }
                     });
+
+                    Geocoder.from(this.state.user.latitude, this.state.user.longitude)
+                      .then(json => {
+                        const addressComponent = json.results[0].formatted_address.split(' ');
+                        this.setState({
+                          userloc : addressComponent[1] + ' ' +  addressComponent[2] + ' ' + addressComponent[3]
+                        })
+                          this.props.changeCurrentLocation(this.state.userloc);
+                      })
+                      .catch(error => console.warn(error));
+
                     this.setState({findgps: true});
                 },
                 (error) => {console.log(JSON.stringify(error));
