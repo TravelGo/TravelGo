@@ -94,7 +94,9 @@ const styles = StyleSheet.create({
     },
     settingview1: {
         padding : 10,
-        backgroundColor: '#00afff'
+        backgroundColor: '#00afff',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     novisited : {
         backgroundColor: 'white',

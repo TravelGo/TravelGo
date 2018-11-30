@@ -94,7 +94,7 @@ export default class TabViewExample extends React.Component {
                   <Text style={{fontSize:10}}>{tmp.full}</Text>
                 </View>
                 <View style={{width:60}}>
-                  <Image source={require("./images/logo.png")} style={{width:40, height: 40, resizeMode: 'contain'}}/>
+                  <Image source={require("../images/logo.png")} style={{width:40, height: 40, resizeMode: 'contain'}}/>
                 </View>
               </View>
           )
@@ -117,7 +117,7 @@ export default class TabViewExample extends React.Component {
         <View>
           <TouchableHighlight onPress={()=> this.visiblebutton(inputkey)}>
             <View style={{borderBottomWidth:2, height:50, borderColor:'rgba(150,150,150,100)', flexDirection:'row', alignItems:'center'}}>
-              <Image source={this.state.visible[inputkey] ? (require("./images/toRight.png")) : (require("./images/toBottom.png"))} style={{width:40, height: 40, resizeMode: 'contain'}}/>
+              <Image source={this.state.visible[inputkey] ? (require("../images/toRight.png")) : (require("../images/toBottom.png"))} style={{width:40, height: 40, resizeMode: 'contain'}}/>
               <Text style={{fontSize:20, fontWeight:'bold'}}>{key + " (" + this.state.doo[key] + ")"}</Text>
             </View>
           </TouchableHighlight>

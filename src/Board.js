@@ -27,10 +27,6 @@ export default class GuestBook extends Component {
     this.setState({ refreshing: false });
   };
 
-  _goToMap = () => {
-    this.props.change("travelstop")
-  };
-
   write = () => {
     JEnum.axios.put(JEnum.comment + this.props.travelStopId, {
       user : this.props.userID,
@@ -80,7 +76,7 @@ export default class GuestBook extends Component {
 
 
         <View style={{ paddingHorizontal: 15, justifyContent: 'space-between', backgroundColor: '#00AFFF', height: 60, flexDirection: 'row', alignItems: 'center' }}>
-          <TouchableOpacity onPress={this._goToMap} style={{ width: 30 }}>
+          <TouchableOpacity onPress={() => { this.props.change('travelStop'); }} style={{ width: 30 }}>
             <Image source={require("../images/goBackButton.png")} style={{ width: 30, height: 30, resizeMode: 'contain' }} />
           </TouchableOpacity>
           <Text style={{ color: 'white', fontSize: 25, fontWeight: 'bold' }}>방명록</Text>

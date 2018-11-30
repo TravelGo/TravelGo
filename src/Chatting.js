@@ -68,10 +68,6 @@ export default class Chat extends Component {
         })
     }
 
-    _goToMap = () => {
-        this.props.change("travelstop")
-    };
-
     sendMessage = () => {
         this.socket.emit("message", {
             user : this.state.username,
@@ -117,7 +113,7 @@ export default class Chat extends Component {
                 {/* Header */}
                 <View>
                     <View style={styles.UpperView}>
-                        <TouchableOpacity onPress={this._goToMap} style={{ width: 30 }}>
+                        <TouchableOpacity onPress={() => { this.props.change('travelStop'); }} style={{ width: 30 }}>
                             <Image source={require("../images/goBackButton.png")} style={{ width: 30, height: 30, resizeMode: 'contain' }} />
                         </TouchableOpacity>
                         <Text style={styles.UpperText}>{this.state.stop}</Text>

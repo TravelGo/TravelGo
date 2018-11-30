@@ -16,8 +16,8 @@ export default class App extends Component {
         const { width, height } = Dimensions.get("window")
         this.state = {
             _id : props.travelStopId,
-            title : "두리두리 용두리",
-            image : 'http://www.doopedia.co.kr/_upload/image4/1711/03/171103021618274/171103021618274_thumb_400.jpg',
+            title : "",
+            image : "",
             description : "",
             comment : [],
             window: {
@@ -39,17 +39,22 @@ export default class App extends Component {
         }
         JEnum.axios.get(JEnum.travelStop + this.state._id)
         .then((res) => {
-            comments = []
+          console.log(res.data.comments);
+            comments = [];
 
-            if (comments.length == 0) {
-                guestBookCounter = 0
-                comments.push("최근 기록된 방명록이 없습니다.");
+            if (res.data.comments.length == 0) {
+                comments.push("기록된 방명록이 없습니다. 처음으로 방명록을 남겨보세요!");
             }
-            
+
             else {
-                guestBookCounter = 1
                 for(let i=0;i<res.data.comments.length;i++) {
-                    comments.push(res.data.comments[i].body.replace(/\n/g, " ").slice(0, 30) + "...");
+                    if (res.data.comments[i].body.length > 38) {
+                        comments.push(res.data.comments[i].body.replace(/\n/g, " ").slice(0, 38) + "...");
+                    }
+                    else {
+                        comments.push(res.data.comments[i].body.replace(/\n/g, " "));
+                    }
+
                 }
             }
 
@@ -57,7 +62,7 @@ export default class App extends Component {
                 stops: [{
                     location : {
                         latitude: res.data.lat,
-                        longitude: res.data.lng      
+                        longitude: res.data.lng
                     }
                 },],
                 stop: {
@@ -103,7 +108,7 @@ export default class App extends Component {
                     />
                 </TouchableOpacity>
             </View>
-            
+
             <View style={{flex: 6, justifyContent: 'center', alignItems: 'center',}}>
                 <Text style={styles.T_Title_Text}>
                 { this.state.title }
@@ -131,8 +136,10 @@ export default class App extends Component {
         )
 
         T_Info = (
-            <View style={styles.T_Info}>
-                <Text style={styles.T_Info_Text}>{this.state.description ? this.state.description : "Description이 작성되지 않은 TravelStop 입니다."}</Text>
+            <View style={[styles.T_Info, ]}>
+                <View style={[styles.info_Box, {width: this.state.window.width - 60}]}>
+                    <Text style={styles.T_Info_Text}>{this.state.description ? this.state.description : "Description이 작성되지 않은 TravelStop 입니다."}</Text>
+                </View>
             </View>
         )
 
@@ -141,8 +148,8 @@ export default class App extends Component {
 
             this.state.comment.forEach(comment => {
                 mentions.push((
-                    <View style={styles.Mention_Group1}>
-                        <Text style={styles.T_Mention_Text1}>
+                    <View style={styles.Mention_Group}>
+                        <Text style={styles.T_Mention_Text}>
                             {comment}
                         </Text>
                     </View>
@@ -226,11 +233,11 @@ export default class App extends Component {
 
                         {T_Mention}
 
+                    </ScrollView>
                         {T_Map}
-                        
+
                         {T_ButtonGroup}
 
-                    </ScrollView>
                 </View>
             </View>
         );
@@ -242,6 +249,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
+        backgroundColor: 'white'
     },
 
     T_Title: {
@@ -273,15 +281,24 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         alignContent: 'center',
         alignSelf: 'stretch',
-        padding: 10,
-        paddingLeft: 40,
-        paddingRight: 40,
+        padding: 30,
+    },
+
+    info_Box: {
+        backgroundColor: '#FAFAFA',
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 10,
+        paddingBottom: 10,
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: '#A4A4A4',
     },
 
     T_Info_Text: {
         fontSize: 12,
         color: '#000000',
-        lineHeight: 15,
+        lineHeight: 17,
     },
 
     T_Mention: {
@@ -289,16 +306,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'stretch',
+        paddingBottom: 15,
     },
 
-    T_Mention_Text1: {
+    T_Mention_Text: {
         fontSize: 10,
         color: '#00AFFF',
-    },
-
-    T_Mention_Text2: {
-        fontSize: 10,
-        color: '#FF0000',
     },
 
     T_Map: {
@@ -334,7 +347,7 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
     },
 
-    Mention_Group1: {
+    Mention_Group: {
         height: 25,
         justifyContent: 'center',
         borderRadius: 7,
@@ -348,22 +361,6 @@ const styles = StyleSheet.create({
         marginLeft: 30,
         marginRight: 30,
     },
-
-    Mention_Group2: {
-        height: 25,
-        justifyContent: 'center',
-        borderRadius: 7,
-        borderWidth: 1,
-        backgroundColor: '#FFFFFF',
-        borderColor: '#00AFFF',
-        marginBottom: 5,
-        paddingLeft: 10,
-        paddingRight: 10,
-        alignSelf: 'stretch',
-        marginLeft: 30,
-        marginRight: 30,
-    },
-
 
     mapview:{
       height: 160,
