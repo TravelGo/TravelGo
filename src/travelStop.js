@@ -35,19 +35,19 @@ export default class App extends Component {
                 longitude: 0
             },
             stops: [],
-            guestBookCounter : 0
+            // guestBookCounter : 0
         }
         JEnum.axios.get(JEnum.travelStop + this.state._id)
         .then((res) => {
             comments = []
-
+            // comments = res.data.data
             if (comments.length == 0) {
-                guestBookCounter = 0
+                // guestBookCounter = 0
                 comments.push("최근 기록된 방명록이 없습니다.");
             }
             
-            else {
-                guestBookCounter = 1
+            else if (comments.length > 0){
+                // guestBookCounter = 1
                 for(let i=0;i<res.data.comments.length;i++) {
                     comments.push(res.data.comments[i].body.replace(/\n/g, " ").slice(0, 30) + "...");
                 }
