@@ -43,15 +43,18 @@ export default class App extends Component {
             comments = [];
 
             if (res.data.comments.length == 0) {
-                guestBookCounter = 0
-                comments.push("최근 기록된 방명록이 없습니다.");
+                comments.push("기록된 방명록이 없습니다. 처음으로 방명록을 남겨보세요!");
             }
 
             else {
-                guestBookCounter = 1
                 for(let i=0;i<res.data.comments.length;i++) {
-                    console.log(res.data.comments[i]);
-                    comments.push(res.data.comments[i].body.replace(/\n/g, " ").slice(0, 30) + "...");
+                    if (res.data.comments[i].body.length > 38) {
+                        comments.push(res.data.comments[i].body.replace(/\n/g, " ").slice(0, 38) + "...");
+                    }
+                    else {
+                        comments.push(res.data.comments[i].body.replace(/\n/g, " "));
+                    }
+
                 }
             }
 
