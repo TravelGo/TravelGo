@@ -28,22 +28,20 @@ export default class App extends Component {
         };
     }
 
-    import_json_url() {
-        return fetch('http://35.231.168.105/travelstop/37.610304/126.996917')
+    import_json_url(latitude, longitude) {
+        return fetch('http://35.231.168.105/travelstop/' + this.state.user.latitude + '/' + this.state.user.longitude)
             .then(response => response.json())
             .then((responseJson) => {
                 this.setState({
                     stops: responseJson,
-                })
-                console.log(this.state.stops)
+                });
+                console.log('http://35.231.168.105/travelstop/' + this.state.user.latitude + '/' + this.state.user.longitude);
+                console.log(this.state.stops);
             })
             .catch(error => console.log(error));
     }
 
-    // watchID : ? number=null
-
     componentDidMount() {
-        this.import_json_url()
         setInterval(() => {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
@@ -73,6 +71,7 @@ export default class App extends Component {
                },
                 { enableHighAccuracy: true, timeout: 2000 }
             )
+            this.import_json_url()
         }, 2000);
     }
 
