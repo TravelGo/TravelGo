@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View, Text, StyleSheet, Dimensions, Button, Icon, TouchableOpacity, Image } from 'react-native';
 import * as Progress from 'react-native-progress';
 import MyPage_Stops from "./MyPage_Stops";
-import Goals from "./Goals";
+import ButtonMap from "./ButtonMap_MyPage";
 
 
 export default class Mypage extends React.Component {
@@ -14,7 +14,7 @@ export default class Mypage extends React.Component {
     "currentPage" : this.Screen[Object.keys(this.Screen)[0]]
   }
 
-  _goToMap = (e) => { 
+  _goToMap = (e) => {
     this.setState({
       currentPage : this.Screen[e]
     })
@@ -63,9 +63,9 @@ export default class Mypage extends React.Component {
           </View>
         </View>
         <View style={{flexDirection: 'row', flex: 0.7, height: 55, flexDirection: 'row', alignItems:'center', }}> 
-          <TouchableOpacity onPress={() => { this._goToMap("travelstop"); }} style={{height: 48, borderColor: '#00afff', borderWidth: 1.5, borderRadius: 8, flex: 1}}>{ 
+          <TouchableOpacity onPress={() => { this._goToMap("ButtonMap"); }} style={{height: 48, borderColor: '#00afff', borderWidth: 1.5, borderRadius: 8, flex: 1}}>{ 
             <Text style={{ fontSize: 17, color : '#00afff', marginTop: 14.5,textAlign: 'center', fontWeight: 'bold'}}>
-            트레블 스탑 
+              지도 
             </Text>
           }
           </TouchableOpacity>
