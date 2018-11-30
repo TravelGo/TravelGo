@@ -23,7 +23,10 @@ export default class App extends Component {
         .then(res => {
             this.setState({
                 recentTS : res.data,
-                recent : res.data[0]
+                recent : res.data.length === 0 ? {
+                    "image" : "https://upload.wikimedia.org/wikipedia/commons/6/6d/Baitou_Mountain_Tianchi.jpg"
+                 } : res.data[0]
+
             })
         })
     }
