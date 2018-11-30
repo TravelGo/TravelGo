@@ -86,15 +86,15 @@ export default class TabViewExample extends React.Component {
         var tmp = this.state.fulladdresses[i];
         if(tmp.doo == key){
           components.push(
-              <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
-                <View style={{width : this.state.width/2}}>
-                  <Text>{tmp.name}</Text>
+              <View style={{backgroundColor:'white', flexDirection:'row', justifyContent:'space-between', alignItems:'center', borderColor:'rgba(200,200,200,100)', borderBottomWidth:1, margin:5}}>
+                <View style={{width : this.state.width/2, marginLeft:30}}>
+                  <Text style={{fontWeight:'bold', fontSize:15}}>{tmp.name}</Text>
                 </View>
                 <View style={{width: 80}}>
-                  <Text>{tmp.full}</Text>
+                  <Text style={{fontSize:10}}>{tmp.full}</Text>
                 </View>
                 <View style={{width:60}}>
-                  <Image source={require("./images/logo.png")} style={{width:50, height: 50, resizeMode: 'contain'}}/>
+                  <Image source={require("./images/logo.png")} style={{width:40, height: 40, resizeMode: 'contain'}}/>
                 </View>
               </View>
           )
@@ -102,7 +102,7 @@ export default class TabViewExample extends React.Component {
       }
     }
 
-    return components;
+    return  components;
 
   }
 
@@ -116,12 +116,9 @@ export default class TabViewExample extends React.Component {
       returnview.push(
         <View>
           <TouchableHighlight onPress={()=> this.visiblebutton(inputkey)}>
-            <View style={{borderBottomWidth:1, borderColor:'black', flexDirection:'row', alignItems:'center'}}>
-              <Text>jjj</Text>
-              <Image source={this.state.visible.inputkey ? require("./images/toRight.png") : require("./images/toBottom.png")} style={{width:50, height: 50, resizeMode: 'contain'}}/>
-              <Text>jjj</Text>
-
-              <Text style={{fontSize:30, fontWeight:'bold'}}>{key + " (" + this.state.doo[key] + ")"}</Text>
+            <View style={{borderBottomWidth:2, height:50, borderColor:'rgba(150,150,150,100)', flexDirection:'row', alignItems:'center'}}>
+              <Image source={this.state.visible[inputkey] ? (require("./images/toRight.png")) : (require("./images/toBottom.png"))} style={{width:40, height: 40, resizeMode: 'contain'}}/>
+              <Text style={{fontSize:20, fontWeight:'bold'}}>{key + " (" + this.state.doo[key] + ")"}</Text>
             </View>
           </TouchableHighlight>
           {this.showcomponent(key)}
