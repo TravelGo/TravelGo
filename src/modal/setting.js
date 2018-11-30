@@ -55,15 +55,23 @@ export default class App extends Component {
                     </ImageBackground>
                 </View>
 
-                    <View style={styles.settingview1}>
-                        <Text style={{fontSize: 17, color: 'white', fontWeight: 'bold',}}>여행자님이 방문한 Travel Stop</Text>
-                    </View>
+                <View style={styles.settingview1}>
+                    <Text style={{fontSize: 17, color: 'white', fontWeight: 'bold',}}>Visited Travel Stops</Text>
+                </View>
 
-                <ScrollView>
-                    <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-                        {visited}
+                {(this.state.recentTS.length==0) ? (
+                    <View style={styles.novisited}> 
+                        <Text style={{fontSize:20}}>방문하신 트래블 스탑이 없습니다.</Text>
+                        <Text style={{fontSize:10}}>어서 여행을 떠나세요!</Text>
                     </View>
-                </ScrollView>
+                    ) : (
+                    <ScrollView>
+                        <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+                            {visited}
+                        </View>
+                    </ScrollView>
+                )}
+
                 <TouchableOpacity onPress={() => { this.props.change('license'); }}>
                     <View style={styles.settingview3}>
                         <Text style={{ color: 'grey', fontWeight: 'bold', fontSize: 15 }}>Open Source</Text>
@@ -79,16 +87,22 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: '#F2F2F2',
+        backgroundColor: '#fff',
     },
     view: {
         flex: 1
     },
     settingview1: {
+        padding : 10,
+        backgroundColor: '#00afff'
+    },
+    novisited : {
+        backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
-        height: 40,
-        backgroundColor: '#00afff'
+        padding: 30,
+        paddingTop : 50,
+        paddingBottom : 50
     },
     settingview3: {
         backgroundColor: 'white',
