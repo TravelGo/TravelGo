@@ -41,7 +41,8 @@ export default class App extends Component {
         menuItems : <View></View>,
         modalInner : ModalRecommanded,
         travelStop : "",
-        money : 0
+        money : 0,
+        stops : []
     }
 
     changeCurrentLocation = (data) => {
@@ -103,6 +104,12 @@ export default class App extends Component {
         })
     }
 
+    setStops = (stops) => {
+        this.setState({
+            stops : stops
+        })
+    }
+
     render() {
         return (
             <View style={{flex:1}}>
@@ -115,6 +122,7 @@ export default class App extends Component {
                 {/* Current Page */}
                 <this.state.CurrentPage
                     _id={this._id}
+                    setStops={this.setStops}
                     userID={this.state.userID}
                     change={this.props.change}
                     modal={this.modalChange}
@@ -138,7 +146,13 @@ export default class App extends Component {
                 </TouchableOpacity>
                 <View style={{alignItems:"center"}}>
                     <View style={[styles.modal, {top:(this.state.isOpen)?-1 * fullHeight + 30:fullHeight}]}>
-                        <this.state.modalInner move={this.props.change} menu={this.leftModalItems} userID={this.props.userID} change={this.modalChange}/>
+                        <this.state.modalInner
+                            move={this.props.change}
+                            menu={this.leftModalItems}
+                            userID={this.props.userID}
+                            change={this.modalChange}
+                            stops={this.state.stops}
+                        />
                     </View>
                 </View>
                 <TouchableOpacity style={{position:"absolute",left:10, top:this.state.isOpen?15:fullHeight}} onPress={()=>{this.closeModal()}}>

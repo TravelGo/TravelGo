@@ -26,7 +26,7 @@ export default class App extends Component {
             this.setState({
                 currentPage : ScreenLogin
             })
-        } else if(category === "travelStop") {
+        } else if(category === "travelStop" || category === "travelstop") {
             this.setState({
                 currentPage : ScreenTravelStop
             })

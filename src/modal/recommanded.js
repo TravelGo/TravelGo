@@ -8,26 +8,21 @@ export default class App extends Component {
     constructor(props) {
         super(props);
         const { width, height } = Dimensions.get("window")
+
         this.state = {
             window: {
                 width: width * 0.9,
                 height: height * 0.9,
             },
-            stops : []
         }
-        JEnum.axios.get(JEnum.recommanded)
-        .then(res => {
-            this.setState({
-                stops : res.data
-            })
-        })
+
     }
 
     render() {
 
         var Reco = [];
 
-        this.state.stops.forEach(row => {
+        this.props.stops.forEach(row => {
             Reco.push(
                 <View style={{ width: this.state.window.width / 2 - 10, height: this.state.window.width / 2 - 10, margin: 3, }}>
                     <Image
