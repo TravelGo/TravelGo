@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, Dimensions, Button, Icon, TouchableOpacity, Image } from 'react-native';
 import * as Progress from 'react-native-progress';
-import ButtonMap from "./ButtonMap_MyPage"
-import Goals from "./Goals"
+import MyPage_Stops from "./MyPage_Stops";
+import Goals from "./Goals";
+
 
 export default class Mypage extends React.Component {
   Screen = { 
-    "map" : ButtonMap,
-    "travelstop" : ButtonMap,
+    "travelstop" : MyPage_Stops,
     "challenge" : Goals,
   }
   state = {
@@ -22,8 +22,8 @@ export default class Mypage extends React.Component {
 
   render() {
     return (
-      <View style={{flexDirection: 'column', flex : 1}}>
-        <View style={{paddingHorizontal: 15, justifyContent:'space-between', backgroundColor: '#00afff', height: 60, flexDirection: 'row', alignItems:'center'}}>
+      <View style={styles.container}>
+        <View style={styles.topBar}>
           <TouchableOpacity onPress={() => this.props.change('setting')} style={{width:30}}>
             <Image source={require("../images/goBackButton.png")} style={{width:30, height: 30, resizeMode: 'contain'}}/>
           </TouchableOpacity>
@@ -31,7 +31,7 @@ export default class Mypage extends React.Component {
           <View style={{width:30}}></View>
         </View>
         <View style={{flex: 1, backgroundColor: "#00afff", }}>
-          <View style={{flexDirection: 'row', paddingLeft: 10, paddingRight: 10, marginLeft: 10, marginRight: 10, margin: 5, backgroundColor: "white", borderRadius: 10, flex: 1, alignItems: "center", justifyContent: "center", }}>
+          <View style={styles.secondBar}>
             <View style={{flex: 1, width: 10, height: 20,  backgroundColor: '#74DF00', justifyContent: "center", alignItems: "center"}}>
               <Text style={{color: 'white', fontWeight: 'bold', fontSize: 10}}>칭호</Text>
             </View>
@@ -63,12 +63,6 @@ export default class Mypage extends React.Component {
           </View>
         </View>
         <View style={{flexDirection: 'row', flex: 0.7, height: 55, flexDirection: 'row', alignItems:'center', }}> 
-          <TouchableOpacity onPress={() => { this._goToMap("map"); }} style={{height: 48, borderColor: '#00afff', borderWidth: 1.5, borderRadius: 8, flex: 1, }}>{ 
-            <Text style={{ fontSize: 17, color : '#00afff', marginTop: 16,textAlign: 'center', fontWeight: 'bold'}}>
-            지도 
-            </Text>
-          }
-          </TouchableOpacity>
           <TouchableOpacity onPress={() => { this._goToMap("travelstop"); }} style={{height: 48, borderColor: '#00afff', borderWidth: 1.5, borderRadius: 8, flex: 1}}>{ 
             <Text style={{ fontSize: 17, color : '#00afff', marginTop: 14.5,textAlign: 'center', fontWeight: 'bold'}}>
             트레블 스탑 
@@ -91,7 +85,29 @@ export default class Mypage extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  scene: {
+  container: {
+    flexDirection: 'column',
     flex: 1
   },
+  topBar: {
+    paddingHorizontal: 15,
+    justifyContent:'space-between',
+    backgroundColor: '#00afff',
+    height: 60,
+    flexDirection: 'row',
+    alignItems:'center'
+  },
+  secondBar: {
+    flexDirection: 'row',
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    margin: 5,
+    backgroundColor: "white",
+    borderRadius: 10,
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center", 
+  }
 });
