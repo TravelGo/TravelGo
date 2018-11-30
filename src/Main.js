@@ -37,7 +37,7 @@ export default class App extends Component {
             .catch(error => console.log(error));
     }
 
-    watchID : ?number=null
+    // watchID : ? number=null
 
     componentDidMount() {
         this.import_json_url()

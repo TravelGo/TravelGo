@@ -14,9 +14,11 @@
     "react-native-axios": "^0.17.1",
     "react-native-cookie": "^0.2.0",
     "react-native-hide-show-password-input": "^1.0.7",
+    "react-native-keyboard-aware-scroll-view": "^0.7.4",
     "react-native-maps": "^0.22.1",
     "react-native-progress": "^3.5.0",
-    "react-native-simple-modal": "^9.0.1"
+    "react-native-simple-modal": "^9.0.1",
+    "socket.io-client": "^2.2.0"
   },
   "devDependencies": {
     "babel-jest": "23.6.0",

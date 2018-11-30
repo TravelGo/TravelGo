@@ -48,11 +48,13 @@ export default class App extends Component {
             })
         }
     }
-    travelStop = (id) => {
+    travelStop = (id, move=true) => {
         this.change("travelStop");
-        this.setState({
-            travelStopId : id
-        })
+        if(move) {
+            this.setState({
+                travelStopId : id
+            })
+        }
     }
     _id = (a) => {
         this.setState({

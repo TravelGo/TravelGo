@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, TouchableOpacity, TextInput, ScrollView, View, Image, Dimensions, RefreshControl } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, TextInput, ScrollView, View, Image, Dimensions, Keyboard } from 'react-native';
+import SocketIOClient from 'socket.io-client';
+const JEnum = require('./JEnum.js')
 
 fullHeight = Dimensions.get("window").height;
 fullWidth = Dimensions.get("window").width;
@@ -8,88 +10,165 @@ export default class Chat extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            message : "",
+            username : "",
+            stop : "",
+            count : 0,
+            chatting : []
+        };
+        this.socket = SocketIOClient('http://여행해.한국:3000');
+        JEnum.axios.get(JEnum.userInfo + "/" + props.userID)
+        .then(res => {
+            this.setState({
+                fullname : res.data.fullname,
+                username : res.data.username,
+            });
+            if(props.travelStopId === "GLOBAL") {
+                this.setState({
+                    stop : "핵인싸 채팅방"
+                });
+                this.init();
+            } else {
+                JEnum.axios.get(JEnum.travelStop + "/" + this.props.travelStopId)
+                .then(res => {
+                    this.setState({
+                        stop : res.data.title
+                    });
+                    this.init();
+                })
+            }
+        })
     }
 
-    fetchData = async () => {
-        const response = await fetch('');
-        const products = await response.json();
-        this.setState({ data: products });
-    }
-
-    _onRefresh() {
-        this.setState({ refreshing: true });
-        this.fetchData().then(() => {
-            this.setState({ refreshing: false })
+    init = () => {
+        this.socket.emit("init", {
+            user : this.state.username,
+            username : this.state.fullname,
+            stop : this.props.travelStopId
         });
+        this.socket.on("join", (data) => {
+            this.state.chatting.push({
+                type : "join",
+                data : data
+            })
+            this.setState({
+                chatting : this.state.chatting,
+                count : this.state.count + 1
+            })
+        })
+        this.socket.on("message", (data) => {
+            this.state.chatting.push({
+                type : "message",
+                data : data
+            })
+            this.setState({
+                chatting : this.state.chatting
+            })
+        })
     }
 
     _goToMap = () => {
         this.props.change("travelstop")
     };
 
-    state = {
-        data: [],
-        refreshing: false
-    };
+    sendMessage = () => {
+        this.socket.emit("message", {
+            user : this.state.username,
+            message : this.state.message,
+            stop : this.props.travelStopId
+        });
+        this.setState({
+            message : ""
+        })
+    }
 
-    TopBar = (
-        <View>
-            <View style={styles.UpperView}>
-                <TouchableOpacity onPress={this._goToMap} style={{ width: 30 }}>
-                  <Image source={require("../images/goBackButton.png")} style={{ width: 30, height: 30, resizeMode: 'contain' }} />
-                </TouchableOpacity>
-                <Text style={styles.UpperText}>용두리</Text>
-                <View style= {{ width: 30}}>
-                </View>
-            </View>
-            <View style={styles.UpperAdditionView}>
-                <Text style={styles.SmallText}>접속자 수 </Text>
-                <Text style={styles.SmallText}> 8</Text>
-            </View>
-        </View>
-    )
-
-    ChatBox = (
-        <View style={[styles.ChatView, {height: fullHeight - 180}]}>
-            <Image source={require("../images/logo.png")} style={styles.ImageBackground}></Image>
-            <View style={styles.ScrollView}>
-                <ScrollView refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this._onRefresh.bind(this)} />} >
-                    <View style={{ alignItems: 'center' }}>
-                        <Text style={styles.ChattingText}>"용두리" 채팅방에 입장하셨습니다.</Text>
-                    </View>
-                    <View style={{ flexDirection: 'row' }}>
-                        <Text style={styles.ChattingText}>용두리 마스터(555):</Text>
-                        <Text style={styles.ChattingText}> hi</Text>
-                    </View>
-                    <View style={{ flexDirection: 'row' }}>
-                        <Text style={styles.ChattingText}>용두리 마스터(555):</Text>
-                        <Text style={styles.ChattingText}> hi</Text>
-                    </View>
-                </ScrollView>
-            </View>
-        </View>
-    )
-
-    TextInputBar = (
-        <View style={styles.TextInputView}> 
-            <TextInput style={styles.TextInput_style} placeholder='     보낼 내용을 입력해주세요'></TextInput>
-            <TouchableOpacity>
-                <Image source={require("../images/send.png")} style={{ width: 40, resizeMode: 'contain' }} />
-            </TouchableOpacity>
-        </View>
-    )
 
     render() {
+        chatting = []
+        logs = this.state.chatting
+        for(let i=0;i<logs.length;i++) {
+            if(logs[i].type === "join") {
+                chatting.push(
+                    (
+                        <View style={{ alignItems: 'center', marginBottom : 10 }}>
+                            <Text style={styles.ChattingText}>{logs[i].data}</Text>
+                        </View>
+                    )
+                )
+            } else {
+                chatting.push(
+                    (
+                        <View style={{marginBottom:10}}>
+                            <View>
+                                <Text style={styles.sender}>{logs[i].data.sender}</Text>
+                            </View>
+                            <View style={{flexDirection:'row',marginTop:5}}>
+                                <Text style={[styles.ChattingText, {backgroundColor:'#f0C400', padding:10, borderRadius:10,  }]}>{logs[i].data.message}</Text>
+                            </View>
+                        </View>
+                    )
+                )    
+            }
+        }
         return (
-        <View style={{flex: 1, backgroundColor: '#00afff'}}>
-            {this.TopBar}
-            <ScrollView>
-                <View style={styles.MainView}>
-                    {this.ChatBox}
-                    {this.TextInputBar}
+            <View style={{flex: 1, backgroundColor: '#00afff'}}>
+
+                {/* Header */}
+                <View>
+                    <View style={styles.UpperView}>
+                        <TouchableOpacity onPress={this._goToMap} style={{ width: 30 }}>
+                            <Image source={require("../images/goBackButton.png")} style={{ width: 30, height: 30, resizeMode: 'contain' }} />
+                        </TouchableOpacity>
+                        <Text style={styles.UpperText}>{this.state.stop}</Text>
+                        <View style={{ width: 30 }}>
+                        </View>
+                    </View>
+                    <View style={styles.UpperAdditionView}>
+                        <Text style={styles.SmallText}>접속자 수 </Text>
+                        <Text style={styles.SmallText}> {this.state.count}</Text>
+                    </View>
                 </View>
-            </ScrollView>
-        </View>
+
+                {/* Section */}
+                <View style={[styles.MainView, {flex:(fullHeight - 95)/fullHeight}]}>
+                    <View style={[styles.ChatView, {flex:1}]}>
+                        <Image source={require("../images/logo.png")} style={styles.ImageBackground}></Image>
+                        <View style={styles.ScrollView}>
+                            <ScrollView
+                                style={{flex:1,padding:20}}
+                                ref={ref => this.scrollView = ref}
+                                onContentSizeChange={(contentWidth, contentHeight)=>{        
+                                    this.scrollView.scrollToEnd({animated: true});
+                                }}
+                            >
+                                <View style={{ alignItems: 'center' }}>
+                                    <Text style={[styles.ChattingText, {colot:'red'}]}>"{this.state.stop}" 채팅방에 입장하셨습니다.</Text>
+                                </View>
+                                {chatting}
+                                <View style={{height:50}}></View>
+                            </ScrollView>
+                        </View>
+                    </View>
+                </View>
+
+                {/* Footer */}
+                <View style={styles.bottomNavigation}>
+                    <View style={styles.TextInputView}>
+                        <TextInput
+                            onSubmitEditing={Keyboard.dismiss}
+                            value={this.state.message}
+                            style={styles.TextInput_style}
+                            placeholder='보낼 내용을 입력해주세요'
+                            onChangeText={(value) => { this.setState({ message: value }) }}>
+                        </TextInput>
+                        <TouchableOpacity onPress={this.sendMessage}>
+                            <Image source={require("../images/send.png")} style={{ width: 40, resizeMode: 'contain' }} />
+                        </TouchableOpacity>
+                    </View>
+                </View>
+
+            </View>
         );
     }
 }
@@ -97,13 +176,21 @@ export default class Chat extends Component {
 
 const styles = StyleSheet.create({
     TextInput_style: {
-        borderWidth: 2,
         borderColor: '#00BFFF',
-        width: 330,
+        width: 300,
         height: 60,
         marginLeft: 5,
         paddingLeft: 10,
-        borderRadius: 30,
+        backgroundColor : '#eee'
+    },
+
+    bottomNavigation : {
+        flexDirection : 'row',
+        justifyContent: 'center',
+        overflow: 'hidden',
+        position : 'absolute',
+        bottom : 0,
+        width : fullWidth,
     },
 
     button: {
@@ -130,10 +217,7 @@ const styles = StyleSheet.create({
     },
 
     MainView: {
-        backgroundColor: '#00afff',
-        flex : 1,
-        resizeMode: 'contain',
-        flexDirection: 'column'
+        backgroundColor: '#ffffff',
     },
 
     UpperText: {
@@ -157,15 +241,13 @@ const styles = StyleSheet.create({
 
     ScrollView: {
         flex: 1,
-        padding: 5,
-        margin: 10,
         zIndex: 1
     },
 
     ImageBackground: {
         width: 330,
         resizeMode: 'contain',
-        opacity: 0.3,
+        opacity: 0.1,
         zIndex: 0,
         position: 'absolute',
         justifyContent: 'center',
@@ -194,9 +276,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
 
+    owner: {
+        fontWeight : 'bold',
+        fontSize: 13,
+    },
     ChattingText: {
         borderStyle: 'solid',
-        fontSize: 20,
+        fontSize: 15,
     },
 
 });

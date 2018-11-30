@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, Dimensions, Image, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text, Dimensions, Image, TouchableOpacity, TouchableWithoutFeedback} from 'react-native';
 
 const JEnum = require('./JEnum.js')
 
@@ -40,7 +40,8 @@ export default class App extends Component {
         isOpen : false,
         menuItems : <View></View>,
         modalInner : ModalRecommanded,
-        travelStop : ""
+        travelStop : "",
+        money : 0
     }
 
     modalChange = (screen) => {
@@ -85,6 +86,16 @@ export default class App extends Component {
         })
         this.props._id(a);
     }
+
+    globalChat() {
+        if(this.state.money == 3) {
+            this.props.travelStop("GLOBAL")
+            this.props.change("chatting")
+        }
+        this.setState({
+            money : this.state.money + 1
+        })
+    }
     
     render() {
         return (
@@ -101,7 +112,9 @@ export default class App extends Component {
                     <TouchableOpacity  style={[styles.buttomButtonNav, {left:0}]} onPress={()=>{this.openModal('default')}}>
                         <Image source={require('../images/left.png')} style={styles.bottomButton}/>
                     </TouchableOpacity>
-                    <Text style={styles.bottomText}>TRAVEL GO</Text>
+                    <TouchableWithoutFeedback onPress={() => {this.globalChat()}}>
+                        <Text style={styles.bottomText}>TRAVEL GO</Text>
+                    </TouchableWithoutFeedback>
                     <TouchableOpacity  style={[styles.buttomButtonNav, {right:0}]} onPress={()=>{this.openModal('setting')}}>
                         <Image source={require('../images/right.png')} style={styles.bottomButton}/>
                     </TouchableOpacity>
