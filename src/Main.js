@@ -104,7 +104,7 @@ export default class App extends Component {
 
                     {
                         this.state.stops.map((contact, i) =>
-                            geolib.getDistance(contact.location, this.state.user) <= 200 ? (
+                            geolib.getDistance(contact.location, this.state.user) <= 50 ? (
                                 <MapView.Marker coordinate={contact.location} key={i}
                                     onPress={e => {
                                         this.props.travelStop(contact._id)
