@@ -214,7 +214,9 @@ export default class App extends Component {
                     zoomEnabled={false}
                 >
                     {this.state.stops.map((contact, i) =>
-                        <MapView.Marker coordinate={contact.location} key={i} image={StopOnImg} />
+                        (<MapView.Marker coordinate={contact.location} key={i}>
+                            <Image source={StopOnImg} style={{ width: 40, height: 40 }}/>
+                        </MapView.Marker>)
                     )}
                 </MapView>
             </View>
@@ -236,7 +238,7 @@ export default class App extends Component {
                         {T_Map}
 
                         {T_ButtonGroup}
-                
+
                     </ScrollView>
                 </View>
             </View>
