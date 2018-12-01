@@ -233,11 +233,11 @@ export default class App extends Component {
 
                         {T_Mention}
 
-                    </ScrollView>
                         {T_Map}
 
                         {T_ButtonGroup}
-
+                
+                    </ScrollView>
                 </View>
             </View>
         );
@@ -331,7 +331,7 @@ const styles = StyleSheet.create({
     },
 
     T_Button: {
-        height: 30,
+        height: 36,
         backgroundColor: '#00AFFF',
         justifyContent: 'center',
         alignItems: 'center',
