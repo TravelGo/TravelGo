@@ -7,8 +7,8 @@ import ButtonMap from "./ButtonMap_MyPage";
 
 export default class Mypage extends React.Component {
   Screen = { 
+    "ButtonMap" : ButtonMap,
     "travelstop" : MyPage_Stops,
-    "challenge" : Goals,
   }
   state = {
     "currentPage" : this.Screen[Object.keys(this.Screen)[0]]
@@ -69,7 +69,7 @@ export default class Mypage extends React.Component {
             </Text>
           }
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => { this._goToMap("challenge"); }} style={{height: 48, borderColor: '#00afff', borderWidth: 1.5, borderRadius: 8, flex: 1}}>{ 
+          <TouchableOpacity onPress={() => { this._goToMap("travelstop"); }} style={{height: 48, borderColor: '#00afff', borderWidth: 1.5, borderRadius: 8, flex: 1}}>{ 
             <Text style={{ fontSize: 17, color : '#00afff', marginTop: 14.5,textAlign: 'center', fontWeight: 'bold'}}>
             도전 과제 
             </Text>
