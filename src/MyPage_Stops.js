@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, Dimensions, Button, Icon, TouchableOpacity, Image, ScrollView, TouchableHighlight } from 'react-native';
 import * as Progress from 'react-native-progress';
+const JEnum = require('./JEnum.js');
 
 export default class TabViewExample extends React.Component {
 
@@ -17,6 +18,17 @@ export default class TabViewExample extends React.Component {
       visible:{},
       fulladdresses:[],
     };
+
+    JEnum.axios.get(JEnum.visited + this.props.userID)
+    .then(res => {
+        this.setState({
+            recentTS : res.data,
+            recent : res.data.length === 0 ? {
+                "image" : "https://upload.wikimedia.org/wikipedia/commons/6/6d/Baitou_Mountain_Tianchi.jpg"
+             } : res.data[0]
+
+        })
+    });
   }
 
   async import_json_url(){
@@ -74,6 +86,7 @@ export default class TabViewExample extends React.Component {
   componentDidMount(){
     this.import_json_url();
     this.setState({loading: false});
+    console.log(this.props);
   }
 
   visiblebutton(key){
@@ -81,6 +94,20 @@ export default class TabViewExample extends React.Component {
     newvisible = this.state.visible;
     newvisible[key] = !newvisible[key];
     this.setState({visible: newvisible});
+  }
+
+  showvisited(title){
+    console.log(this.state.recentTS)
+    output = "아직 방문한적이 없는 트레블스탑이에요!";
+    for(i=0;i<this.state.recentTS.length;i++){
+      if(this.state.recentTS[i].title == title){
+        output = "이미 방문하셨던 트레블스탑이네요!";
+        break;
+      }
+    }
+
+    alert(output);
+
   }
 
 
@@ -92,7 +119,9 @@ export default class TabViewExample extends React.Component {
       for(i=0;i<this.state.fulladdresses.length;i++){
         var tmp = this.state.fulladdresses[i];
         if(tmp.doo == key){
+          const name= tmp.name;
           components.push(
+            <TouchableHighlight onPress={()=> this.showvisited(name)}>
               <View style={{backgroundColor:'white', flexDirection:'row', justifyContent:'space-between', alignItems:'center', borderColor:'rgba(200,200,200,100)', borderBottomWidth:1, margin:5}}>
                 <View style={{width : this.state.width/2, marginLeft:30}}>
                   <Text style={{fontWeight:'bold', fontSize:15}}>{tmp.name}</Text>
@@ -104,6 +133,7 @@ export default class TabViewExample extends React.Component {
                   <Image source={require("../images/logo.png")} style={{width:40, height: 40, resizeMode: 'contain'}}/>
                 </View>
               </View>
+            </TouchableHighlight>
           )
         }
       }

@@ -36,8 +36,6 @@ export default class App extends Component {
                     stops: responseJson,
                 });
                 this.props.setStops(responseJson)
-                console.log('http://35.231.168.105/travelstop/' + this.state.user.latitude + '/' + this.state.user.longitude);
-                console.log(this.state.stops);
             })
             .catch(error => console.log(error));
     }

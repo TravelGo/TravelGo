@@ -6,12 +6,17 @@ import ButtonMap from "./ButtonMap_MyPage";
 
 
 export default class Mypage extends React.Component {
-  Screen = { 
+  constructor(props){
+    super(props);
+  }
+
+
+  Screen = {
     "ButtonMap" : ButtonMap,
     "travelstop" : MyPage_Stops,
   }
   state = {
-    "currentPage" : this.Screen[Object.keys(this.Screen)[0]]
+    "currentPage" : this.Screen[Object.keys(this.Screen)[1]]
   }
 
   _goToMap = (e) => {
@@ -21,6 +26,7 @@ export default class Mypage extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <View style={styles.container}>
         <View style={styles.topBar}>
@@ -37,12 +43,12 @@ export default class Mypage extends React.Component {
             </View>
             <View style={{flex: 10, justifyContent: "center", alignItems: "center"}}>
               <Text style={{color: 'black', fontSize: 15, textDecorationLine: 'underline'}}>연못 속의 개구리</Text>
-            </View>            
+            </View>
             <View style={{flex: 1}}></View>
           </View>
-        </View>        
+        </View>
         <View style={{flex: 1, flexDirection: "row", backgroundColor: "#00afff", paddingRight: 10, paddingLeft: 10}}>
-          
+
           <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
             <View style={{backgroundColor: 'white', borderRadius: 5, width: 50, height: 20, justifyContent: 'center', alignItems: 'center'}}>
               <Text style={{color: '#00afff', fontSize: 15}}>
@@ -51,7 +57,7 @@ export default class Mypage extends React.Component {
             </View>
           </View>
 
-          <View style={{flex: 4, backgroundColor: '#00afff', flexDirection: 'column', }}>          
+          <View style={{flex: 4, backgroundColor: '#00afff', flexDirection: 'column', }}>
             <View style={{flex: 1, justifyContent:'flex-end' }}>
               <Progress.Bar progress={0.33} width={260} color={'#FFBF00'} unfilledColor={'white'} borderColor={'#109eff'} />
             </View>
@@ -62,22 +68,22 @@ export default class Mypage extends React.Component {
             </View>
           </View>
         </View>
-        <View style={{flexDirection: 'row', flex: 0.7, height: 55, flexDirection: 'row', alignItems:'center', }}> 
-          <TouchableOpacity onPress={() => { this._goToMap("ButtonMap"); }} style={{height: 48, borderColor: '#00afff', borderWidth: 1.5, borderRadius: 8, flex: 1}}>{ 
+        <View style={{flexDirection: 'row', flex: 0.7, height: 55, flexDirection: 'row', alignItems:'center', }}>
+          <TouchableOpacity onPress={() => { this._goToMap("ButtonMap"); }} style={{height: 48, borderColor: '#00afff', borderWidth: 1.5, borderRadius: 8, flex: 1}}>{
             <Text style={{ fontSize: 17, color : '#00afff', marginTop: 14.5,textAlign: 'center', fontWeight: 'bold'}}>
-              트레블 맵 
+              트레블 맵
             </Text>
           }
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => { this._goToMap("travelstop"); }} style={{height: 48, borderColor: '#00afff', borderWidth: 1.5, borderRadius: 8, flex: 1}}>{ 
+          <TouchableOpacity onPress={() => { this._goToMap("travelstop"); }} style={{height: 48, borderColor: '#00afff', borderWidth: 1.5, borderRadius: 8, flex: 1}}>{
             <Text style={{ fontSize: 17, color : '#00afff', marginTop: 14.5,textAlign: 'center', fontWeight: 'bold'}}>
-            트레블 스탑 
+            트레블 스탑
             </Text>
           }
           </TouchableOpacity>
         </View>
         <View style={{flex:11.5}}>
-          <this.state.currentPage/>
+          <this.state.currentPage userID={this.props.userID}/>
         </View>
       </View>
     );
@@ -108,6 +114,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     flex: 1,
     alignItems: "center",
-    justifyContent: "center", 
+    justifyContent: "center",
   }
 });
