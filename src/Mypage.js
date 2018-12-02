@@ -65,13 +65,13 @@ export default class Mypage extends React.Component {
         <View style={{flexDirection: 'row', flex: 0.7, height: 55, flexDirection: 'row', alignItems:'center', }}> 
           <TouchableOpacity onPress={() => { this._goToMap("ButtonMap"); }} style={{height: 48, borderColor: '#00afff', borderWidth: 1.5, borderRadius: 8, flex: 1}}>{ 
             <Text style={{ fontSize: 17, color : '#00afff', marginTop: 14.5,textAlign: 'center', fontWeight: 'bold'}}>
-              지도 
+              트레블 맵 
             </Text>
           }
           </TouchableOpacity>
           <TouchableOpacity onPress={() => { this._goToMap("travelstop"); }} style={{height: 48, borderColor: '#00afff', borderWidth: 1.5, borderRadius: 8, flex: 1}}>{ 
             <Text style={{ fontSize: 17, color : '#00afff', marginTop: 14.5,textAlign: 'center', fontWeight: 'bold'}}>
-            도전 과제 
+            트레블 스탑 
             </Text>
           }
           </TouchableOpacity>
