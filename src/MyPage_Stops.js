@@ -2,13 +2,11 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, Dimensions, Button, Icon, TouchableOpacity, Image, ScrollView, TouchableHighlight } from 'react-native';
 import * as Progress from 'react-native-progress';
-import Geocoder from 'react-native-geocoding';
 
 export default class TabViewExample extends React.Component {
 
   constructor(props) {
     super(props);
-    Geocoder.init("AIzaSyC-wh2GZ92W7jsNjtHD1JUDoMl1nNLRJgo");
     this.state = {
       width:Dimensions.get("window").width,
       height:Dimensions.get("window").height,
@@ -23,42 +21,52 @@ export default class TabViewExample extends React.Component {
 
   async import_json_url(){
 
-    var stops = [];
-
-    await fetch('http://xn--9i5b27z1b.xn--3e0b707e/travelstop/37.610304/126.996917')
+    await fetch('http://35.231.168.105/travelstop/all')
       .then(response => response.json())
       .then((responseJson) => {
-        this.state.stops = responseJson;
+        this.setState({stops:responseJson});
       })
       .catch(error => alert(error));
 
-      var addresses = {};
+      var addresses = {
+        서울특별시 :0,
+        인천광역시 :0,
+        전라남도 :0,
+        충청남도 :0,
+        제주특별자치도 :0,
+        전라북도:0,
+
+      };
+
+      var doo = ["서울특별시","인천광역시","전라남도","충청남도","제주특별자치도","전라북도","충청북도"]
+
       var fulladdresses = [];
       var visible = {};
 
-      for(i=0;i<this.state.stops.length;i++){
-         await Geocoder.from(this.state.stops[i].location.latitude, this.state.stops[i].location.longitude)
-            .then(json => {
-              var addressComponent = json.results[0].formatted_address.split(' ');
 
-              fulladdresses.push(
-                {name: this.state.stops[i].name, doo: addressComponent[1], full: addressComponent[2]}
-              )
+      this.state.stops.map((contact, i) => {
+        var addressComponent = contact.address.split(' ');
+        for(j=0;j<=doo.length;j++){
+          if(contact.address.indexOf(doo[j]) == -1){
+            visible[doo[j]] = false;
+          }else{
+            addresses[doo[j]] += 1;
+            fulladdresses.push(
+              {name: contact.name, doo: doo[j], full: addressComponent[2]}
+            )
+            break;
+          }
+          if(j==doo.length){
+            console.log(contact.address);
+          }
+        }
+
+      });
 
 
-              if(addresses[addressComponent[1]] == undefined){
-                addresses[addressComponent[1]] = 0;
-                visible[addressComponent[1]] = false;
-              }
-              addresses[addressComponent[1]] += 1;
-            })
-        .catch(error => console.warn(error));
-      }
 
       this.setState({doo:addresses});
-      console.log(this.state.doo);
       this.setState({fulladdresses: fulladdresses, visible:visible});
-      console.log(visible);
 
   }
 
@@ -79,7 +87,6 @@ export default class TabViewExample extends React.Component {
   showcomponent(key){
     var components = [];
 
-    console.log(this.state.visible[key]);
 
     if(this.state.visible[key]){
       for(i=0;i<this.state.fulladdresses.length;i++){
@@ -110,8 +117,6 @@ export default class TabViewExample extends React.Component {
     var returnview = [];
 
     for(var key in this.state.doo){
-      console.log(key);
-      console.log(this.state.doo[key]);
       const inputkey =key;
       returnview.push(
         <View>
