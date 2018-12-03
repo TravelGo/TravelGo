@@ -121,8 +121,8 @@ export default class TabViewExample extends React.Component {
         if(tmp.doo == key){
           const name= tmp.name;
           components.push(
-            <TouchableHighlight onPress={()=> this.showvisited(name)}>
-              <View style={{backgroundColor:'white', flexDirection:'row', justifyContent:'space-between', alignItems:'center', borderColor:'rgba(200,200,200,100)', borderBottomWidth:1, margin:5}}>
+            <TouchableOpacity onPress={()=> this.showvisited(name)}>
+              <View style={{backgroundColor:'white', flexDirection:'row', justifyContent:'space-between', alignItems:'center', borderColor:'rgba(200,200,200,100)', borderBottomWidth:1, }}>
                 <View style={{width : this.state.width/2, marginLeft:30}}>
                   <Text style={{fontWeight:'bold', fontSize:15}}>{tmp.name}</Text>
                 </View>
@@ -133,7 +133,7 @@ export default class TabViewExample extends React.Component {
                   <Image source={require("../images/logo.png")} style={{width:40, height: 40, resizeMode: 'contain'}}/>
                 </View>
               </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
           )
         }
       }
@@ -150,12 +150,12 @@ export default class TabViewExample extends React.Component {
       const inputkey =key;
       returnview.push(
         <View>
-          <TouchableHighlight onPress={()=> this.visiblebutton(inputkey)}>
+          <TouchableOpacity onPress={()=> this.visiblebutton(inputkey)}>
             <View style={{borderBottomWidth:2, height:50, borderColor:'rgba(150,150,150,100)', flexDirection:'row', alignItems:'center'}}>
               <Image source={this.state.visible[inputkey] ? (require("../images/toRight.png")) : (require("../images/toBottom.png"))} style={{width:40, height: 40, resizeMode: 'contain'}}/>
               <Text style={{fontSize:20, fontWeight:'bold'}}>{key + " (" + this.state.doo[key] + ")"}</Text>
             </View>
-          </TouchableHighlight>
+          </TouchableOpacity>
           {this.showcomponent(key)}
 
         </View>
