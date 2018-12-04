@@ -5,7 +5,7 @@ import geolib from 'geolib';
 import StopOnImg from '../images/travelstop(on).png';
 import StopOffImg from '../images/travelstop(off).png';
 import Geocoder from 'react-native-geocoding';
-const JEnum = require('./JEnum.js')
+
 
 let title="TITLE"
 
@@ -23,11 +23,24 @@ export default class App extends Component {
             },
             stops: [],
             findgps : true,
+            camera: {
+              center:{
+                latitude: 38.611026,
+                longitude: 126.996917,
+              },
+              heading:90,
+              pitch:45,
+              zoom:10,
+              altitude:1000,
+
+            },
         };
+
+
     }
 
     import_json_url(latitude, longitude) {
-        return fetch('http://35.231.168.105/travelstop/' + this.state.user.latitude + '/' + this.state.user.longitude)
+        return fetch('http://35.231.168.105/travelstop/' + this.state.camera.center.latitude + '/' + this.state.camera.center.longitude)
             .then(response => response.json())
             .then((responseJson) => {
                 this.setState({
@@ -45,15 +58,18 @@ export default class App extends Component {
                 (position) => {
                     this.setGeocoding(position.coords.latitude, position.coords.longitude);
                     this.setState({
-                        user: {
-                            latitude: position.coords.latitude,
-                            longitude: position.coords.longitude,
-                            latitudeDelta: 0.005,
-                            longitudeDelta: 0.005,
-                        }
+                        camera: {
+                            center:{
+                              latitude: position.coords.latitude,
+                              longitude: position.coords.longitude,
+                            },
+                            heading:0,
+                            pitch:30,
+                            zoom:17,
+                            altitude:1000,
+                        },
                     });
                     this.setState({findgps: true});
-                    console.log(position.coords)
                 },
                 (error) => {console.log(JSON.stringify(error));
                  this.setState({findgps: false});
@@ -70,10 +86,10 @@ export default class App extends Component {
 
     setGeocoding(latitude=0, longitude=0) {
         if(latitude === 0 && longitude === 0) {
-            latitude = this.state.user.latitude;
-            longitude = this.state.user.latitude;
+            latitude = this.state.camera.center.latitude;
+            longitude = this.state.camera.center.latitude;
         }
-        fetch("https://maps.google.com/maps/api/geocode/json?language=ko&latlng=" + this.state.user.latitude + "," + this.state.user.longitude + "&key=AIzaSyC-wh2GZ92W7jsNjtHD1JUDoMl1nNLRJgo")
+        fetch("https://maps.google.com/maps/api/geocode/json?language=ko&latlng=" + this.state.camera.center.latitude + "," + this.state.camera.center.longitude + "&key=AIzaSyC-wh2GZ92W7jsNjtHD1JUDoMl1nNLRJgo")
         .then(res => res.json())
         .then(json => {
             const addressComponent = json.results[0].formatted_address.split(' ');
@@ -89,31 +105,36 @@ export default class App extends Component {
             <View style={styles.view}>
               {this.state.findgps ?
                 (<MapView style={styles.mapview}
-                    showsUserLocation = {false}
-                    initialRegion={{
+                    showsUserLocation = {true}
+                    initialCamera={{
+                      center:{
                         latitude: 38.611026,
                         longitude: 126.996917,
-                        latitudeDelta: 0.005,
-                        longitudeDelta: 0.005,
+                      },
+                      heading:90,
+                      pitch:45,
+                      zoom:10,
+                      altitude:1000,
                     }}
-                    region={this.state.user}
+                    camera={this.state.camera}
                     loadingEnabled={true}
                     rotateEnabled={false}
                     scrollEnabled={false}
-                    pitchEnabled={true}
+                    pitchEnabled={false}
                     zoomEnabled={false}
+
                 >
-
-                <MapView.Marker coordinate={this.state.user}>
-                    <Image source={require('../images/point.png')} style={{ width: 25, height: 25 }}/>
-                </MapView.Marker>
-
+{
+                // <MapView.Marker coordinate={this.state.user}>
+                //     <Image source={require('../images/point.png')} style={{ width: 25, height: 25 }}/>
+                // </MapView.Marker>
+}
 
 
 
                     {
                         this.state.stops.map((contact, i) =>
-                            geolib.getDistance(contact.location, this.state.user) <= 50 ? (
+                            geolib.getDistance(contact.location, this.state.camera.center) <= 50 ? (
                                 <MapView.Marker coordinate={contact.location} key={i}
                                     onPress={e => {
                                         this.props.travelStop(contact._id)
