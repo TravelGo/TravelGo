@@ -7,10 +7,8 @@ var fullHeight = Dimensions.get('window').height; //full height
 
 export default class App extends Component {
     state = {
-        username : "jtjisgod",
-        password : "password12#",
-        username : "00700",
-        password : "00700"
+        username : "",
+        password : ""
     }
     onLogin = () => {
         JEnum.axios.post(JEnum.login, {
