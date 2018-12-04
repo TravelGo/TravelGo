@@ -10,21 +10,6 @@ export default class Mypage extends React.Component {
     super(props);
   }
 
-
-  Screen = {
-    "ButtonMap" : ButtonMap,
-    "travelstop" : MyPage_Stops,
-  }
-  state = {
-    "currentPage" : this.Screen[Object.keys(this.Screen)[1]]
-  }
-
-  _goToMap = (e) => {
-    this.setState({
-      currentPage : this.Screen[e]
-    })
-  }
-
   render() {
     console.log(this.props)
     return (
@@ -67,20 +52,6 @@ export default class Mypage extends React.Component {
               </Text>
             </View>
           </View>
-        </View>
-        <View style={{flexDirection: 'row', flex: 0.7, height: 55, flexDirection: 'row', alignItems:'center', marginBottom: 10, marginTop: 7}}>
-          <TouchableOpacity onPress={() => { this._goToMap("ButtonMap"); }} style={{height: 48, borderColor: '#00afff', borderWidth: 1.5, borderBottomLeftRadius: 8, borderBottomRightRadius: 8, flex: 1}}>{
-            <Text style={{ fontSize: 17, color : '#00afff', marginTop: 14.5,textAlign: 'center', fontWeight: 'bold'}}>
-              트레블 맵
-            </Text>
-          }
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => { this._goToMap("travelstop"); }} style={{height: 48, borderColor: '#00afff', borderWidth: 1.5, borderBottomLeftRadius: 8, borderBottomRightRadius: 8, flex: 1}}>{
-            <Text style={{ fontSize: 17, color : '#00afff', marginTop: 14.5,textAlign: 'center', fontWeight: 'bold'}}>
-            트레블 스탑
-            </Text>
-          }
-          </TouchableOpacity>
         </View>
         <View style={{flex:11.5}}>
           <this.state.currentPage userID={this.props.userID}/>
