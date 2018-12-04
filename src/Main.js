@@ -53,25 +53,39 @@ export default class App extends Component {
                         }
                     });
 
-                    Geocoder.from(this.state.user.latitude, this.state.user.longitude)
-                      .then(json => {
-                        const addressComponent = json.results[0].formatted_address.split(' ');
-                        this.setState({
-                          userloc : addressComponent[1] + ' ' +  addressComponent[2] + ' ' + addressComponent[3]
-                        })
-                          this.props.changeCurrentLocation(this.state.userloc);
-                      })
-                      .catch(error => console.warn(error));
-
                     this.setState({findgps: true});
+                    console.log(position.coords)
                 },
                 (error) => {console.log(JSON.stringify(error));
                  this.setState({findgps: false});
                },
-                { enableHighAccuracy: true, timeout: 2000 }
+                { enableHighAccuracy: true, timeout: 1500}
             )
             this.import_json_url()
         }, 2000);
+
+        Geocoder.from(this.state.user.latitude, this.state.user.longitude)
+        .then(json => {
+          const addressComponent = json.results[0].formatted_address.split(' ');
+          this.setState({
+            userloc : addressComponent[1] + ' ' +  addressComponent[2] + ' ' + addressComponent[3]
+          })
+            this.props.changeCurrentLocation(this.state.userloc);
+        })
+        .catch(error => console.warn(error));
+
+        setInterval(() => {
+          Geocoder.from(this.state.user.latitude, this.state.user.longitude)
+          .then(json => {
+            const addressComponent = json.results[0].formatted_address.split(' ');
+            this.setState({
+              userloc : addressComponent[1] + ' ' +  addressComponent[2] + ' ' + addressComponent[3]
+            })
+              this.props.changeCurrentLocation(this.state.userloc);
+          })
+          .catch(error => console.warn(error));
+        }, 60000);
+
     }
 
     render() {
@@ -79,7 +93,7 @@ export default class App extends Component {
             <View style={styles.view}>
               {this.state.findgps ?
                 (<MapView style={styles.mapview}
-                    showsUserLocation = {false}
+                    showsUserLocation = {true}
                     initialRegion={{
                         latitude: 38.611026,
                         longitude: 126.996917,

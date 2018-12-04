@@ -75,8 +75,6 @@ export default class TabViewExample extends React.Component {
 
       });
 
-
-
       this.setState({doo:addresses});
       this.setState({fulladdresses: fulladdresses, visible:visible});
 
@@ -122,15 +120,12 @@ export default class TabViewExample extends React.Component {
           const name= tmp.name;
           components.push(
             <TouchableOpacity onPress={()=> this.showvisited(name)}>
-              <View style={{backgroundColor:'white', flexDirection:'row', justifyContent:'space-between', alignItems:'center', borderColor:'rgba(200,200,200,100)', borderBottomWidth:1, }}>
+              <View style={{backgroundColor:'white', height:50, flexDirection:'row', justifyContent:'space-between', alignItems:'center', borderColor:'rgba(200,200,200,100)', borderBottomWidth:1, }}>
                 <View style={{width : this.state.width/2, marginLeft:30}}>
                   <Text style={{fontWeight:'bold', fontSize:15}}>{tmp.name}</Text>
                 </View>
                 <View style={{width: 80}}>
                   <Text style={{fontSize:10}}>{tmp.full}</Text>
-                </View>
-                <View style={{width:60}}>
-                  <Image source={require("../images/logo.png")} style={{width:40, height: 40, resizeMode: 'contain'}}/>
                 </View>
               </View>
             </TouchableOpacity>
