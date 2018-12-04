@@ -93,7 +93,7 @@ export default class App extends Component {
             <View style={styles.view}>
               {this.state.findgps ?
                 (<MapView style={styles.mapview}
-                    showsUserLocation = {true}
+                    showsUserLocation = {false}
                     initialRegion={{
                         latitude: 38.611026,
                         longitude: 126.996917,
