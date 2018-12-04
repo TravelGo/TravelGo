@@ -97,6 +97,7 @@ export default class App extends Component {
                         longitudeDelta: 0.005,
                     }}
                     region={this.state.user}
+                    loadingEnabled={true}
                     rotateEnabled={false}
                     scrollEnabled={false}
                     pitchEnabled={true}
