@@ -14,8 +14,6 @@ export default class App extends Component {
     constructor(props) {
         super(props);
 
-        Geocoder.init("AIzaSyC-wh2GZ92W7jsNjtHD1JUDoMl1nNLRJgo");
-
         this.state = {
             user: {
                 latitude: 0,
@@ -41,9 +39,11 @@ export default class App extends Component {
     }
 
     componentDidMount() {
+
         setInterval(() => {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
+                    this.setGeocoding(position.coords.latitude, position.coords.longitude);
                     this.setState({
                         user: {
                             latitude: position.coords.latitude,
@@ -52,7 +52,6 @@ export default class App extends Component {
                             longitudeDelta: 0.005,
                         }
                     });
-
                     this.setState({findgps: true});
                     console.log(position.coords)
                 },
@@ -64,28 +63,25 @@ export default class App extends Component {
             this.import_json_url()
         }, 2000);
 
-        Geocoder.from(this.state.user.latitude, this.state.user.longitude)
-        .then(json => {
-          const addressComponent = json.results[0].formatted_address.split(' ');
-          this.setState({
-            userloc : addressComponent[1] + ' ' +  addressComponent[2] + ' ' + addressComponent[3]
-          })
-            this.props.changeCurrentLocation(this.state.userloc);
-        })
-        .catch(error => console.warn(error));
-
         setInterval(() => {
-          Geocoder.from(this.state.user.latitude, this.state.user.longitude)
-          .then(json => {
+            this.setGeocoding()
+        }, 60000);
+    }
+
+    setGeocoding(latitude=0, longitude=0) {
+        if(latitude === 0 && longitude === 0) {
+            latitude = this.state.user.latitude;
+            longitude = this.state.user.latitude;
+        }
+        fetch("https://maps.google.com/maps/api/geocode/json?language=ko&latlng=" + this.state.user.latitude + "," + this.state.user.longitude + "&key=AIzaSyC-wh2GZ92W7jsNjtHD1JUDoMl1nNLRJgo")
+        .then(res => res.json())
+        .then(json => {
             const addressComponent = json.results[0].formatted_address.split(' ');
             this.setState({
               userloc : addressComponent[1] + ' ' +  addressComponent[2] + ' ' + addressComponent[3]
             })
               this.props.changeCurrentLocation(this.state.userloc);
-          })
-          .catch(error => console.warn(error));
-        }, 60000);
-
+        });
     }
 
     render() {
