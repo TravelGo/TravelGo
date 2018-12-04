@@ -18,21 +18,33 @@ export default class Mypage extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      cov : 0,
+      visited : [],
+      grade : "칭호를 불러오는중입니다.",
+      level : 0,
+      max : 0,
+      progress : 0
+    }
+
     JEnum.axios.get(JEnum.visited + this.props.userID)
     .then(res => {
       let grade = "";
       let level = 0;
-      for(let i=0;i<Object.keys(this.grade);i++) {
-        if(JEnum.visited.length <= Object.keys(this.grade)[i]) {
-          grade = this.grade[Object.keys(this.grade)[i]]
+      for(let i=0;i<Object.keys(this.grade).length;i++) {
+        if(res.data.length <= Object.keys(this.grade)[i]) {
+          grade = this.grade[Object.keys(this.grade)[i-1]]
           level = i;
+          max = Object.keys(this.grade)[i];
           break;
         }
       }
       this.setState({
-        cov : JEnum.visited.length,
+        cov : res.data.length,
         visited : res.data,
         grade : grade,
+        progress: res.data.length/max,
+        max : max,
         level : level
       })
     });
@@ -71,11 +83,11 @@ export default class Mypage extends React.Component {
 
           <View style={{flex: 4, backgroundColor: '#00afff', flexDirection: 'column', }}>
             <View style={{flex: 1, justifyContent:'flex-end' }}>
-              <Progress.Bar progress={0.33} width={260} color={'#FFBF00'} unfilledColor={'white'} borderColor={'#109eff'} />
+              <Progress.Bar progress={this.state.progress} width={260} color={'#FFBF00'} unfilledColor={'white'} borderColor={'#109eff'} />
             </View>
             <View style={{flex: 1, justifyContent: 'flex-start'}}>
               <Text style={{color: 'white', fontSize: 12}}>
-                {this.state.} / 240
+                {this.state.cov} / {this.state.max}
               </Text>
             </View>
           </View>
