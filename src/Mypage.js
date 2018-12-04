@@ -8,6 +8,15 @@ import ButtonMap from "./ButtonMap_MyPage";
 export default class Mypage extends React.Component {
   constructor(props){
     super(props);
+
+    JEnum.axios.get(JEnum.visited + this.props.userID)
+    .then(res => {
+        this.setState({
+            recentTS : res.data
+        })
+    });
+
+    }
   }
 
   render() {
@@ -54,7 +63,7 @@ export default class Mypage extends React.Component {
           </View>
         </View>
         <View style={{flex:11.5}}>
-          <this.state.currentPage userID={this.props.userID}/>
+          <this.state.currentPage userID={this.props.userID} recentTS={this.state.recentTS}/>
         </View>
       </View>
     );
