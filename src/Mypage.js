@@ -2,16 +2,43 @@ import * as React from 'react';
 import { View, Text, StyleSheet, Dimensions, Button, Icon, TouchableOpacity, Image } from 'react-native';
 import * as Progress from 'react-native-progress';
 import MyPage_Stops from "./MyPage_Stops";
-import ButtonMap from "./ButtonMap_MyPage";
-
+const JEnum = require("./JEnum")
 
 export default class Mypage extends React.Component {
-  constructor(props){
+
+  grade = {
+    0 : "배낭 없는 지렁이",
+    30 : "좀 다녀본 개구리",
+    100 : "여유로운 고양이",
+    300 : "여행 전문 호랑이",
+    500 : "투어 본좌 용두리",
+    2147483647 : ""
+  }
+
+  constructor(props) {
     super(props);
+
+    JEnum.axios.get(JEnum.visited + this.props.userID)
+    .then(res => {
+      let grade = "";
+      let level = 0;
+      for(let i=0;i<Object.keys(this.grade);i++) {
+        if(JEnum.visited.length <= Object.keys(this.grade)[i]) {
+          grade = this.grade[Object.keys(this.grade)[i]]
+          level = i;
+          break;
+        }
+      }
+      this.setState({
+        cov : JEnum.visited.length,
+        visited : res.data,
+        grade : grade,
+        level : level
+      })
+    });
   }
 
   render() {
-    console.log(this.props)
     return (
       <View style={styles.container}>
         <View style={styles.topBar}>
@@ -27,7 +54,7 @@ export default class Mypage extends React.Component {
               <Text style={{color: 'white', fontWeight: 'bold', fontSize: 10}}>칭호</Text>
             </View>
             <View style={{flex: 10, justifyContent: "center", alignItems: "center"}}>
-              <Text style={{color: 'black', fontSize: 15, textDecorationLine: 'underline'}}>연못 속의 개구리</Text>
+              <Text style={{color: 'black', fontSize: 15, textDecorationLine: 'underline'}}>{this.state.grade}</Text>
             </View>
             <View style={{flex: 1}}></View>
           </View>
@@ -37,7 +64,7 @@ export default class Mypage extends React.Component {
           <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
             <View style={{backgroundColor: 'white', borderRadius: 5, width: 50, height: 20, justifyContent: 'center', alignItems: 'center'}}>
               <Text style={{color: '#00afff', fontSize: 15}}>
-                Lv. 4
+                Lv. {this.state.level}
               </Text>
             </View>
           </View>
@@ -48,13 +75,13 @@ export default class Mypage extends React.Component {
             </View>
             <View style={{flex: 1, justifyContent: 'flex-start'}}>
               <Text style={{color: 'white', fontSize: 12}}>
-                80 / 240
+                {this.state.} / 240
               </Text>
             </View>
           </View>
         </View>
         <View style={{flex:11.5}}>
-          <this.state.currentPage userID={this.props.userID}/>
+          <MyPage_Stops userID={this.props.userID}/>
         </View>
       </View>
     );

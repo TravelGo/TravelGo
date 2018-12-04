@@ -5,7 +5,7 @@ import geolib from 'geolib';
 import StopOnImg from '../images/travelstop(on).png';
 import StopOffImg from '../images/travelstop(off).png';
 import Geocoder from 'react-native-geocoding';
-
+const JEnum = require('./JEnum.js')
 
 let title="TITLE"
 
