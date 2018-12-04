@@ -128,7 +128,7 @@ export default class App extends Component {
                     })
                 }}>
                     <Image
-                        style={{flex: 1, width: 260, alignSelf: 'stretch', justifyContent: 'center', alignItems: 'center', borderRadius: 10, marginLeft: 50, marginRight: 50, marginTop: 10, marginBottom: 10,}}
+                        style={{flex: 1, width: 260, alignSelf: 'stretch', justifyContent: 'center', alignItems: 'center', borderRadius: 10, marginLeft: 30, marginRight: 30, marginTop: 10, marginBottom: 10,}}
                         source={{uri: (this.state.image ? this.state.image : "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/No_image_3x4.svg/1024px-No_image_3x4.svg.png")}} //서버에서 받아올 것
                     />
                 </TouchableOpacity>
@@ -255,7 +255,7 @@ const styles = StyleSheet.create({
     },
 
     T_Title: {
-        height:40,
+        height:45,
         backgroundColor: '#545454',
         justifyContent: 'center',
         alignItems: 'center',
@@ -270,7 +270,7 @@ const styles = StyleSheet.create({
     },
 
     T_View: {
-        height: 170,
+        height: 190,
         backgroundColor: '#00AFFF',
         justifyContent: 'center',
         alignItems: 'center',
@@ -283,7 +283,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         alignContent: 'center',
         alignSelf: 'stretch',
-        padding: 30,
+        paddingLeft: 30,
+        paddingRight: 30,
+        paddingBottom: 10,
+        paddingTop: 10
     },
 
     info_Box: {
@@ -308,7 +311,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'stretch',
-        paddingBottom: 15,
+        paddingBottom: 10,
+        paddingTop: 10,
     },
 
     T_Mention_Text: {
